@@ -1,10 +1,9 @@
 
-*.log
-AI Testing/Temp/__Backupscenes/0.backup
+"AI Testing/Temp/__Backupscenes/0.backup"
 *.bakert
 AI Testing/Temp/UnityLockfile
 *.log
-AI Testing/Library/shadercompiler-UnityShaderCompiler.exe0.log
+"AI Testing/Library/shadercompiler-UnityShaderCompiler.exe0.log"
 
 [Ll]ibrary/
 [Tt]emp/

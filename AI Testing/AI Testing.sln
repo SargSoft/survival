@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI Testing", "AI Testing.csproj", "{98B1EF35-F796-1B68-D065-4CAF299CA9B1}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{889FB1A1-5C23-30C7-0AA6-AE5727964E4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{98B1EF35-F796-1B68-D065-4CAF299CA9B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98B1EF35-F796-1B68-D065-4CAF299CA9B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98B1EF35-F796-1B68-D065-4CAF299CA9B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98B1EF35-F796-1B68-D065-4CAF299CA9B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{889FB1A1-5C23-30C7-0AA6-AE5727964E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{889FB1A1-5C23-30C7-0AA6-AE5727964E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{889FB1A1-5C23-30C7-0AA6-AE5727964E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{889FB1A1-5C23-30C7-0AA6-AE5727964E4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

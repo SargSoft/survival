@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MovementScript : MonoBehaviour
+public class CharacterControlScript : MonoBehaviour
 {
-    //Variables
+  //Variables
 
 	private Vector2 mD;						//mD stands for Mouse Direction
 	private float mouseXValue = 0.0f;		//Used to store inputs recieved from mouse of X & Y Values
@@ -29,16 +30,41 @@ public class MovementScript : MonoBehaviour
     }
 
 
-     // Start is called before the first frame update
+      //UI Variables
+
+    public Slider healthSlider;
+    public int maxHealth;
+
+    public Slider energySlider;
+    public int maxEnergy;
+
+    public Slider oxygenSlider;
+    public int maxOxygen;
+
+
+      // Start is called before the first frame update
     void Start()
     {
 
     	rb = GetComponent<Rigidbody>();
     	col = GetComponent<CapsuleCollider>();
 
+
         //Making the cursor invisible & Locking it in the screen
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+
+        //Initializing player vitals
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth;
+
+        energySlider.maxValue = maxEnergy;
+        energySlider.value = maxEnergy;
+
+        oxygenSlider.maxValue = maxOxygen;
+        oxygenSlider.value = maxOxygen;
+
     }
 
     // Update is called once per frame
@@ -51,8 +77,9 @@ public class MovementScript : MonoBehaviour
 
         mouseXValue += mouseXSpeed * Input.GetAxis("Mouse X");
         mouseYValue -= mouseYSpeed * Input.GetAxis("Mouse Y");
-      
-        transform.eulerAngles = new Vector3(0, mouseXValue); //transforming the X & Y axis of the object itself      
+        mouseYValue = Mathf.Clamp(mouseYValue, -90, 90);	//Clamping the Y axis to stop it exceeding the 180 degrees in front of you
+
+        transform.eulerAngles = new Vector3(0, mouseXValue); //transforming the X & Y axis of the object itself   
         fixedYAxis.transform.eulerAngles = new Vector3(mouseYValue, mouseXValue); //transorming the X & Y axis of the camera (child)
 
 
@@ -106,17 +133,17 @@ public class MovementScript : MonoBehaviour
             transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
     	}
         
-        if(isGrounded() && Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.back * backwardSpeed * Time.deltaTime);
         }
         
-        if(isGrounded() && Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * strafeSpeed * Time.deltaTime);
         }
         
-        if(isGrounded() && Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector3.right * strafeSpeed * Time.deltaTime);
         }

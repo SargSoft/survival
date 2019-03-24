@@ -705,7 +705,6 @@ GameObject:
   - component: {fileID: 530847146}
   - component: {fileID: 530847145}
   - component: {fileID: 530847144}
-  - component: {fileID: 530847143}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
@@ -713,28 +712,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &530847143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459023408}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530847142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d84c51ee9401d24ba9e4c7e8a144244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1478801232}
-  maxHealth: 100
-  healthFallRate: 0
-  energySlider: {fileID: 259877671}
-  maxEnergy: 100
-  energyFallRate: 0
-  oxygenSlider: {fileID: 203703658}
-  maxOxygen: 100
-  oxygenFallRate: 0
 --- !u!54 &530847144
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -767,10 +744,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseXSpeed: 2
   mouseYSpeed: 2
-  forwardSpeed: 10
-  backwardSpeed: 5
-  strafeSpeed: 5
-  jumpForce: 5
+  forwardSpeed: 6
+  backwardSpeed: 3
+  strafeSpeed: 3
+  jumpForce: 3
   runMultiplier: 2
   crouchMultiplier: 0.5
   crouchCameraMove: 0.2
@@ -780,6 +757,12 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
+  healthSlider: {fileID: 1478801232}
+  maxHealth: 100
+  energySlider: {fileID: 259877671}
+  maxEnergy: 100
+  oxygenSlider: {fileID: 203703658}
+  maxOxygen: 100
 --- !u!136 &530847146
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1555,6 +1538,61 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxEnergy
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxOxygen
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: forwardSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: backwardSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: strafeSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxEnergy
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
+        type: 3}
+      propertyPath: maxOxygen
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2289441898350751035, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1610,32 +1648,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
-        type: 3}
-      propertyPath: groundLayers.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
-        type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
-        type: 3}
-      propertyPath: maxEnergy
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298151631889363020, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
-        type: 3}
-      propertyPath: maxOxygen
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2289441897266202859, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
         type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8ed3bf733094f2248b2e6c0c3b09e65f, type: 3}
 --- !u!1 &1478801230
 GameObject:

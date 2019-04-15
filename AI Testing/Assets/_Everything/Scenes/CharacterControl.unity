@@ -747,7 +747,7 @@ MonoBehaviour:
   forwardSpeed: 6
   backwardSpeed: 3
   strafeSpeed: 3
-  jumpForce: 3
+  jumpForce: 4
   runMultiplier: 2
   crouchMultiplier: 0.5
   crouchCameraMove: 0.2
@@ -1576,7 +1576,7 @@ PrefabInstance:
     - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
         type: 3}
       propertyPath: jumpForce
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2289441898350751015, guid: 8ed3bf733094f2248b2e6c0c3b09e65f,
         type: 3}

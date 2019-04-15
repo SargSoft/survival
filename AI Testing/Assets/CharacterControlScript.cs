@@ -16,6 +16,7 @@ public class CharacterControlScript : MonoBehaviour
     public float backwardSpeed = 5f;		//Speed at which the player moves backwards
     public float strafeSpeed = 5f;			//Speed at which the player moves sideways
     public float jumpForce = 5.0f;			//Force upwards the player jumps
+    private bool jumpOnSpot = true;		//Boolean value to indicate whether the player is jumping on spot, not in a direction
     public float runMultiplier = 2.0f;		//The multiplier used while running
     public float crouchMultiplier = 0.5f;	//The mutiplier used while crouching
     public float crouchCameraMove = 0.2f;	//The amount the camera moves down when the player crouches
@@ -122,28 +123,34 @@ public class CharacterControlScript : MonoBehaviour
         }
         else if(isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
+        	jumpOnSpot = false;
         	rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        
+        if(isGrounded())
+        {
+        	jumpOnSpot = true;
         }      
       	
-
+      	Debug.Log(jumpOnSpot);
         //Standard movement keys
 
-    	if(Input.GetKey(KeyCode.W))
+    	if(Input.GetKey(KeyCode.W) && jumpOnSpot)
     	{
             transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
     	}
         
-        if(Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S) && jumpOnSpot)
         {
             transform.Translate(Vector3.back * backwardSpeed * Time.deltaTime);
         }
         
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A) && jumpOnSpot)
         {
             transform.Translate(Vector3.left * strafeSpeed * Time.deltaTime);
         }
         
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D) && jumpOnSpot)
         {
             transform.Translate(Vector3.right * strafeSpeed * Time.deltaTime);
         }

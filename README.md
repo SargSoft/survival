@@ -2,25 +2,26 @@
 Intro Paragraph
 
 ## Table of Contents
-1. [Team Members](https://github.com/sargasso-studios/general_testing#1team-members)
-2. [Getting Started](https://github.com/sargasso-studios/general_testing#2getting-started)
-3. [Coding Style](https://github.com/sargasso-studios/general_testing#3coding-style)
-4. [Design](https://github.com/sargasso-studios/general_testing#4design)
+1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
+2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
+3. [Coding Style](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
+4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
 
-## 1.Team Members
+## 1. Team Members
 - Charlie Brown
 - Jack Thomas
 - Nye Goodall
 - Sadiq Adesanya
 
-## 2.Getting Started
+## 2. Getting Started
 - Unity Version 2018.3.9f1
 - 3ds Max Version ...
 
-## 3.Coding Style
+## 3. Code Style Guide
+Section outlining the styling of the code.
 
-## 4.Design
-### environment_prototyping
+## 4. Design
+### 4.1 environment_prototyping
 A prototype of the ecosystem design.
 
 #### Inital design
@@ -34,7 +35,7 @@ A prototype of the ecosystem design.
 - Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
 
 
-### CharacterControl
+### 4.2 CharacterControl
 Prefabs of a simple character model (capsule) with functioning character controls
 
 #### Inital design

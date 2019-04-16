@@ -1,10 +1,10 @@
 # Survival Game Project
-Intro Paragraph
+A survival game focused on exploration and building, with a strong storyline, and expansive underwater / on land ecosystem.
 
 ## Table of Contents
 1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
-3. [Coding Style](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
+3. [Code Style Guide](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
 4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
 
 ## 1. Team Members
@@ -21,7 +21,7 @@ Intro Paragraph
 Section outlining the styling of the code.
 
 ## 4. Design
-### 4.1 environment_prototyping
+### 4.1 Environment Prototyping
 A prototype of the ecosystem design.
 
 #### Inital design
@@ -35,7 +35,7 @@ A prototype of the ecosystem design.
 - Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
 
 
-### 4.2 CharacterControl
+### 4.2 Character Control
 Prefabs of a simple character model (capsule) with functioning character controls
 
 #### Inital design

@@ -14,7 +14,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 - Sadiq Adesanya
 
 ## 2. Getting Started
-- Unity Version 2018.3.9f1
+- Unity Version 2018.3.9 (found in 2018.x section of: https://unity3d.com/get-unity/download/archive)
 - 3ds Max Version ...
 
 ## 3. Code Style Guide

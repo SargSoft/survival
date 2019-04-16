@@ -2,16 +2,16 @@
 Intro Paragraph
 
 ## Table of Contents
-[Team Members](https://github.com/sargasso-studios/general_testing#1team-members)
-[Getting Started](https://github.com/sargasso-studios/general_testing#2getting-started)
-[Coding Style](https://github.com/sargasso-studios/general_testing#3coding-style)
-[Design](https://github.com/sargasso-studios/general_testing#4design)
+1. [Team Members](https://github.com/sargasso-studios/general_testing#1team-members)
+2. [Getting Started](https://github.com/sargasso-studios/general_testing#2getting-started)
+3. [Coding Style](https://github.com/sargasso-studios/general_testing#3coding-style)
+4. [Design](https://github.com/sargasso-studios/general_testing#4design)
 
 ## 1.Team Members
--Charlie Brown
--Jack Thomas
--Nye Goodall
--Sadiq Adesanya
+- Charlie Brown
+- Jack Thomas
+- Nye Goodall
+- Sadiq Adesanya
 
 ## 2.Getting Started
 - Unity Version 2018.3.9f1

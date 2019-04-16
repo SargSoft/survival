@@ -1,13 +1,25 @@
 # Survival Game Project
 Intro Paragraph
 
-## Getting Started
+## Table of Contents
+Team Members
+Getting Started
+Coding Style
+Design
+
+## 1.Team Members
+Charlie Brown
+Jack Thomas
+Nye Goodall
+Sadiq Adesanya
+
+## 2.Getting Started
 - Unity Version 2018.3.9f1
 - 3ds Max Version ...
 
-## Coding Style
+## 3.Coding Style
 
-## Design
+## 4.Design
 ## environment_prototyping
 A prototype of the ecosystem design.
 

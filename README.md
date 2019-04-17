@@ -27,16 +27,24 @@ A survival game focused on exploration and building, with a strong storyline, an
 This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
 
 ### 3.1 Variables
-Stuff to do with variables.
+- For all variable names use Camel Case
+- For public variables simply use an appropriate, descriptive name
+- For private variables use an appropriate, descriptive name, combine with "m_" as the prefix (e.g. m_variable)
 
 ### 3.2 Functions
-Function text.
+- For all function names use Camel Case
 
 ### 3.3 Comments/Headers
-Stuff relating to comments & Headers.
+- Use comments to describe the purpose of all of the variables
+- Use comments to describe ...
+- Use Headers to separate sections (e.g. [Header("Title")] )
 
 ### 3.4 Layout
-Layout text.
+- Variables at top (public, then private)
+- Functions next
+- Code that runs at start
+- Code that runs per frame
+- Image to show this?
 
 ## 4. Design
 ### 4.1 Environment Prototyping

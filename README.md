@@ -5,7 +5,13 @@ A survival game focused on exploration and building, with a strong storyline, an
 1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
 3. [Code Style Guide](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
+	3.1 [Variables]
+	3.2 [Functions]
+	3.3 [Comments/Headers]
+	3.4 [Layout]
 4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
+	4.1 [Environment Prototyping]
+	4.2 [Character Control]
 
 ## 1. Team Members
 - Charlie Brown
@@ -18,7 +24,19 @@ A survival game focused on exploration and building, with a strong storyline, an
 - 3ds Max Version ...
 
 ## 3. Code Style Guide
-Section outlining the styling of the code.
+This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
+
+### 3.1 Variables
+Stuff to do with variables.
+
+### 3.2 Functions
+Function text.
+
+### 3.3 Comments/Headers
+Stuff relating to comments & Headers.
+
+### 3.4 Layout
+Layout text.
 
 ## 4. Design
 ### 4.1 Environment Prototyping

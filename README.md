@@ -30,9 +30,9 @@ A survival game focused on exploration and building, with a strong storyline, an
 This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
 
 ### 3.1 Naming
-- For all variable names use Camel Case
-- For public variables simply use an appropriate, descriptive name
-- For private variables use an appropriate, descriptive name, combine with "m_" as the prefix (e.g. m_variable)
+- Use Camel Case for variables and parameters 
+- Use Pascal Case for functions and classes
+- Do not use prefixes (e.g. m_ for private variables)
 
 ### 3.2 Spacing
 - For all function names use Camel Case

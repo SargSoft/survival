@@ -5,16 +5,19 @@ A survival game focused on exploration and building, with a strong storyline, an
 1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
 3. [Code Style Guide](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
-	- [Variables](https://github.com/sargasso-studios/general_testing#31-variables)
-	- [Functions](https://github.com/sargasso-studios/general_testing#32-functions)
-	- [Comments/Headers](https://github.com/sargasso-studios/general_testing#33-commentsheaders)
+	- [Naming](https://github.com/sargasso-studios/general_testing#31-naming)
+	- [Spacing](https://github.com/sargasso-studios/general_testing#32-)
+	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#33-commentingheaders)
+	- [Bracing](https://github.com/sargasso-studios/general_testing#34-layout)
 	- [Layout](https://github.com/sargasso-studios/general_testing#34-layout)
+	- [File Structure](https://github.com/sargasso-studios/general_testing#34-layout)
 4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
 	- [Environment Prototyping](https://github.com/sargasso-studios/general_testing#41-environment-prototyping)
 	- [Character Control](https://github.com/sargasso-studios/general_testing#42-character-control)
 
 ## 1. Team Members
 - Charlie Brown
+- Chris Mimm
 - Jack Thomas
 - Nye Goodall
 - Sadiq Adesanya
@@ -26,25 +29,31 @@ A survival game focused on exploration and building, with a strong storyline, an
 ## 3. Code Style Guide
 This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
 
-### 3.1 Variables
+### 3.1 Naming
 - For all variable names use Camel Case
 - For public variables simply use an appropriate, descriptive name
 - For private variables use an appropriate, descriptive name, combine with "m_" as the prefix (e.g. m_variable)
 
-### 3.2 Functions
+### 3.2 Spacing
 - For all function names use Camel Case
 
-### 3.3 Comments/Headers
+### 3.3 Commenting / Headers
 - Use comments to describe the purpose of all of the variables
 - Use comments to describe ...
 - Use Headers to separate sections (e.g. [Header("Title")] )
 
-### 3.4 Layout
+### 3.4 Bracing
+- Bracing stuff
+
+### 3.5 Layout
 - Variables at top (public, then private)
 - Functions next
 - Code that runs at start
 - Code that runs per frame
 - Image to show this?
+
+### 3.6 File Structure
+- File structure stuff
 
 ## 4. Design
 ### 4.1 Environment Prototyping

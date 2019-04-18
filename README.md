@@ -35,15 +35,21 @@ This section is an outline of our preferred coding style, in order to make all o
 - Do not use prefixes (e.g. m_ for private variables)
 
 ### 3.2 Spacing
-- For all function names use Camel Case
+- Use a single space after the comma between function arguments (e.g. 'Vector3(x, y, z)')
+- Use a single space before and after an operator (e.g. 'x + y')
+
 
 ### 3.3 Commenting / Headers
-- Use comments to describe the purpose of all of the variables
-- Use comments to describe ...
-- Use Headers to separate sections (e.g. [Header("Title")] )
+- Double slash commenting (single line commenting) will be used rather than multi line commenting (e.g. '// Comment here')
+- Variables purposes should be clear from their names, although a comment may be attached if appropriate
+- All functions should have a comment that clearly describes their purpose, intention, and logical flow
+- Additional comments may be used elsewhere where appropriate
+- Use Headers to separate sections (e.g. '[Header("Title")]')
 
 ### 3.4 Bracing
-- Bracing stuff
+- Open and closing braces should always be on their own line, below the statement at the biggining of the block, and then after the contents
+- All contents inside braces should be intented by 1 tab more than the braces themselves
+- E.g. (Image example here)
 
 ### 3.5 Layout
 - Variables at top (public, then private)
@@ -53,7 +59,23 @@ This section is an outline of our preferred coding style, in order to make all o
 - Image to show this?
 
 ### 3.6 File Structure
-- File structure stuff
+- Assets
+	- Art
+		- Materials
+		- Models
+		- Textures
+	- Audio
+		- Music
+		- Sound
+	- Code
+		- Scripts
+		- Shaders
+	- Docs (Wiki, Concept Art, Marketing Material)
+	- Level (Anything related to game design in Unity)
+		- Prefabs
+		- Scenes
+		- UI
+	- Resources (Configuration files, localization text, other user files)
 
 ## 4. Design
 ### 4.1 Environment Prototyping

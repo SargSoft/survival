@@ -4,13 +4,13 @@ A survival game focused on exploration and building, with a strong storyline, an
 ## Table of Contents
 1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
-3. [Code Style Guide](https://github.com/sargasso-studios/general_testing#3-code-style-guide)
+3. [Style Guide](https://github.com/sargasso-studios/general_testing#3-style-guide)
 	- [Naming](https://github.com/sargasso-studios/general_testing#31-naming)
-	- [Spacing](https://github.com/sargasso-studios/general_testing#32-)
-	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#33-commentingheaders)
-	- [Bracing](https://github.com/sargasso-studios/general_testing#34-layout)
-	- [Layout](https://github.com/sargasso-studios/general_testing#34-layout)
-	- [File Structure](https://github.com/sargasso-studios/general_testing#34-layout)
+	- [Spacing](https://github.com/sargasso-studios/general_testing#32-spacing)
+	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#33-commenting--headers)
+	- [Bracing](https://github.com/sargasso-studios/general_testing#34-bracing)
+	- [Layout](https://github.com/sargasso-studios/general_testing#35-layout)
+	- [File Structure](https://github.com/sargasso-studios/general_testing#36-file-structure)
 4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
 	- [Environment Prototyping](https://github.com/sargasso-studios/general_testing#41-environment-prototyping)
 	- [Character Control](https://github.com/sargasso-studios/general_testing#42-character-control)
@@ -26,7 +26,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 - Unity Version 2018.3.9 (found in 2018.x section of: https://unity3d.com/get-unity/download/archive)
 - 3ds Max Version ...
 
-## 3. Code Style Guide
+## 3. Style Guide
 This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
 
 ### 3.1 Naming

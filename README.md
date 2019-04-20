@@ -68,8 +68,8 @@ This section is an outline of our preferred coding style, in order to make all o
 - Opening braces should be on the same like as the statements declaration
 - Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace
 - All contents inside braces should be intented by 1 tab more than the braces themselves
-![BraceExample1](Assets/Docs/BraceExample1.png)
-![BraceExample2](Assets/Docs/BraceExample2.png)
+![BracesExample1](Assets/Docs/BracesExample1.png)
+![BracesExample2](Assets/Docs/BracesExample2.png)
 
 
 ### 3.5 Layout

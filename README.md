@@ -65,9 +65,12 @@ This section is an outline of our preferred coding style, in order to make all o
 - Use Headers to separate sections (e.g. '[Header("Title")]')
 
 ### 3.4 Bracing
-- Open and closing braces should always be on their own line, below the statement at the biggining of the block, and then after the contents
+- Opening braces should be on the same like as the statements declaration
+- Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace
 - All contents inside braces should be intented by 1 tab more than the braces themselves
-- E.g. (Image example here)
+![BraceExample1](Assets/Docs/BraceExample1.png)
+![BraceExample2](Assets/Docs/BraceExample2.png)
+
 
 ### 3.5 Layout
 - Variables at top (public, then private)

@@ -78,6 +78,91 @@ This section is an outline of our preferred coding style, in order to make all o
 	- Resources (Configuration files, localization text, other user files)
 
 ## 4. Design
+Intro paragraph for the design section
+
+### 4.1 Character
+Intro to the Character design section.
+
+#### 4.1.1 Controls
+- Controls info
+
+#### 4.1.2 Shaders
+- Shaders info
+
+#### 4.1.3 UI
+- UI info
+
+#### 4.1.4 Visuals / Animations
+- Visuals / Animations info
+
+### 4.2 Environment
+Intro to the Environment design section.
+
+#### 4.2.1 AI / Fauna
+- AI / Fauna info
+
+#### 4.2.2 Landscape
+- Landscape info
+
+#### 4.2.3 Plants
+- Plants info
+
+### 4.3 Menu's
+Intro to the Menu design section.
+
+#### 4.3.1 Main Menu
+- Main Menu info
+
+#### 4.3.2 Settings
+- Settings info
+
+### 4.4 Skills
+Intro to the Skills design section.
+
+#### 4.4.1 Building / Construction
+- Building / Contruction info
+
+##### 4.4.1.1 UI
+- Building / Construction UI
+
+##### 4.4.1.2 Recipes / Items
+- Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
+
+#### 4.4.2 Crafting
+- Crafting info
+
+##### 4.4.2.1 UI
+- Crafting UI
+
+##### 4.4.2.2 Recipes / Items
+- Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
+
+### 4.5 Story
+Intro to the Story section.
+
+#### 4.5.1 Backstory
+- Backstory info
+
+#### 4.5.2 Ending
+- Ending info
+
+#### 4.5.3 Journal
+- Journal info, ingame wiki with information on fauna / plants / environment / crafting / etc.
+
+#### 4.5.4 Story Arc
+- Story Arc info
+
+
+
+
+
+
+
+
+
+
+
+
 ### 4.1 Environment Prototyping
 A prototype of the ecosystem design.
 

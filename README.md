@@ -98,6 +98,8 @@ This section is an outline of our preferred coding style, in order to make all o
 ## 4. Design
 Intro paragraph for the design section
 
+![Mindmap](Assets/Docs/DesignMindmap.png)
+
 ### 4.1 Character
 Intro to the Character design section.
 

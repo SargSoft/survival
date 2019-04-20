@@ -69,9 +69,19 @@ This section is an outline of our preferred coding style, in order to make all o
 - Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace
 - All contents inside braces should be intented by 1 tab more than the braces themselves
 
-![BracesExample1](Assets/Docs/BracesExample1.png)
+```cs
+static void Function(string argument1, int argument2) {
+    // Contents
+}
+```
 
-![BracesExample2](Assets/Docs/BracesExample2.png)
+```cs
+if(someExpression) {
+    doSomething();
+} else {
+    doSomethingElse();
+}
+```
 
 
 ### 3.5 Layout

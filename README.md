@@ -11,9 +11,27 @@ A survival game focused on exploration and building, with a strong storyline, an
 	- [Bracing](https://github.com/sargasso-studios/general_testing#34-bracing)
 	- [Layout](https://github.com/sargasso-studios/general_testing#35-layout)
 	- [File Structure](https://github.com/sargasso-studios/general_testing#36-file-structure)
-4. [Design](https://github.com/sargasso-studios/general_testing#4-design)
-	- [Environment Prototyping](https://github.com/sargasso-studios/general_testing#41-environment-prototyping)
-	- [Character Control](https://github.com/sargasso-studios/general_testing#42-character-control)
+4. [Design](https://github.com/sargasso-studios/survival#4-design)
+	- [Character](https://github.com/sargasso-studios/survival#41-character)
+		- [Controls](https://github.com/sargasso-studios/survival#411-controls)
+		- [Shaders](https://github.com/sargasso-studios/survival#412-shaders)
+		- [UI](https://github.com/sargasso-studios/survival#413-ui)
+		- [Visuals / Animations](https://github.com/sargasso-studios/survival#414-visuals--animations)
+	- [Environment](https://github.com/sargasso-studios/survival#42-environment)
+		- [AI / Fauna](https://github.com/sargasso-studios/survival#421-ai--fauna)
+		- [Landscape](https://github.com/sargasso-studios/survival#422-landscape)
+		- [Plants](https://github.com/sargasso-studios/survival#423-plants)
+	- [Menu's](https://github.com/sargasso-studios/survival#43-menus)
+		- [Main Menu](https://github.com/sargasso-studios/survival#431-main-menu)
+		- [Settings](https://github.com/sargasso-studios/survival#432-settings)
+	- [Skills](https://github.com/sargasso-studios/survival#44-skills)
+		- [Building / Construction](https://github.com/sargasso-studios/survival#441-building--construction)
+		- [Crafting](https://github.com/sargasso-studios/survival#442-crafting)
+	- [Story](https://github.com/sargasso-studios/survival#45-story)
+		- [Backstory](https://github.com/sargasso-studios/survival#451-backstory)
+		- [Ending](https://github.com/sargasso-studios/survival#452-ending)
+		- [Journal](https://github.com/sargasso-studios/survival#453-journal)
+		- [Story Arc](https://github.com/sargasso-studios/survival#454-story-arc)
 
 ## 1. Team Members
 - Charlie Brown
@@ -84,7 +102,17 @@ Intro paragraph for the design section
 Intro to the Character design section.
 
 #### 4.1.1 Controls
-- Controls info
+Prefabs of a simple character model (capsule) with functioning character controls
+
+Inital design
+- Basic WASD movement
+- Ability to control the direction of the character with the mouse
+- Add simple functions like crouch, jump, running
+
+Further 
+- Separating different controls into their own functions (e.g. crouching, jumping, running, etc.)
+- Using Unity's Input Manager & built in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
+- Implement swimming
 
 #### 4.1.2 Shaders
 - Shaders info
@@ -99,7 +127,17 @@ Intro to the Character design section.
 Intro to the Environment design section.
 
 #### 4.2.1 AI / Fauna
-- AI / Fauna info
+A prototype of the ecosystem design.
+
+Inital design
+- Build system for zoning that populates a specific area with plant life taking in to account terrain.
+- Expand zoning system to have plants instantiated in clusters with variables dictating available food.
+- Build basic herbivore AI that paths around based on terrain, handles encounters with food,carnivores.
+- Build basic carnivore AI that hunts herbivores when hungry, and otherwise patrols.
+
+Further 
+- Test build second species of herbivore with different behaviour (i.e. bottom feeders).
+- Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
 
 #### 4.2.2 Landscape
 - Landscape info
@@ -151,41 +189,3 @@ Intro to the Story section.
 
 #### 4.5.4 Story Arc
 - Story Arc info
-
-
-
-
-
-
-
-
-
-
-
-
-### 4.1 Environment Prototyping
-A prototype of the ecosystem design.
-
-#### Inital design
-- Build system for zoning that populates a specific area with plant life taking in to account terrain.
-- Expand zoning system to have plants instantiated in clusters with variables dictating available food.
-- Build basic herbivore AI that paths around based on terrain, handles encounters with food,carnivores.
-- Build basic carnivore AI that hunts herbivores when hungry, and otherwise patrols.
-
-#### Further 
-- Test build second species of herbivore with different behaviour (i.e. bottom feeders).
-- Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
-
-
-### 4.2 Character Control
-Prefabs of a simple character model (capsule) with functioning character controls
-
-#### Inital design
-- Basic WASD movement
-- Ability to control the direction of the character with the mouse
-- Add simple functions like crouch, jump, running
-
-#### Further 
-- Separating different controls into their own functions (e.g. crouching, jumping, running, etc.)
-- Using Unity's Input Manager & built in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
-- Implement swimming

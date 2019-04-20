@@ -48,9 +48,11 @@ A survival game focused on exploration and building, with a strong storyline, an
 This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
 
 ### 3.1 Naming
-- Use Camel Case for variables and parameters 
-- Use Pascal Case for functions and classes
+- Use Camel Case for variables, and parameters 
+- Use Pascal Case for functions, properties, events, and classes
+- Use Pascal Case for files, and directories
 - Do not use prefixes (e.g. m_ for private variables)
+- Do use 'I' prefix for interfaces
 
 ### 3.2 Spacing
 - Use a single space after the comma between function arguments (e.g. 'Vector3(x, y, z)')
@@ -66,8 +68,8 @@ This section is an outline of our preferred coding style, in order to make all o
 
 ### 3.4 Bracing
 - Opening braces should be on the same like as the statements declaration
-- Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace
-- All contents inside braces should be intented by 1 tab more than the braces themselves
+- Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace (examples seen below)
+- All contents inside braces should be indented by 1 tab more than the braces themselves
 
 ```cs
 static void Function(string argument1, int argument2) {

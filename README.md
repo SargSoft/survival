@@ -6,11 +6,12 @@ A survival game focused on exploration and building, with a strong storyline, an
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
 3. [Style Guide](https://github.com/sargasso-studios/general_testing#3-style-guide)
 	- [Naming](https://github.com/sargasso-studios/general_testing#31-naming)
-	- [Spacing](https://github.com/sargasso-studios/general_testing#32-spacing)
-	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#33-commenting--headers)
-	- [Bracing](https://github.com/sargasso-studios/general_testing#34-bracing)
-	- [Layout](https://github.com/sargasso-studios/general_testing#35-layout)
-	- [File Structure](https://github.com/sargasso-studios/general_testing#36-file-structure)
+	- [Language](https://github.com/sargasso-studios/general_testing#32-language)
+	- [Spacing](https://github.com/sargasso-studios/general_testing#33-spacing)
+	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#34-commenting--headers)
+	- [Bracing](https://github.com/sargasso-studios/general_testing#35-bracing)
+	- [Layout](https://github.com/sargasso-studios/general_testing#36-layout)
+	- [File Structure](https://github.com/sargasso-studios/general_testing#37-file-structure)
 4. [Design](https://github.com/sargasso-studios/survival#4-design)
 	- [Character](https://github.com/sargasso-studios/survival#41-character)
 		- [Controls](https://github.com/sargasso-studios/survival#411-controls)
@@ -45,34 +46,67 @@ A survival game focused on exploration and building, with a strong storyline, an
 - 3ds Max Version ...
 
 ## 3. Style Guide
-This section is an outline of our preferred coding style, in order to make all of parts of the project very easy to read / understand, and make sure that there is a clear structure to each script.
+This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.
 
 ### 3.1 Naming
-- Use Camel Case for variables, and parameters 
+- Use Camel Case for variables, and parameters
 - Use Pascal Case for functions, properties, events, and classes
 - Use Pascal Case for files, and directories
 - Do not use prefixes (e.g. m_ for private variables)
 - Do use 'I' prefix for interfaces
 
-### 3.2 Spacing
-- Use a single space after the comma between function arguments (e.g. 'Vector3(x, y, z)')
-- Use a single space before and after an operator (e.g. 'x + y')
+### 3.2 Language
+- Always use US spellings
+- The only exception is 'MonoBehaviour' as this is the name of the class
 
+**Good:**
+```cs
+string color = "red";
+```
+**Bad:**
+```cs
+string colour = "red";
+```
+### 3.3 Spacing
+- Use a single space after the comma between function arguments (example 1)
+- Do not use a space between the opening parenthesis (example 1)
+- Do not use a space between the function name and opening parenthesis (example 1)
+- Do not use spaces inside brackets (example 2)
+- Use a single space before and after an operator (example 3)
+```cs
+example 1
 
-### 3.3 Commenting / Headers
+Console.WriteLine(argument1, argument2, argument3);
+```
+```cs
+example 2
+
+x = dataArray[index];
+```
+```cs
+example 3
+
+if (x == y)
+
+while (x == y)
+
+Cnsole.WriteLine(x + y)
+```
+
+### 3.4 Commenting / Headers
 - Double slash commenting (single line commenting) will be used rather than multi line commenting (e.g. '// Comment here')
 - Variables purposes should be clear from their names, although a comment may be attached if appropriate
 - All functions should have a comment that clearly describes their purpose, intention, and logical flow
 - Additional comments may be used elsewhere where appropriate
 - Use Headers to separate sections (e.g. '[Header("Title")]')
 
-### 3.4 Bracing
+### 3.5 Bracing
 - Opening braces should be on the same like as the statements declaration
 - Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace (examples seen below)
 - All contents inside braces should be indented by 1 tab more than the braces themselves
 
 ```cs
-static void Function(string argument1, int argument2) {
+static void Function(string parameter1, int parameter2) {
     // Contents
 }
 ```
@@ -86,14 +120,14 @@ if(someExpression) {
 ```
 
 
-### 3.5 Layout
+### 3.6 Layout
 - Variables at top (public, then private)
 - Functions next
 - Code that runs at start
 - Code that runs per frame
 - Image to show this?
 
-### 3.6 File Structure
+### 3.7 File Structure
 - Assets
 	- Art
 		- Materials
@@ -185,6 +219,12 @@ Intro to the Skills design section.
 ##### 4.4.1.2 Recipes / Items
 - Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
 
+	| Item          | Recipe        | Assets/Visuals| Scripts       |
+	|:-------------:|:-------------:|:-------------:|:-------------:|
+	| info          | info          | info          | info          |
+	| info          | info          | info          | info          |
+	| info          | info          | info          | info          |
+
 #### 4.4.2 Crafting
 - Crafting info
 
@@ -193,6 +233,12 @@ Intro to the Skills design section.
 
 ##### 4.4.2.2 Recipes / Items
 - Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
+
+	| Item          | Recipe        | Assets/Visuals| Scripts       |
+	|:-------------:|:-------------:|:-------------:|:-------------:|
+	| info          | info          | info          | info          |
+	| info          | info          | info          | info          |
+	| info          | info          | info          | info          |
 
 ### 4.5 Story
 Intro to the Story section.

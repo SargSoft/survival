@@ -74,17 +74,17 @@ string colour = "red";
 - Do not use spaces inside brackets (example 2)
 - Use a single space before and after an operator (example 3)
 ```cs
-example 1
+// example 1:
 
 Console.WriteLine(argument1, argument2, argument3);
 ```
 ```cs
-example 2
+// example 2:
 
 x = dataArray[index];
 ```
 ```cs
-example 3
+// example 3:
 
 if (x == y)
 
@@ -94,11 +94,24 @@ Cnsole.WriteLine(x + y)
 ```
 
 ### 3.4 Commenting / Headers
-- Double slash commenting (single line commenting) will be used rather than multi line commenting (e.g. '// Comment here')
+- Double slash commenting (single line commenting) will be used rather than multi line commenting
+- A space will be left after the double slash and before the comment (example 1)
+- Comments should end with a period (example 1)
 - Variables purposes should be clear from their names, although a comment may be attached if appropriate
-- All functions should have a comment that clearly describes their purpose, intention, and logical flow
+- All functions should have a comment that clearly describes their purpose, intention, and approach
 - Additional comments may be used elsewhere where appropriate
-- Use Headers to separate sections (e.g. '[Header("Title")]')
+- Use Headers to separate sections, and therefore variables, to improve readability, and sort the variables into groups in the inspector
+
+```cs
+// example 1
+
+// Comment Here.
+```
+```cs
+// example 2
+
+[Header("Title")]
+```
 
 ### 3.5 Bracing
 - Opening braces should be on the same like as the statements declaration

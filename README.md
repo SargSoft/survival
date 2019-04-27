@@ -7,11 +7,14 @@ A survival game focused on exploration and building, with a strong storyline, an
 3. [Style Guide](https://github.com/sargasso-studios/general_testing#3-style-guide)
 	- [Naming](https://github.com/sargasso-studios/general_testing#31-naming)
 	- [Language](https://github.com/sargasso-studios/general_testing#32-language)
-	- [Spacing](https://github.com/sargasso-studios/general_testing#33-spacing)
-	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#34-commenting--headers)
-	- [Bracing](https://github.com/sargasso-studios/general_testing#35-bracing)
-	- [Layout](https://github.com/sargasso-studios/general_testing#36-layout)
-	- [File Structure](https://github.com/sargasso-studios/general_testing#37-file-structure)
+	- [Declaration](https://github.com/sargasso-studios/general_testing#33-declaration)
+	- [Spacing](https://github.com/sargasso-studios/general_testing#34-spacing)
+	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#35-commenting--headers)
+	- [Bracing](https://github.com/sargasso-studios/general_testing#36-bracing)
+	- [Layout](https://github.com/sargasso-studios/general_testing#37-layout)
+	- [Directory](https://github.com/sargasso-studios/general_testing#38-directory)
+		- [File Structure](https://github.com/sargasso-studios/general_testing#381-file-structure)
+		- [Files Types](https://github.com/sargasso-studios/general_testing#382-file-types)
 4. [Design](https://github.com/sargasso-studios/survival#4-design)
 	- [Character](https://github.com/sargasso-studios/survival#41-character)
 		- [Controls](https://github.com/sargasso-studios/survival#411-controls)
@@ -67,7 +70,22 @@ string color = "red";
 ```cs
 string colour = "red";
 ```
-### 3.3 Spacing
+
+### 3.3 Declaration
+- Use one line per variable declaration, do not have multiple variables declared on a single line
+
+**Good:**
+```cs
+string variable1;
+string variable2;
+string variable3;
+```
+**Bad:**
+```cs
+string variable1, variable2, variable3;
+```
+
+### 3.4 Spacing
 - Use a single space after the comma between function arguments (example 1)
 - Do not use a space between the opening parenthesis (example 1)
 - Do not use a space between the function name and opening parenthesis (example 1)
@@ -93,7 +111,7 @@ while (x == y)
 Cnsole.WriteLine(x + y)
 ```
 
-### 3.4 Commenting / Headers
+### 3.5 Commenting / Headers
 - Double slash commenting (single line commenting) will be used rather than multi line commenting
 - A space will be left after the double slash and before the comment (example 1)
 - Comments should end with a period (example 1)
@@ -113,7 +131,7 @@ Cnsole.WriteLine(x + y)
 [Header("Title")]
 ```
 
-### 3.5 Bracing
+### 3.6 Bracing
 - Opening braces should be on the same like as the statements declaration
 - Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace (examples seen below)
 - All contents inside braces should be indented by 1 tab more than the braces themselves
@@ -133,31 +151,53 @@ if(someExpression) {
 ```
 
 
-### 3.6 Layout
+### 3.7 Layout
 - Variables at top (public, then private)
 - Functions next
 - Code that runs at start
 - Code that runs per frame
 - Image to show this?
 
-### 3.7 File Structure
-- Assets
-	- Art
-		- Materials
-		- Models
-		- Textures
-	- Audio
-		- Music
-		- Sound
-	- Code
-		- Scripts
-		- Shaders
-	- Docs (Wiki, Concept Art, Marketing Material)
-	- Level (Anything related to game design in Unity)
-		- Prefabs
-		- Scenes
-		- UI
-	- Resources (Configuration files, localization text, other user files)
+### 3.8 Directory
+
+#### 3.8.1 File Structure
+
+```
+Assets
++---Art
+|	+---Materials
+|	+---Models
+|	+---Textures
++---Audio
+|	+---Music
+|	+---Sound
++---Code
+|	+---Scripts
+|		+---Environment
+|		+---Framework
+|		+---Tools
+|		+---UI
+|	+---Shaders
++---Docs
+|	+---Wiki
+|	+---ConceptArt
+|	+---Marketing
+|	+---Readme
++---Level
+|	+---Prefabs
+|	+---Scenes
+|	+---UI
++---Resources		# Configuration files, localization text, other user files
+```
+
+#### 3.8.2 File Types
+
+	| Files         | File Type     |
+	|:-------------:|:-------------:|
+	| Music         | .WAV          |
+	| Sound         | .OGG          |
+	| Models        | .FBX          |
+	| Textures      | .PNG          |
 
 ## 4. Design
 Intro paragraph for the design section

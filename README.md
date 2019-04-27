@@ -192,12 +192,12 @@ Assets
 
 #### 3.8.2 File Types
 
-	| Files         | File Type     |
-	|:-------------:|:-------------:|
-	| Music         | .WAV          |
-	| Sound         | .OGG          |
-	| Models        | .FBX          |
-	| Textures      | .PNG          |
+| Files         | File Type     |
+|:-------------:|:-------------:|
+| Music         | .WAV          |
+| Sound         | .OGG          |
+| Models        | .FBX          |
+| Textures      | .PNG          |
 
 ## 4. Design
 Intro paragraph for the design section

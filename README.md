@@ -179,10 +179,10 @@ Assets
 |		+---UI
 |	+---Shaders
 +---Docs
-|	+---Wiki
-|	+---ConceptArt
+|	+---Concept Art
 |	+---Marketing
 |	+---Readme
+|	+---Wiki
 +---Level
 |	+---Prefabs
 |	+---Scenes
@@ -202,7 +202,7 @@ Assets
 ## 4. Design
 Intro paragraph for the design section
 
-![Mindmap](Assets/Docs/DesignMindmap.png)
+![Mindmap](Assets/Docs/Readme/DesignMindmap.png)
 
 ### 4.1 Character
 Intro to the Character design section.

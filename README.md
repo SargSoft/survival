@@ -220,13 +220,25 @@ Further
 - Using Unity's Input Manager & built in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
 - Implement swimming
 
-#### 4.1.2 Shaders
+#### 4.1.2 Settings
+- Settings info
+
+#### 4.1.3 Shaders
 - Shaders info
 
-#### 4.1.3 UI
+#### 4.1.4 Skills
+- Skills info
+
+##### 4.1.4.1 Building
+- Building info (UI, Recipes, Items Scripts & Assets)
+
+##### 4.1.4.2 Crafting
+- Crafting info (UI, Recipes, Items Scripts & Assets)
+
+#### 4.1.5 UI
 - UI info
 
-#### 4.1.4 Visuals / Animations
+#### 4.1.6 Visuals / Animations
 - Visuals / Animations info
 
 ### 4.2 Environment
@@ -245,55 +257,37 @@ Further
 - Test build second species of herbivore with different behaviour (i.e. bottom feeders).
 - Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
 
-#### 4.2.2 Landscape
+#### 4.2.2 Audio
+- Audio info
+
+##### 4.2.2.1 Music
+- Music info
+
+##### 4.2.2.2 Sounds
+- Sounds info
+
+#### 4.2.3 Landscape
 - Landscape info
 
-#### 4.2.3 Plants
+#### 4.2.4 Plants
 - Plants info
 
-### 4.3 Menu's
+### 4.3 Main Menu
 Intro to the Menu design section.
 
-#### 4.3.1 Main Menu
-- Main Menu info
+#### 4.3.1 Background
+- Background info
 
-#### 4.3.2 Settings
-- Settings info
+#### 4.3.2 Buttons
+- Buttons info
 
-### 4.4 Skills
-Intro to the Skills design section.
+#### 4.3.1 Music
+- Music info
 
-#### 4.4.1 Building / Construction
-- Building / Contruction info
+#### 4.3.2 Options
+- Options info
 
-##### 4.4.1.1 UI
-- Building / Construction UI
-
-##### 4.4.1.2 Recipes / Items
-- Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
-
-	| Item          | Recipe        | Assets/Visuals| Scripts       |
-	|:-------------:|:-------------:|:-------------:|:-------------:|
-	| info          | info          | info          | info          |
-	| info          | info          | info          | info          |
-	| info          | info          | info          | info          |
-
-#### 4.4.2 Crafting
-- Crafting info
-
-##### 4.4.2.1 UI
-- Crafting UI
-
-##### 4.4.2.2 Recipes / Items
-- Table of Items, Recipes, Assets/visuals, Scripts (Items Purpose/Function)
-
-	| Item          | Recipe        | Assets/Visuals| Scripts       |
-	|:-------------:|:-------------:|:-------------:|:-------------:|
-	| info          | info          | info          | info          |
-	| info          | info          | info          | info          |
-	| info          | info          | info          | info          |
-
-### 4.5 Story
+### 4.4 Story
 Intro to the Story section.
 
 #### 4.5.1 Backstory

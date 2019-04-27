@@ -18,24 +18,30 @@ A survival game focused on exploration and building, with a strong storyline, an
 4. [Design](https://github.com/sargasso-studios/survival#4-design)
 	- [Character](https://github.com/sargasso-studios/survival#41-character)
 		- [Controls](https://github.com/sargasso-studios/survival#411-controls)
-		- [Shaders](https://github.com/sargasso-studios/survival#412-shaders)
-		- [UI](https://github.com/sargasso-studios/survival#413-ui)
-		- [Visuals / Animations](https://github.com/sargasso-studios/survival#414-visuals--animations)
+		- [Settings](https://github.com/sargasso-studios/survival#412-settings)
+		- [Shaders](https://github.com/sargasso-studios/survival#413-shaders)
+		- [Skills](https://github.com/sargasso-studios/survival#414-skills)
+			- [Building](https://github.com/sargasso-studios/survival#4141-building)
+			- [Crafting](https://github.com/sargasso-studios/survival#4142-crafting)
+		- [UI](https://github.com/sargasso-studios/survival#415-ui)
+		- [Visuals / Animations](https://github.com/sargasso-studios/survival#416-visuals--animations)
 	- [Environment](https://github.com/sargasso-studios/survival#42-environment)
 		- [AI / Fauna](https://github.com/sargasso-studios/survival#421-ai--fauna)
-		- [Landscape](https://github.com/sargasso-studios/survival#422-landscape)
-		- [Plants](https://github.com/sargasso-studios/survival#423-plants)
-	- [Menu's](https://github.com/sargasso-studios/survival#43-menus)
-		- [Main Menu](https://github.com/sargasso-studios/survival#431-main-menu)
-		- [Settings](https://github.com/sargasso-studios/survival#432-settings)
-	- [Skills](https://github.com/sargasso-studios/survival#44-skills)
-		- [Building / Construction](https://github.com/sargasso-studios/survival#441-building--construction)
-		- [Crafting](https://github.com/sargasso-studios/survival#442-crafting)
-	- [Story](https://github.com/sargasso-studios/survival#45-story)
-		- [Backstory](https://github.com/sargasso-studios/survival#451-backstory)
-		- [Ending](https://github.com/sargasso-studios/survival#452-ending)
-		- [Journal](https://github.com/sargasso-studios/survival#453-journal)
-		- [Story Arc](https://github.com/sargasso-studios/survival#454-story-arc)
+		- [Audio](https://github.com/sargasso-studios/survival#422-audio)
+			- [Music](https://github.com/sargasso-studios/survival#4221-music)
+			- [Sounds](https://github.com/sargasso-studios/survival#4222-sounds)
+		- [Landscape](https://github.com/sargasso-studios/survival#423-landscape)
+		- [Plants](https://github.com/sargasso-studios/survival#424-plants)
+	- [Main Menu](https://github.com/sargasso-studios/survival#43-main-menu)
+		- [Background](https://github.com/sargasso-studios/survival#431-background)
+		- [Buttons](https://github.com/sargasso-studios/survival#432-buttons)
+		- [Music](https://github.com/sargasso-studios/survival#433-music)
+		- [Options](https://github.com/sargasso-studios/survival#434-options)
+	- [Story](https://github.com/sargasso-studios/survival#44-story)
+		- [Backstory](https://github.com/sargasso-studios/survival#441-backstory)
+		- [Ending](https://github.com/sargasso-studios/survival#442-ending)
+		- [Journal](https://github.com/sargasso-studios/survival#443-journal)
+		- [Story Arc](https://github.com/sargasso-studios/survival#444-story-arc)
 
 ## 1. Team Members
 - Charlie Brown
@@ -281,23 +287,23 @@ Intro to the Menu design section.
 #### 4.3.2 Buttons
 - Buttons info
 
-#### 4.3.1 Music
+#### 4.3.3 Music
 - Music info
 
-#### 4.3.2 Options
+#### 4.3.4 Options
 - Options info
 
 ### 4.4 Story
 Intro to the Story section.
 
-#### 4.5.1 Backstory
+#### 4.4.1 Backstory
 - Backstory info
 
-#### 4.5.2 Ending
+#### 4.4.2 Ending
 - Ending info
 
-#### 4.5.3 Journal
+#### 4.4.3 Journal
 - Journal info, ingame wiki with information on fauna / plants / environment / crafting / etc.
 
-#### 4.5.4 Story Arc
+#### 4.4.4 Story Arc
 - Story Arc info

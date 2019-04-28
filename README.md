@@ -9,7 +9,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 	- [Language](https://github.com/sargasso-studios/general_testing#32-language)
 	- [Declaration](https://github.com/sargasso-studios/general_testing#33-declaration)
 	- [Spacing](https://github.com/sargasso-studios/general_testing#34-spacing)
-	- [Commenting / Headers](https://github.com/sargasso-studios/general_testing#35-commenting--headers)
+	- [Commenting](https://github.com/sargasso-studios/general_testing#35-commenting)
 	- [Bracing](https://github.com/sargasso-studios/general_testing#36-bracing)
 	- [Layout](https://github.com/sargasso-studios/general_testing#37-layout)
 	- [Directory](https://github.com/sargasso-studios/general_testing#38-directory)
@@ -117,24 +117,19 @@ while (x == y)
 Cnsole.WriteLine(x + y)
 ```
 
-### 3.5 Commenting / Headers
+### 3.5 Commenting
 - Double slash commenting (single line commenting) will be used rather than multi line commenting
 - A space will be left after the double slash and before the comment (example 1)
-- Comments should end with a period (example 1)
+- Comments should **not** end with a period (example 1)
+- The first letter of comments should always be capitalized (example 1)
 - Variables purposes should be clear from their names, although a comment may be attached if appropriate
 - All functions should have a comment that clearly describes their purpose, intention, and approach
 - Additional comments may be used elsewhere where appropriate
-- Use Headers to separate sections, and therefore variables, to improve readability, and sort the variables into groups in the inspector
 
 ```cs
 // example 1
 
-// Comment Here.
-```
-```cs
-// example 2
-
-[Header("Title")]
+// Comment Here
 ```
 
 ### 3.6 Bracing
@@ -158,11 +153,47 @@ if(someExpression) {
 
 
 ### 3.7 Layout
-- Variables at top (public, then private)
-- Functions next
-- Code that runs at start
-- Code that runs per frame
-- Image to show this?
+- The first lines should use (using) to import the namespaces that will be used in the script
+- Next declare the class of the script (only one class per script)
+- Inside that class declare the variables for the script (public then private) using Headers to separate them into groups, which will be displayed in the inspector window in unity
+- Next will be void Start which will contain all of the code that will be initialized when the script is run
+- After that is void Update, which will run once per frame
+- Finally is the list of functions, the format of which is demonstrated in the below example, which follow the same format as the class they are within
+- Leave blank lines between sections (as seen in example below), and do **not** leave another other blank lines
+
+```cs
+using UnityEngine;
+using System.Collections;
+
+public class ClassName : MonoBehaviour {
+	[Header("Title to describe variable group")]
+	public string stringName;
+	private float floatName;
+
+	[Header("Title to describe variable group")]
+	public float floatName;
+	private string stringName;
+
+    // Use this for initialization
+    void Start () {
+    // Code here
+    }
+    
+    // Update is called once per frame
+    void Update () {
+    // Code here
+    }
+
+    // Functions here
+    public void FunctionName() {
+    	[Header("Title to describe variable group")]
+    	private string stringName;
+    	private float floatName;
+
+    	// Main Code here
+    }
+}
+```
 
 ### 3.8 Directory
 

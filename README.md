@@ -160,6 +160,7 @@ if(someExpression) {
 - After that is void Update, which will run once per frame
 - Finally is the list of functions, the format of which is demonstrated in the below example, which follow the same format as the class they are within
 - Leave blank lines between sections (as seen in example below), and do **not** leave another other blank lines
+- All of the comments in the example below should be removed in the actual scripts
 
 ```cs
 using UnityEngine;

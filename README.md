@@ -177,12 +177,12 @@ public class ClassName : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-    // Code here
+    	// Code here
     }
     
     // Update is called once per frame
     void Update () {
-    // Code here
+    	// Code here
     }
 
     // Functions here

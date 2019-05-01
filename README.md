@@ -114,7 +114,7 @@ if (x == y)
 
 while (x == y)
 
-Cnsole.WriteLine(x + y)
+Console.WriteLine(x + y)
 ```
 
 ### 3.5 Commenting

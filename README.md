@@ -27,17 +27,17 @@ A survival game focused on exploration and building, with a strong storyline, an
 		- [Visuals / Animations](https://github.com/sargasso-studios/survival#416-visuals--animations)
 	- [Environment](https://github.com/sargasso-studios/survival#42-environment)
 		- [AI / Fauna](https://github.com/sargasso-studios/survival#421-ai--fauna)
-			- [Herbivores]
-				- [Small Herbivores]
-				- [Medium Herbivores]
-				- [Large Herbivores]
-			- [Predators]
-				- [Small Predators]
-				- [Medium Predators]
-				- [Large Predators]
-			- [Crustaceans]
-				- [Small Crustaceans]
-				- [Large Crustaceans]
+			- [Herbivores](https://github.com/sargasso-studios/survival#4211-herbivores)
+				- [Small Herbivores](https://github.com/sargasso-studios/survival#42111-small-herbivores)
+				- [Medium Herbivores](https://github.com/sargasso-studios/survival#42112-medium-herbivores)
+				- [Large Herbivores](https://github.com/sargasso-studios/survival#42113-large-herbivores)
+			- [Predators](https://github.com/sargasso-studios/survival#4212-predators)
+				- [Small Predators](https://github.com/sargasso-studios/survival#42121-small-predators)
+				- [Medium Predators](https://github.com/sargasso-studios/survival#42122-medium-predators)
+				- [Large Predators](https://github.com/sargasso-studios/survival#42123-large-predators)
+			- [Crustaceans](https://github.com/sargasso-studios/survival#4213-crustaceans)
+				- [Small Crustaceans](https://github.com/sargasso-studios/survival#42131-small-crustaceans)
+				- [Large Crustaceans](https://github.com/sargasso-studios/survival#42132-large-crustaceans)
 		- [Audio](https://github.com/sargasso-studios/survival#422-audio)
 			- [Music](https://github.com/sargasso-studios/survival#4221-music)
 			- [Sounds](https://github.com/sargasso-studios/survival#4222-sounds)

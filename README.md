@@ -58,7 +58,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.
 
 ### 3.1 Naming
-- Use Camel Case for variables, and parameters
+- Use Camel Case for variables and parameters
 - Use Pascal Case for functions, properties, events, and classes
 - Use Pascal Case for files, and directories
 - Do not use prefixes (e.g. m_ for private variables)
@@ -118,10 +118,10 @@ Console.WriteLine(x + y)
 ```
 
 ### 3.5 Commenting
-- Double slash commenting (single line commenting) will be used rather than multi line commenting
+- Double slash commenting (single line commenting) will be used rather than multi-line commenting
 - A space will be left after the double slash and before the comment (example 1)
 - Comments should **not** end with a period (example 1)
-- The first letter of comments should always be capitalized (example 1)
+- The first letter of comments should always be capitalised (example 1)
 - Variables purposes should be clear from their names, although a comment may be attached if appropriate
 - All functions should have a comment that clearly describes their purpose, intention, and approach
 - Additional comments may be used elsewhere where appropriate
@@ -133,8 +133,8 @@ Console.WriteLine(x + y)
 ```
 
 ### 3.6 Bracing
-- Opening braces should be on the same like as the statements declaration
-- Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace (examples seen below)
+- Opening braces should be on the same line as the statements declaration
+- Closing braces should be on their own line below the contents, unless there is an else statement which starts on the same line as the closing brace (example seen below)
 - All contents inside braces should be indented by 1 tab more than the braces themselves
 
 ```cs
@@ -153,13 +153,13 @@ if(someExpression) {
 
 
 ### 3.7 Layout
-- The first lines should use (using) to import the namespaces that will be used in the script
-- Next declare the class of the script (only one class per script)
+- The first lines should use **using** to import the namespaces that will be used in the script
+- Next, declare the class of the script (only one class per script)
 - Inside that class declare the variables for the script (public then private) using Headers to separate them into groups, which will be displayed in the inspector window in unity
-- Next will be void Start which will contain all of the code that will be initialized when the script is run
+- Next will be void Start which will contain all of the code that will be initialised when the script is run
 - After that is void Update, which will run once per frame
 - Finally is the list of functions, the format of which is demonstrated in the below example, which follow the same format as the class they are within
-- Leave blank lines between sections (as seen in example below), and do **not** leave another other blank lines
+- Leave blank lines between sections (as seen in the example below), and do **not** leave any other blank lines
 - All of the comments in the example below should be removed in the actual scripts
 
 ```cs
@@ -225,7 +225,7 @@ Assets
 |	+---Prefabs
 |	+---Scenes
 |	+---UI
-+---Resources		# Configuration files, localization text, other user files
++---Resources		# Configuration files, localisation text, other user files
 ```
 
 #### 3.8.2 File Types
@@ -248,14 +248,14 @@ Intro to the Character design section.
 #### 4.1.1 Controls
 Prefabs of a simple character model (capsule) with functioning character controls
 
-Inital design
+Initial design
 - Basic WASD movement
 - Ability to control the direction of the character with the mouse
 - Add simple functions like crouch, jump, running
 
 Further 
 - Separating different controls into their own functions (e.g. crouching, jumping, running, etc.)
-- Using Unity's Input Manager & built in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
+- Using Unity's Input Manager & built-in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
 - Implement swimming
 
 #### 4.1.2 Settings
@@ -285,7 +285,7 @@ Intro to the Environment design section.
 #### 4.2.1 AI / Fauna
 A prototype of the ecosystem design.
 
-Inital design
+Initial design
 - Build system for zoning that populates a specific area with plant life taking in to account terrain.
 - Expand zoning system to have plants instantiated in clusters with variables dictating available food.
 - Build basic herbivore AI that paths around based on terrain, handles encounters with food,carnivores.

@@ -27,6 +27,17 @@ A survival game focused on exploration and building, with a strong storyline, an
 		- [Visuals / Animations](https://github.com/sargasso-studios/survival#416-visuals--animations)
 	- [Environment](https://github.com/sargasso-studios/survival#42-environment)
 		- [AI / Fauna](https://github.com/sargasso-studios/survival#421-ai--fauna)
+			- [Herbivores]
+				- [Small Herbivores]
+				- [Medium Herbivores]
+				- [Large Herbivores]
+			- [Predators]
+				- [Small Predators]
+				- [Medium Predators]
+				- [Large Predators]
+			- [Crustaceans]
+				- [Small Crustaceans]
+				- [Large Crustaceans]
 		- [Audio](https://github.com/sargasso-studios/survival#422-audio)
 			- [Music](https://github.com/sargasso-studios/survival#4221-music)
 			- [Sounds](https://github.com/sargasso-studios/survival#4222-sounds)
@@ -197,6 +208,7 @@ public class ClassName : MonoBehaviour {
 ```
 
 ### 3.8 Directory
+This section outlines the expections in terms of how we structure our files, and also the file types that should be used.
 
 #### 3.8.1 File Structure
 
@@ -238,25 +250,21 @@ Assets
 | Textures      | .PNG          |
 
 ## 4. Design
-Intro paragraph for the design section
+This section is an overview of the design of the game followed by a highly descriptive breakdown of all the individual elements of the game. Below is a visual representation of the game design overview.
 
 ![Mindmap](Assets/Docs/Readme/DesignMindmap.png)
 
 ### 4.1 Character
-Intro to the Character design section.
+Below is a breakdown of all of the aspects relating to the character, including all of the requisites for each element.
 
 #### 4.1.1 Controls
-Prefabs of a simple character model (capsule) with functioning character controls
+**Requisites:**
 
-Initial design
 - Basic WASD movement
-- Ability to control the direction of the character with the mouse
-- Add simple functions like crouch, jump, running
-
-Further 
-- Separating different controls into their own functions (e.g. crouching, jumping, running, etc.)
+- Camera control with mouse (capsule should rotate along x-axis with mouse, but not along y-axis)
+- Crouching, jumping, and running (each of which should have their own function)
+- Swimming (should detect one camera is below water surface, and controls should adjust appropriately to simulate swimming)
 - Using Unity's Input Manager & built-in multiplatform commands (e.g. 'Horizontal' rather than 'Mouse X')
-- Implement swimming
 
 #### 4.1.2 Settings
 - Settings info
@@ -280,20 +288,86 @@ Further
 - Visuals / Animations info
 
 ### 4.2 Environment
-Intro to the Environment design section.
+Below is a breakdown of all of the aspects relating to the environment, including all of the requisites for each element, and also initial concept art.
 
 #### 4.2.1 AI / Fauna
-A prototype of the ecosystem design.
+This section will outline the overview of all the types of Fauna in the game, and their respective requisites.
 
-Initial design
-- Build system for zoning that populates a specific area with plant life taking in to account terrain.
-- Expand zoning system to have plants instantiated in clusters with variables dictating available food.
+```
+Herbivores -----> Small -----> Shoaling
+			  |			   |
+			  |			   --> Scavenging
+			  |
+			  |
+			  --> Medium ----> Shoaling
+			  |			   |
+			  |			   --> Scavenging
+			  |
+			  |
+			  --> Large -----> Roaming
+			  			   |
+			  			   --> Scavenging
+
+
+Predators ------> Small -----> Shoaling
+			  |
+			  --> Medium ----> Roaming
+			  |
+			  --> Large -----> Roaming
+
+
+Crustaceans ----> Small
+			  |
+			  --> Large
+
+			  			(MAKE THIS PRETTIER IN LATEX CHARLIE?)
+```
+
+##### 4.2.1.1 Herbivores
+Herbivores intro text.
+
+###### 4.2.1.1.1 Small Herbivores
+**Small Shoaling Herbivores:**
+
 - Build basic herbivore AI that paths around based on terrain, handles encounters with food,carnivores.
+- Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
+
+**Small Scavenging Herbivoes:**
+
+- Test build second species of herbivore with different behaviour (i.e. bottom feeders).
+
+###### 4.2.1.1.2 Medium Herbivores
+**Small Shoaling Herbivores:**
+
+**Small Scavenging Herbivoes**
+
+###### 4.2.1.1.3 Large Herbivores
+**Small Roaming Herbivores:**
+
+**Small Scavenging Herbivoes:**
+
+##### 4.2.1.2 Predators
+Preditores intro text.
+
+###### 4.2.1.2.1 Small Predators
+**Small Shoaling Preditors:**
+
+###### 4.2.1.2.2 Medium Predators
+**Medium Roaming Preditors:**
+
 - Build basic carnivore AI that hunts herbivores when hungry, and otherwise patrols.
 
-Further 
-- Test build second species of herbivore with different behaviour (i.e. bottom feeders).
-- Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
+###### 4.2.1.2.3 Large Predators
+**Large Roaming Preditors:**
+
+##### 4.2.1.3 Crustaceans
+Crustaceans intro text.
+
+###### 4.2.1.3.1 Small Crustaceans
+info
+
+###### 4.2.1.3.2 Large Crustaceans
+info
 
 #### 4.2.2 Audio
 - Audio info
@@ -308,10 +382,13 @@ Further
 - Landscape info
 
 #### 4.2.4 Plants
-- Plants info
+**Requisites:**
+
+- Build system for zoning that populates a specific area with plant life taking in to account terrain.
+- Expand zoning system to have plants instantiated in clusters with variables dictating available food.
 
 ### 4.3 Main Menu
-Intro to the Menu design section.
+Below is a breakdown of all of the aspects relating to the main menu, including all of the requisites, and initial concept art.
 
 #### 4.3.1 Background
 - Background info
@@ -326,7 +403,7 @@ Intro to the Menu design section.
 - Options info
 
 ### 4.4 Story
-Intro to the Story section.
+Below is a breakdown of all of the aspects relating to the story, including all of the major events, backstory, story chronology, and in game triggers for story advancement.
 
 #### 4.4.1 Backstory
 - Backstory info

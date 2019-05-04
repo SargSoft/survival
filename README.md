@@ -293,35 +293,7 @@ Below is a breakdown of all of the aspects relating to the environment, includin
 #### 4.2.1 AI / Fauna
 This section will outline the overview of all the types of Fauna in the game, and their respective requisites.
 
-```
-Herbivores -----> Small -----> Shoaling
-			  |			   |
-			  |			   --> Scavenging
-			  |
-			  |
-			  --> Medium ----> Shoaling
-			  |			   |
-			  |			   --> Scavenging
-			  |
-			  |
-			  --> Large -----> Roaming
-			  			   |
-			  			   --> Scavenging
-
-
-Predators ------> Small -----> Shoaling
-			  |
-			  --> Medium ----> Roaming
-			  |
-			  --> Large -----> Roaming
-
-
-Crustaceans ----> Small
-			  |
-			  --> Large
-
-			  			(MAKE THIS PRETTIER IN LATEX CHARLIE?)
-```
+![TreeDiagram](Assets/Docs/Readme/FaunaTreeDiagram.png)
 
 ##### 4.2.1.1 Herbivores
 Herbivores intro text.

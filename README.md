@@ -301,6 +301,8 @@ Herbivores intro text.
 ###### 4.2.1.1.1 Small Herbivores
 **Small Shoaling Herbivores:**
 
+![ShoalingHerbivoreAIFlowchart](Assets/Docs/Readme/ShoalingHerbivoreAIFlowchart.png)
+
 - Build basic herbivore AI that paths around based on terrain, handles encounters with food,carnivores.
 - Expand Herbivore AI to accommodate swarms (when >1 are in close proximity have them join together and consolidate logic).
 

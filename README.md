@@ -291,14 +291,16 @@ Below is a breakdown of all of the aspects relating to the character, including 
 Below is a breakdown of all of the aspects relating to the environment, including all of the requisites for each element, and also initial concept art.
 
 #### 4.2.1 AI / Fauna
-This section will outline the overview of all the types of Fauna in the game, and their respective requisites.
+This section will outline the overview of all the types of Fauna in the game, their respective requisites, and behavioural patterns. Below is a tree diagram which illustrates how the different fauna are organised.
 
 ![TreeDiagram](Assets/Docs/Readme/FaunaTreeDiagram.png)
 
 ##### 4.2.1.1 Herbivores
-Herbivores intro text.
+Below the different variants of herbivorous fauna are broken down by their relative sizes and behavioural patterns.
 
 ###### 4.2.1.1.1 Small Herbivores
+There are two types of small herbivorous fauna, shoalers, and scavengers, both of which have their own different behavioural patterns, as outlined below.
+
 **Small Shoaling Herbivores:**
 
 ![ShoalingHerbivoreAIFlowchart](Assets/Docs/Readme/ShoalingHerbivoreAIFlowchart.png)
@@ -311,31 +313,41 @@ Herbivores intro text.
 - Test build second species of herbivore with different behaviour (i.e. bottom feeders).
 
 ###### 4.2.1.1.2 Medium Herbivores
-**Small Shoaling Herbivores:**
+There are two types of medium herbivorous fauna, shoalers, and scavengers, both of which have their own different behavioural patterns, as outlined below.
 
-**Small Scavenging Herbivoes**
+**Medium Shoaling Herbivores:**
+
+**Medium Scavenging Herbivoes**
 
 ###### 4.2.1.1.3 Large Herbivores
-**Small Roaming Herbivores:**
+There are two types of large herbivorous fauna, roamers, and scavengers, both of which have their own different behavioural patterns, as outlined below.
 
-**Small Scavenging Herbivoes:**
+**Large Roaming Herbivores:**
+
+**Large Scavenging Herbivoes:**
 
 ##### 4.2.1.2 Predators
-Preditores intro text.
+Below the different variants of predatory fauna are broken down by their relative sizes and behavioural patterns.
 
 ###### 4.2.1.2.1 Small Predators
+There is only one type of small predatory fauna, scavengers, which have their own behavioural pattern, as outlined below.
+
 **Small Shoaling Preditors:**
 
 ###### 4.2.1.2.2 Medium Predators
+There is only one type of medium predatory fauna, scavengers, which have their own behavioural pattern, as outlined below.
+
 **Medium Roaming Preditors:**
 
 - Build basic carnivore AI that hunts herbivores when hungry, and otherwise patrols.
 
 ###### 4.2.1.2.3 Large Predators
+There is only one type of large predatory fauna, scavengers, which have their own behavioural pattern, as outlined below.
+
 **Large Roaming Preditors:**
 
 ##### 4.2.1.3 Crustaceans
-Crustaceans intro text.
+Below the different variants of crustaceans are broken down by their relative sizes.
 
 ###### 4.2.1.3.1 Small Crustaceans
 info

@@ -365,6 +365,8 @@ info
 ##### 5.2.2.1 Music
 - Music info
 
+[Ambient Music Track 1](/Assets/Audio/Music/SurvivalGameAmbientMusicTrack1.wav)
+
 ##### 5.2.2.2 Sounds
 - Sounds info
 

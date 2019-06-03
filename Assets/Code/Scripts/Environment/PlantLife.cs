@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class plantLife : MonoBehaviour
+public class PlantLife : MonoBehaviour
 {
 
     public GameObject floor; // Refrence to the ocean floor prefab

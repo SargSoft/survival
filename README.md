@@ -69,6 +69,8 @@ A survival game focused on exploration and building, with a strong storyline, an
 ## 3. Methodology
 Info on Agile Methodology.
 
+![AgileMethodologyDiagram](Assets/Docs/Readme/AgileMethodologyDiagram.png)
+
 ## 4. Style Guide
 This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.
 

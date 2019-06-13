@@ -409,4 +409,11 @@ Below is a breakdown of all of the aspects relating to the story, including all 
 - Journal info, ingame wiki with information on fauna / plants / environment / crafting / etc.
 
 #### 5.4.4 Story Arc
-- Story Arc info
+- In the future humanity has started to colonise space and is looking at expanding into new systems (perhaps something about Earth being uninhabitable)
+- You are part of a small team, 3 of 4 people, of explorers looking for new planets that look habitable / have similar conditions to earth
+- Due to the distance you are travelling, teams are rarely in range of communication with the rest of humanity, and as a result it is an extremely dangerous job, (if you get lost or you or your ship is damage, there is very little chance of survival)
+- Your team finds a somewhat empty looking planet, but your scans detect water, and the potential for life
+- Ship lands on the water, near an island, and you go to explore the island on your own
+- As you are on the island (very desolate and no sign of life) your comms go dead suddently, at first you think it is just a glitch and then get worried and return to the ship
+- You find the ship completely gone, without a trace, along with your crew
+- Start of the game

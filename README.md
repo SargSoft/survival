@@ -4,7 +4,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 ## Table of Contents
 1. [Team Members](https://github.com/sargasso-studios/general_testing#1-team-members)
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
-3. [Methodology](https://github.com/sargasso-studios/general_testing#3-methodology)
+3. [Methodology & Pillars](https://github.com/sargasso-studios/general_testing#3-methodology&pillars)
 4. [Style Guide](https://github.com/sargasso-studios/general_testing#4-style-guide)
 	- [Naming](https://github.com/sargasso-studios/general_testing#41-naming)
 	- [Language](https://github.com/sargasso-studios/general_testing#42-language)
@@ -66,11 +66,13 @@ A survival game focused on exploration and building, with a strong storyline, an
 - Unity Version 2018.3.9 (found in 2018.x section of: https://unity3d.com/get-unity/download/archive)
 - 3ds Max Version ...
 
-## 3. Methodology
-Info on Agile Methodology.
+## 3. Methodology & Pillars
+### 3.1 SCRUM Methodology & Agile Software Development
+For this project we will follow the SCRUM methodology, which is a specific approach to Agile Software Development. As opposed to the traditional Waterfall approach, Agile Software Development forces continual re-evaluation of the current state of the product, and direction, greatly increasing productivity, and ensuring testing, and evaluation, is a continual part of the process. This is achieved through an iterative process, as shown in the belown diagram, that is repeated by each individual for every product increment. Each iteration is a fixed length, and is known as a Sprint, which should be no longer than 30days, and in our case we have decided on bi-weekly sprints, meaning that the Agile Development cycle should be completed within these two weeks, and there will then be a meeting in which the progress is evaluated, and new product increments are decided on for the next Sprint. Another key part of SCRUM methodology is the belief that it is better to cut back on functionality than to sacrifice quality, this means that it is more important to get half of the functionality working, but ensure it is all tested and quality checked, rather than more functionality that is half baked. Finally, it is important that if any unexpected additional functionality requirements surface during a Sprint that they are put on the backlog to be discussed at the next meeting, and thus do not interfere with the current Sprint, avoiding any potential delays. Above all else, all product increments should be community driven, learnt during the feedback section of the cycle, and discussed during the bi-weekly meetings.
 
-![AgileMethodologyDiagram](Assets/Docs/Readme/AgileMethodologyDiagram.png)
+![AgileDevelopmentDiagram](Assets/Docs/Readme/AgileDevelopmentDiagram.png)
 
+### 3.2 Game Pillars
 ## 4. Style Guide
 This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.
 

@@ -6,7 +6,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 2. [Getting Started](https://github.com/sargasso-studios/general_testing#2-getting-started)
 3. [Methodology & Pillars](https://github.com/sargasso-studios/survival#3-methodology--pillars)
 	- [SCRUM Methodology & Agile Software Development](https://github.com/sargasso-studios/survival#31-scrum-methodology--agile-software-development)
-	- [Game Pillars](https://github.com/sargasso-studios/survival#32-game-pillars)
+	- [Design Pillars](https://github.com/sargasso-studios/survival#32-design-pillars)
 4. [Style Guide](https://github.com/sargasso-studios/general_testing#4-style-guide)
 	- [Naming](https://github.com/sargasso-studios/general_testing#41-naming)
 	- [Language](https://github.com/sargasso-studios/general_testing#42-language)
@@ -74,7 +74,11 @@ For this project we will follow the SCRUM methodology, which is a specific appro
 
 ![AgileDevelopmentDiagram](Assets/Docs/Readme/AgileDevelopmentDiagram.png)
 
-### 3.2 Game Pillars
+### 3.2 Design Pillars
+- Exploration
+- Story
+- Building
+
 ## 4. Style Guide
 This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.
 

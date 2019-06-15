@@ -75,9 +75,15 @@ For this project we will follow the SCRUM methodology, which is a specific appro
 ![AgileDevelopmentDiagram](Assets/Docs/Readme/AgileDevelopmentDiagram.png)
 
 ### 3.2 Design Pillars
-- Exploration
-- Story
-- Building
+
+![DesignPillars](Assets/Docs/Readme/DesignPillars.png)
+
+#### **Exploration:**
+Exploration should envoke a feeling of amazement, mystery, and anticipation. A non procedurly generated world, that feels both large scale, but does not neglect smaller aspects (Should not feel like an empty shell). Linked with the storyline it should promote returning to areas and multiple rewards requiring story advancement to access everything in each area (not just progressive in terms of areas, feeling like there is no reason to return to "completed" areas). A realistic feeling ecosystem, with lots of thought put into how a real ecosystem function, and what kinds of animals would realistically evolve in a given environment (e.g. possibly a younger planet than earth, thus less evolved animals, hotter environment meaning creatures could be larger, etc).
+#### **Story:**
+An expansive, well thought out, multi-linear storyline, with one overall story arch, but also other "side quests", that makes the player feel they have real choice and an effect on the world. There should also be a good amount of information / backstory on the world in which the story is based, including a good setup before the game starts (either in some sort of small video or text based, almost like at the beginning of Star Wars), information on different things within the world (sort of in game wiki maybe through some sort of scanning system), and greater context (what system the planet is in, small amount of info on other plants, binary system / 2 suns, etc).
+#### **Building:**
+Especially focused on the idea of building bases, and perhaps some sorts of transport (although not so much that it feels like you can get around overly quickly). Really want to emphasise the need for multiple bases (possibly one main base and smaller satellite ones) in different biomes, with a lot of farming plants for crafting. A sort of modular building perhaps, but maybe with some hotspot type integration (perhaps for specific things on the island or just for things within a base), should not feel overly restricted so as to inhibit creativity, but should also not feel "janky" or have the end products looking aesthetically unpleasing. The ability to build into rock formations to an extent (sort of like in "No Mans Sky"), and perhaps some sort of mining shafts, but not too much terrain manipulation.
 
 ## 4. Style Guide
 This section is an outline of our preferred coding style, in order to improve readability/understandability, make sure that there is a clear structure to each script, and ensure a universal standard throughout all of the scripts.

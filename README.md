@@ -311,7 +311,11 @@ Below is a breakdown of all of the aspects relating to the character, including 
 Below is a breakdown of all of the aspects relating to the environment, including all of the requisites for each element, and also initial concept art.
 
 #### 5.2.1 AI / Fauna
-This section will outline the overview of all the types of Fauna in the game, their respective requisites, and behavioural patterns. Below is a tree diagram which illustrates how the different fauna are organised.
+This section will outline the overview of all the types of Fauna in the game, their respective requisites, and behavioural patterns. Below is a tree diagram which illustrates how the different fauna are organised, and two ideas boards for fauna.
+
+![FaunaIdeasBoard1](Assets/Docs/Readme/FaunaIdeas1.png)
+
+![FaunaIdeasBoard2](Assets/Docs/Readme/FaunaIdeas2.png)
 
 ![TreeDiagram](Assets/Docs/Readme/FaunaTreeDiagram.png)
 

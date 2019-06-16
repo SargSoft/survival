@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class VolumeText : MonoBehaviour
-{
+public class VolumeText : MonoBehaviour {
 
 	private TextMeshProUGUI volumeText;
 
-	void Start()
-	{
+	void Start() {
 		volumeText = GetComponent<TextMeshProUGUI> ();
 	}
 
-    void Update()
-    {
+    void Update() {
     	volumeText.text = MainMenu.displayVolume;
     	// Debug.Log("The current volume is: " + MainMenu.displayVolume);
     }

@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CharacterControlScript : MonoBehaviour
-{
-  //Variables
+public class CharacterControlScript : MonoBehaviour {
 
+  	//Variables
 	private Vector2 mD;						//mD stands for Mouse Direction
 	private float mouseXValue = 0.0f;		//Used to store inputs recieved from mouse of X & Y Values
     private float mouseYValue = 0.0f;		//Used to store inputs recieved from mouse of X & Y Values
@@ -16,7 +14,7 @@ public class CharacterControlScript : MonoBehaviour
     public float backwardSpeed = 5f;		//Speed at which the player moves backwards
     public float strafeSpeed = 5f;			//Speed at which the player moves sideways
     public float jumpForce = 5.0f;			//Force upwards the player jumps
-    private bool jumpOnSpot = true;		//Boolean value to indicate whether the player is jumping on spot, not in a direction
+    private bool jumpOnSpot = true;		    //Boolean value to indicate whether the player is jumping on spot, not in a direction
     public float runMultiplier = 2.0f;		//The multiplier used while running
     public float crouchMultiplier = 0.5f;	//The mutiplier used while crouching
     public float crouchCameraMove = 0.2f;	//The amount the camera moves down when the player crouches
@@ -30,52 +28,21 @@ public class CharacterControlScript : MonoBehaviour
     	return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * 0.9f, groundLayers);
     }
 
-
-      //UI Variables
-
-    public Slider healthSlider;
-    public int maxHealth;
-
-    public Slider energySlider;
-    public int maxEnergy;
-
-    public Slider oxygenSlider;
-    public int maxOxygen;
-
-
-      // Start is called before the first frame update
-    void Start()
-    {
+    // Start is called before the first frame update
+    void Start() {
 
     	rb = GetComponent<Rigidbody>();
     	col = GetComponent<CapsuleCollider>();
 
-
         //Making the cursor invisible & Locking it in the screen
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-
-        //Initializing player vitals
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = maxHealth;
-
-        energySlider.maxValue = maxEnergy;
-        energySlider.value = maxEnergy;
-
-        oxygenSlider.maxValue = maxOxygen;
-        oxygenSlider.value = maxOxygen;
-
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-   	
+    void Update() {
 
     	// Mouse Inputs
-
         mouseXValue += mouseXSpeed * Input.GetAxis("Mouse X");
         mouseYValue -= mouseYSpeed * Input.GetAxis("Mouse Y");
         mouseYValue = Mathf.Clamp(mouseYValue, -90, 90);	//Clamping the Y axis to stop it exceeding the 180 degrees in front of you
@@ -83,12 +50,9 @@ public class CharacterControlScript : MonoBehaviour
         transform.eulerAngles = new Vector3(0, mouseXValue); //transforming the X & Y axis of the object itself   
         fixedYAxis.transform.eulerAngles = new Vector3(mouseYValue, mouseXValue); //transorming the X & Y axis of the camera (child)
 
-
     	// Keyboard Inputs
 
-
         //Running
-
        	if(Input.GetKeyDown(KeyCode.LeftShift))
        	{
        		forwardSpeed *= runMultiplier;
@@ -99,9 +63,7 @@ public class CharacterControlScript : MonoBehaviour
        		forwardSpeed /= runMultiplier;
         }
 
-
         //Crouching
-
         if(Input.GetKeyDown(KeyCode.LeftControl))
        	{
        		forwardSpeed *= crouchMultiplier;
@@ -114,9 +76,7 @@ public class CharacterControlScript : MonoBehaviour
        		cameraCrouch.transform.Translate(Vector3.up * crouchCameraMove);
         }
 
-
         //Jumping
-
         if(isGrounded() && Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.W))
        	{
        		rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);       		
@@ -132,9 +92,7 @@ public class CharacterControlScript : MonoBehaviour
         	jumpOnSpot = true;
         }      
       	
-      	Debug.Log(jumpOnSpot);
         //Standard movement keys
-
     	if(Input.GetKey(KeyCode.W) && jumpOnSpot)
     	{
             transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
@@ -153,8 +111,6 @@ public class CharacterControlScript : MonoBehaviour
         if(Input.GetKey(KeyCode.D) && jumpOnSpot)
         {
             transform.Translate(Vector3.right * strafeSpeed * Time.deltaTime);
-        }
-          
-        
+        }         
     }
 }

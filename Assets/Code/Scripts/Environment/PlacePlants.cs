@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacePlants : MonoBehaviour {
-	[SerializeField] private GameObject flPlant;
-	[SerializeField] private GameObject slPlant;
+	public GameObject flPlant;
+	public GameObject slPlant;
 	[SerializeField] private int plantDensity;
 	[SerializeField] private int plantClusterDensity;
     
@@ -18,7 +18,16 @@ public class PlacePlants : MonoBehaviour {
     	//for i in cluster density instantiate plantClass.plant randomly within certain distance of node, making sure no overlap
     } 
     public GameObject depthDetection(GameObject zone) {
-    	return new GameObject();
+    	GameObject temp = new GameObject();
+        temp.AddComponent<PlantCluster>();
+        PlantCluster tempScript = temp.GetComponent<PlantCluster>();
+
+        tempScript.plantObject = slPlant;
+        //Raycast from zone ddown to floor, if distance is x then make plantobject shallow or deep etc.
+
+        //Spawn plant objects surrounding cluster making child of
+        tempScript.spawnSurrounding(plantClusterDensity, tempScript.plantObject);
+        return temp;
     	//Create the game object which will have a class attached with plant info
 
     	//Work out depth zone

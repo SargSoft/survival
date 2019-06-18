@@ -332,17 +332,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 590775800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572f81beb9e3a8f47b37ba0824283e01, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b76ce25a5b18c04e85b7ea1ba550ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: {fileID: 31074938}
-  placeHolderPlant: {fileID: 1347392947101452590, guid: a305c5b1731769c4ab0d6eac47bdd34d,
-    type: 3}
-  shallowPlant: {fileID: 2325186843988720159, guid: e96ad83aea08f5d4ab5a3be02baadff7,
-    type: 3}
-  deepPlant: {fileID: 6982321262067040533, guid: e3e806a4c289f124fa03f27092e96fc8,
-    type: 3}
-  numOfPlants: 10
+  flPlant: {fileID: 0}
+  slPlant: {fileID: 0}
+  plantDensity: 5
+  plantClusterDensity: 3
 --- !u!4 &590775802
 Transform:
   m_ObjectHideFlags: 0

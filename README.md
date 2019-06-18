@@ -118,12 +118,14 @@ If there is a conflict that needs human input, the fallback tool (i.e: Preforce)
 
 #### Resources
 [Unity Manual - Smart Merge](https://docs.unity3d.com/Manual/SmartMerge.html)
+
 [Reddit - How to solve scene conflicts with Unity's Smart Merge (5.1 fixes)](https://www.reddit.com/r/Unity3D/comments/39bdq5/how_to_solve_scene_conflicts_with_unitys_smart/)
+
 [How to use Git for Unity source control?](http://stackoverflow.com/questions/18225126/how-to-use-git-for-unity-source-control)
 
 ---
 
-Credits go to @[anacatte](http://twitter.com/anacatte) for this guide. 
+Credits go to @[anacatte](http://twitter.com/anacatte) for this guide (Source: [here](https://github.com/anacat/unity-mergetool))
 
 ## 3. Methodology & Pillars
 ### 3.1 SCRUM Methodology & Agile Software Development

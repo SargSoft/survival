@@ -1565,7 +1565,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInputName: Horizontal
   verticalInputName: Vertical
-  movementSpeed: 6
+  walkSpeed: 6
+  runSpeed: 10
+  runKey: 304
+  camera: {fileID: 878293630}
+  crouchSpeed: 4
+  crouchCameraMove: 0.2
+  crouchKey: 306
   slopeForce: 5
   slopeForceRayLength: 5
   jumpFallOff:

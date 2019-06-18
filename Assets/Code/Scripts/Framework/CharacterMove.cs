@@ -6,7 +6,16 @@ public class CharacterMove : MonoBehaviour {
 
     [SerializeField] private string horizontalInputName;
     [SerializeField] private string verticalInputName;
-    [SerializeField] private float movementSpeed;
+
+ 	private float movementSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private KeyCode runKey;
+
+    [SerializeField] private GameObject camera;
+    [SerializeField] private float crouchSpeed;
+    [SerializeField] private float crouchCameraMove;
+    [SerializeField] private KeyCode crouchKey;
 
     [SerializeField] private float slopeForce;
     [SerializeField] private float slopeForceRayLength;
@@ -21,6 +30,7 @@ public class CharacterMove : MonoBehaviour {
 
     private void Awake() {
     	charController = GetComponent<CharacterController>();
+    	movementSpeed = walkSpeed;
     }
 
     private void Update() {
@@ -41,6 +51,8 @@ public class CharacterMove : MonoBehaviour {
     		charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
     	}
 
+    	Run();
+    	Crouch();
     	JumpInput();
     }
 
@@ -79,5 +91,24 @@ public class CharacterMove : MonoBehaviour {
     	}
     	
     	return false;
+    }
+
+    private void Run() {
+    	if(Input.GetKeyDown(runKey)) {
+    		movementSpeed = runSpeed;
+    	} else if(Input.GetKeyUp(runKey)) {
+    		movementSpeed = walkSpeed;
+    	}
+    }
+
+    private void Crouch() {
+    	if(Input.GetKeyDown(crouchKey)) {
+    		camera.transform.Translate(Vector3.down * crouchCameraMove);
+    		movementSpeed = crouchSpeed;
+
+    	} else if(Input.GetKeyUp(crouchKey)) {
+    		camera.transform.Translate(Vector3.up * crouchCameraMove);
+    		movementSpeed = walkSpeed;
+    	}
     }
 }

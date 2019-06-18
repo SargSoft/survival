@@ -10,24 +10,19 @@ public class PlacePlants : MonoBehaviour {
     
 	void Start() {
         foreach (GameObject spawnArea in GameObject.FindGameObjectsWithTag("spawnArea")) {
-        	initPlants(spawnArea, depthDetection(spawnArea), plantDensity, plantClusterDensity);       	
+        	SpawnPlants(spawnArea);     	
         }
     }
-    public void initPlants(GameObject area, GameObject plantClass, int density, int clusterSize) {
-    	//for i in density instantiate plantClass.node randomly placed within area
-    	//for i in cluster density instantiate plantClass.plant randomly within certain distance of node, making sure no overlap
-    } 
-    public GameObject depthDetection(GameObject zone) {
-    	GameObject temp = new GameObject();
-        temp.AddComponent<PlantCluster>();
-        PlantCluster tempScript = temp.GetComponent<PlantCluster>();
-
+    public GameObject SpawnPlants(GameObject zone) {
+    	GameObject plantNode = new GameObject();
+    	plantNode.name = "PlantNode";
+        plantNode.AddComponent<PlantCluster>();
+        PlantCluster tempScript = plantNode.GetComponent<PlantCluster>();
         tempScript.plantObject = slPlant;
-        //Raycast from zone ddown to floor, if distance is x then make plantobject shallow or deep etc.
 
         //Spawn plant objects surrounding cluster making child of
         tempScript.spawnSurrounding(plantClusterDensity, tempScript.plantObject);
-        return temp;
+        return plantNode;
     	//Create the game object which will have a class attached with plant info
 
     	//Work out depth zone
@@ -36,6 +31,14 @@ public class PlacePlants : MonoBehaviour {
 
     	//other...
 
+    }
+    public void FindPosition() {
+    	//find position for each node.
+    }
+    public void FindDepth(GameObject area){
+    	RaycastHit hit;
+    	Vector3 dwn = area.transform.TransformDirection(Vector3.down);
+    	if(Physics.Raycast(area.transform.position, dwn, out hit, 500)) Debug.Log("hit something below");
     }
     
 }

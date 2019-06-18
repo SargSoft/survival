@@ -335,8 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b76ce25a5b18c04e85b7ea1ba550ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flPlant: {fileID: 0}
-  slPlant: {fileID: 0}
+  flPlant: {fileID: 2325186843988720159, guid: e96ad83aea08f5d4ab5a3be02baadff7, type: 3}
+  slPlant: {fileID: 6982321262067040533, guid: e3e806a4c289f124fa03f27092e96fc8, type: 3}
   plantDensity: 5
   plantClusterDensity: 3
 --- !u!4 &590775802

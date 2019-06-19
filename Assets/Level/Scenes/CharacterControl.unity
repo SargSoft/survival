@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseXInputName: Mouse X
   mouseYInputName: Mouse Y
-  mouseSensitivity: 150
+  mouseSensitivity: 100
   playerBody: {fileID: 1316574329}
 --- !u!1 &991396420
 GameObject:
@@ -1565,15 +1565,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInputName: Horizontal
   verticalInputName: Vertical
+  runInputName: Run
+  crouchInputName: Crouch
+  jumpInputName: Jump
   walkSpeed: 6
   runSpeed: 10
-  runKey: 304
-  camera: {fileID: 878293630}
   crouchSpeed: 4
   crouchCameraMove: 0.2
-  crouchKey: 306
-  slopeForce: 5
-  slopeForceRayLength: 5
   jumpFallOff:
     serializedVersion: 2
     m_Curve:
@@ -1599,7 +1597,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpMultiplier: 10
-  jumpKey: 32
+  camera: {fileID: 878293630}
+  slopeForce: 5
+  slopeForceRayLength: 5
 --- !u!143 &1316574331
 CharacterController:
   m_ObjectHideFlags: 0

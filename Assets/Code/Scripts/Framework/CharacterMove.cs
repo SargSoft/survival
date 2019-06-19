@@ -3,40 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour {
-
+	[Header("Input Names")]
     [SerializeField] private string horizontalInputName;
     [SerializeField] private string verticalInputName;
+    [SerializeField] private string runInputName;
+    [SerializeField] private string crouchInputName;
+    [SerializeField] private string jumpInputName;
 
- 	private float movementSpeed;
+    [Header("Movement")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
-    [SerializeField] private KeyCode runKey;
-
-    [SerializeField] private GameObject camera;
     [SerializeField] private float crouchSpeed;
     [SerializeField] private float crouchCameraMove;
-    [SerializeField] private KeyCode crouchKey;
+    [SerializeField] private AnimationCurve jumpFallOff;
+    [SerializeField] private float jumpMultiplier;
+    private float movementSpeed;
+ 	private bool isJumping;
 
+    [Header("GameObject")]
+    [SerializeField] private GameObject camera;
+    private CharacterController charController;
+
+    [Header("Physics")]
     [SerializeField] private float slopeForce;
     [SerializeField] private float slopeForceRayLength;
 
-    private CharacterController charController;
-
-    [SerializeField] private AnimationCurve jumpFallOff;
-    [SerializeField] private float jumpMultiplier;
-    [SerializeField] private KeyCode jumpKey;
-
-    private bool isJumping;
-
+    //
     private void Awake() {
     	charController = GetComponent<CharacterController>();
     	movementSpeed = walkSpeed;
     }
 
+    //
     private void Update() {
     	PlayerMovement();
     }
 
+    //
     private void PlayerMovement() {
     	float vertInput = Input.GetAxis(verticalInputName);
     	float horizInput = Input.GetAxis(horizontalInputName);
@@ -56,13 +59,15 @@ public class CharacterMove : MonoBehaviour {
     	JumpInput();
     }
 
+    //
     private void JumpInput() {
-    	if(Input.GetKeyDown(jumpKey) && !isJumping) {
+    	if(Input.GetButtonDown(jumpInputName) && !isJumping) {
     		isJumping = true;
     		StartCoroutine(JumpEvent());
     	}
     }
 
+    //
     private IEnumerator JumpEvent() {
     	charController.slopeLimit = 90.0f;
     	float timeInAir = 0.0f;
@@ -78,6 +83,7 @@ public class CharacterMove : MonoBehaviour {
     	isJumping = false;
     }
 
+    //
     private bool OnSlope() {
     	if (isJumping) {
     		return false;
@@ -93,20 +99,22 @@ public class CharacterMove : MonoBehaviour {
     	return false;
     }
 
+    //
     private void Run() {
-    	if(Input.GetKeyDown(runKey)) {
+    	if(Input.GetButtonDown(runInputName)) {
     		movementSpeed = runSpeed;
-    	} else if(Input.GetKeyUp(runKey)) {
+    	} else if(Input.GetButtonUp(runInputName)) {
     		movementSpeed = walkSpeed;
     	}
     }
 
+    //
     private void Crouch() {
-    	if(Input.GetKeyDown(crouchKey)) {
+    	if(Input.GetButtonDown(crouchInputName)) {
     		camera.transform.Translate(Vector3.down * crouchCameraMove);
     		movementSpeed = crouchSpeed;
 
-    	} else if(Input.GetKeyUp(crouchKey)) {
+    	} else if(Input.GetButtonUp(crouchInputName)) {
     		camera.transform.Translate(Vector3.up * crouchCameraMove);
     		movementSpeed = walkSpeed;
     	}

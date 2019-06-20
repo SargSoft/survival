@@ -39,7 +39,7 @@ public class CharacterMove : MonoBehaviour {
     	PlayerMovement();
     }
 
-    // Called once per frame, first 5 lines deal with mouse and keyboard movement, then stops slope jittering, then calls other functions
+    // Called once per frame, first 5 lines deal with the keyboard movement, then stops slope jittering, then calls other functions
     private void PlayerMovement() {
     	float vertInput = Input.GetAxis(verticalInputName);
     	float horizInput = Input.GetAxis(horizontalInputName);

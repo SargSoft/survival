@@ -14,10 +14,11 @@ A survival game focused on exploration and building, with a strong storyline, an
 	- [Spacing](https://github.com/sargasso-studios/general_testing#44-spacing)
 	- [Commenting](https://github.com/sargasso-studios/general_testing#45-commenting)
 	- [Bracing](https://github.com/sargasso-studios/general_testing#46-bracing)
-	- [Layout](https://github.com/sargasso-studios/general_testing#47-layout)
-	- [Directory](https://github.com/sargasso-studios/general_testing#48-directory)
-		- [File Structure](https://github.com/sargasso-studios/general_testing#481-file-structure)
-		- [Files Types](https://github.com/sargasso-studios/general_testing#482-file-types)
+	- [Indentation](https://github.com/sargasso-studios/general_testing#47-indentation)
+	- [Layout](https://github.com/sargasso-studios/general_testing#48-layout)
+	- [Directory](https://github.com/sargasso-studios/general_testing#49-directory)
+		- [File Structure](https://github.com/sargasso-studios/general_testing#491-file-structure)
+		- [Files Types](https://github.com/sargasso-studios/general_testing#492-file-types)
 5. [Design](https://github.com/sargasso-studios/survival#5-design)
 	- [Character](https://github.com/sargasso-studios/survival#51-character)
 		- [Controls](https://github.com/sargasso-studios/survival#511-controls)
@@ -241,15 +242,30 @@ if(someExpression) {
 }
 ```
 
+### 4.7 Indentation
+1 tab should be used to indent sections between braces, *not* a set number of spaces. Some text editors, and IDE's (Integrated Development Environment), by default generate spaces instead of tabs when pressing enter, so you will need to change this setting. Below are guides for the most commonly used text editors and IDS's:
 
-### 4.7 Layout
+#### Sublime Text 3
+- Click on one of the indented lines
+- Navigate to the bottom right corner of the screen to where it says 'Tab Size:'
+- Click on 'Tab Size:' and select 'Convert Indentation to Tabs', as seen in the below images
+
+
+![SublimeText3Tabs](Assets/Docs/Readme/SublimeText3Tabs.png)
+
+![SublimeTextTabs2](Assets/Docs/Readme/SublimeText3Tabs2.png)
+
+
+#### Microsoft Visual Studio
+
+### 4.8 Layout
 - The first lines should use **using** to import the namespaces that will be used in the script
 - Next, declare the class of the script (only one class per script)
 - Inside that class declare the variables for the script (public then private) using Headers to separate them into groups, which will be displayed in the inspector window in unity
 - Next will be void Start which will contain all of the code that will be initialised when the script is run
 - After that is void Update, which will run once per frame
 - Finally is the list of functions, the format of which is demonstrated in the below example, which follow the same format as the class they are within
-- Leave blank lines between sections (as seen in the example below), and do **not** leave any other blank lines
+- Leave blank lines between sections (as seen in the example below), leave blank lines where appropriate to split up sections to improve readability
 - All of the comments in the example below should be removed in the actual scripts
 
 ```cs
@@ -286,10 +302,10 @@ public class ClassName : MonoBehaviour {
 }
 ```
 
-### 4.8 Directory
+### 4.9 Directory
 This section outlines the expections in terms of how we structure our files, and also the file types that should be used.
 
-#### 4.8.1 File Structure
+#### 4.9.1 File Structure
 
 ```
 Assets
@@ -319,7 +335,7 @@ Assets
 +---Resources		# Configuration files, localisation text, other user files
 ```
 
-#### 4.8.2 File Types
+#### 4.9.2 File Types
 
 | Files         | File Type     |
 |:-------------:|:-------------:|

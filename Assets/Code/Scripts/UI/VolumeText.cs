@@ -11,8 +11,8 @@ public class VolumeText : MonoBehaviour {
 		volumeText = GetComponent<TextMeshProUGUI> ();
 	}
 
-    void Update() {
-    	volumeText.text = MainMenu.displayVolume;
-    	// Debug.Log("The current volume is: " + MainMenu.displayVolume);
-    }
+	void Update() {
+		volumeText.text = MainMenu.displayVolume;
+		// Debug.Log("The current volume is: " + MainMenu.displayVolume);
+	}
 }

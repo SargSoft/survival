@@ -243,7 +243,7 @@ if(someExpression) {
 ```
 
 ### 4.7 Indentation
-1 tab should be used to indent sections between braces, *not* a set number of spaces. Some text editors, and IDE's (Integrated Development Environment), by default generate spaces instead of tabs when pressing enter, so you will need to change this setting. Below are guides for the most commonly used text editors and IDS's:
+1 tab should be used to indent sections between braces, **not** a set number of spaces. Some text editors, and IDE's (Integrated Development Environment), by default generate spaces instead of tabs when pressing enter, so you will need to change this setting. Below are guides for the most commonly used text editors and IDE's:
 
 #### Sublime Text 3
 - Click on one of the indented lines

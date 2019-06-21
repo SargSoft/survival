@@ -246,7 +246,7 @@ if(someExpression) {
 1 tab should be used to indent sections between braces, **not** a set number of spaces. Some text editors, and IDE's (Integrated Development Environment), by default generate spaces instead of tabs when pressing enter, so you will need to change this setting. Below are guides for the most commonly used text editors and IDE's:
 
 #### Sublime Text 3
-- Click on one of the indented lines
+- Highlight all lines that have spaces that need to be converted into tabs
 - Navigate to the bottom right corner of the screen to where it says 'Tab Size:'
 - Click on 'Tab Size:' and select 'Convert Indentation to Tabs', as seen in the below images
 
@@ -257,6 +257,9 @@ if(someExpression) {
 
 
 #### Microsoft Visual Studio
+
+#### Changing Unity Templates
+Unfortunately, even though the above methods will successfully change all the spaces into tabs in the given scripts, and will also mean when you add new lines they will also use tabs instead of spaces, new scripts created in Unity using the standard template will revert back to using spaces. To fix this you simply have to change the spaces into tabs, using the above methods, in the Unity templates, located in `Unity\Editor\Data\Resources\ScriptTemplates`.
 
 ### 4.8 Layout
 - The first lines should use **using** to import the namespaces that will be used in the script

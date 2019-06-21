@@ -259,7 +259,7 @@ if(someExpression) {
 #### Microsoft Visual Studio
 
 #### Changing Unity Templates
-Unfortunately, even though the above methods will successfully change all the spaces into tabs in the given scripts, and will also mean when you add new lines they will also use tabs instead of spaces, new scripts created in Unity using the standard template will revert back to using spaces. To fix this you simply have to change the spaces into tabs, using the above methods, in the Unity templates, located in `Unity\Editor\Data\Resources\ScriptTemplates`.
+Unfortunately, even though the above methods will successfully change all the spaces into tabs in the given script, and will also mean when you add new lines they will also use tabs instead of spaces, new scripts created in Unity using the standard template will revert back to using spaces. To fix this you simply have to change the spaces into tabs, using the above methods, in the Unity templates, located in `Unity\Editor\Data\Resources\ScriptTemplates`.
 
 ### 4.8 Layout
 - The first lines should use **using** to import the namespaces that will be used in the script

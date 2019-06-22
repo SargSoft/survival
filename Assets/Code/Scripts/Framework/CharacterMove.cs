@@ -20,6 +20,8 @@ public class CharacterMove : MonoBehaviour {
 	[SerializeField] private float jumpMultiplier;
 	private float movementSpeed;
 	private bool isJumping;
+	private bool isCrouch;
+	private bool isRun;
 
 	[Header("GameObject")]
 	[SerializeField] private GameObject camera;
@@ -29,11 +31,13 @@ public class CharacterMove : MonoBehaviour {
 	[Header("Physics")] // Two varialbes, ray length is the length of the ray shooting down to detect floor, slopForce is the downwards force applied to remove jitters
 	[SerializeField] private float slopeForce;
 	[SerializeField] private float slopeForceRayLength;
+	private bool inWater;
 
 	// Called once after objects are initialized, used to initialize variables and get the Character Controller Component
 	private void Awake() {
 		charController = GetComponent<CharacterController>();
 		movementSpeed = walkSpeed;
+		inWater = false;
 	}
 
 	// Called once per frame and calls the PlayerMovement function, which controls all player movement
@@ -60,6 +64,7 @@ public class CharacterMove : MonoBehaviour {
 		Run();
 		Crouch();
 		JumpInput();
+		Debug.Log(movementSpeed);
 	}
 
 	// Checks to make sure player has pressed the jump key, and also is not already jumping
@@ -104,36 +109,53 @@ public class CharacterMove : MonoBehaviour {
 
 	// Called when the player presses the run key, and increases the players movement while the key is held down
 	private void Run() {
-		if(Input.GetButtonDown(runInputName)) {
+		if(Input.GetButtonDown(runInputName) && !isCrouch && !IsUnderwater()) {
 			movementSpeed = runSpeed;
-		} else if(Input.GetButtonUp(runInputName)) {
+			isRun = true;
+		} else if(Input.GetButtonUp(runInputName) && !isCrouch && !IsUnderwater()) {
 			movementSpeed = walkSpeed;
+			isRun = false;
 		}
 	}
 
 	// Called when the player presses the crouch key, and lowers the camera while the key is held down
 	private void Crouch() {
-		if(Input.GetButtonDown(crouchInputName)) {
+		if(Input.GetButtonDown(crouchInputName) && !isRun && !IsUnderwater() && CrouchWaterDistance()) {
 			camera.transform.Translate(Vector3.down * crouchCameraMove);
 			movementSpeed = crouchSpeed;
+			isCrouch = true;
 
-		} else if(Input.GetButtonUp(crouchInputName)) {
+		} else if(Input.GetButtonUp(crouchInputName) && !isRun && !IsUnderwater() && isCrouch) {
 			camera.transform.Translate(Vector3.up * crouchCameraMove);
 			movementSpeed = walkSpeed;
+			isCrouch = false;
 		}
 	}
 
 	//
 	private void Swim() {
-		if IsUnderwater() {
+		if(IsUnderwater() && !inWater) {
+			if(isCrouch) camera.transform.Translate(Vector3.up * crouchCameraMove);
 			movementSpeed = swimSpeed;
-		} else if !IsUnderwater() {
+			isRun = false;
+			isCrouch = false;
+			inWater = true;
+			Debug.Log("Underwater");
+		} else if(!IsUnderwater() && inWater) {
 			movementSpeed = walkSpeed;
+			inWater = false;
+			Debug.Log("Above Water");
 		}
+		
 	}
 
-	//
+	// Checks if the player camera is below the y position of the water surface plane
 	private bool IsUnderwater() {
 		return camera.transform.position.y < water.transform.position.y;
+	}
+
+	// Checks if the difference between the camera position and water position is greater than the crouch movement, and thus prevents crouching below the water surface
+	private bool CrouchWaterDistance() {
+		return camera.transform.position.y - water.transform.position.y > crouchCameraMove;
 	}
 }

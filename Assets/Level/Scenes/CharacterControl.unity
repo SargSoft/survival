@@ -619,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281359403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 13, z: 250}
+  m_LocalPosition: {x: 250, y: 24, z: 250}
   m_LocalScale: {x: 50, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1472,7 +1472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316574328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 21.5, z: 100}
+  m_LocalPosition: {x: 100, y: 31.4, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 878293631}
@@ -1498,6 +1498,7 @@ MonoBehaviour:
   jumpInputName: Jump
   walkSpeed: 6
   runSpeed: 10
+  swimSpeed: 5
   crouchSpeed: 4
   crouchCameraMove: 0.2
   jumpFallOff:

@@ -13,6 +13,7 @@ public class CharacterMove : MonoBehaviour {
 	[Header("Movement")]
 	[SerializeField] private float walkSpeed;
 	[SerializeField] private float runSpeed;
+	[SerializeField] private float swimSpeed;
 	[SerializeField] private float crouchSpeed;
 	[SerializeField] private float crouchCameraMove;
 	[SerializeField] private AnimationCurve jumpFallOff;
@@ -22,6 +23,7 @@ public class CharacterMove : MonoBehaviour {
 
 	[Header("GameObject")]
 	[SerializeField] private GameObject camera;
+	[SerializeField] private GameObject water;
 	private CharacterController charController;
 
 	[Header("Physics")] // Two varialbes, ray length is the length of the ray shooting down to detect floor, slopForce is the downwards force applied to remove jitters
@@ -54,6 +56,7 @@ public class CharacterMove : MonoBehaviour {
 			charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
 		}
 
+		Swim();
 		Run();
 		Crouch();
 		JumpInput();
@@ -118,5 +121,19 @@ public class CharacterMove : MonoBehaviour {
 			camera.transform.Translate(Vector3.up * crouchCameraMove);
 			movementSpeed = walkSpeed;
 		}
+	}
+
+	//
+	private void Swim() {
+		if IsUnderwater() {
+			movementSpeed = swimSpeed;
+		} else if !IsUnderwater() {
+			movementSpeed = walkSpeed;
+		}
+	}
+
+	//
+	private bool IsUnderwater() {
+		return camera.transform.position.y < water.transform.position.y;
 	}
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,13 +31,17 @@ public class CharacterMove : MonoBehaviour {
 	[Header("Physics")] // Two varialbes, ray length is the length of the ray shooting down to detect floor, slopForce is the downwards force applied to remove jitters
 	[SerializeField] private float slopeForce;
 	[SerializeField] private float slopeForceRayLength;
+	[SerializeField] private Vector3 defaultGravity;
+	[SerializeField] private Vector3 waterGravity;
 	private bool inWater;
+	private Vector3 charGravity;
 
 	// Called once after objects are initialized, used to initialize variables and get the Character Controller Component
 	private void Awake() {
 		charController = GetComponent<CharacterController>();
 		movementSpeed = walkSpeed;
 		inWater = false;
+		charGravity = defaultGravity;
 	}
 
 	// Called once per frame and calls the PlayerMovement function, which controls all player movement
@@ -53,8 +57,8 @@ public class CharacterMove : MonoBehaviour {
 		Vector3 forwardMovement = transform.forward * vertInput;
 		Vector3 rightMovement = transform.right * horizInput;
 
-		// Note: SimpleMove applies Time.deltaTime automatically so no need to do so above
-		charController.SimpleMove(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed);
+		charController.Move(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed * Time.deltaTime);
+		charController.Move(charGravity * Time.deltaTime);
 
 		if((vertInput != 0 || horizInput != 0) && OnSlope()) {
 			charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
@@ -140,10 +144,14 @@ public class CharacterMove : MonoBehaviour {
 			isRun = false;
 			isCrouch = false;
 			inWater = true;
+			charGravity = waterGravity;
 			Debug.Log("Underwater");
+
+			
 		} else if(!IsUnderwater() && inWater) {
 			movementSpeed = walkSpeed;
 			inWater = false;
+			charGravity = defaultGravity;
 			Debug.Log("Above Water");
 		}
 		
@@ -156,6 +164,6 @@ public class CharacterMove : MonoBehaviour {
 
 	// Checks if the difference between the camera position and water position is greater than the crouch movement, and thus prevents crouching below the water surface
 	private bool CrouchWaterDistance() {
-		return camera.transform.position.y - water.transform.position.y > crouchCameraMove;
+		return camera.transform.position.y - water.transform.position.y - 0.5 > crouchCameraMove;
 	}
 }

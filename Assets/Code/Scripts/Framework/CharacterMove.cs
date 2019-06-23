@@ -33,7 +33,7 @@ public class CharacterMove : MonoBehaviour {
 	[SerializeField] private float slopeForceRayLength;
 	[SerializeField] private Vector3 defaultGravity;
 	[SerializeField] private Vector3 waterGravity;
-	private bool inWater;
+	public static bool inWater;
 	private Vector3 charGravity;
 
 	// Called once after objects are initialized, used to initialize variables and get the Character Controller Component
@@ -73,7 +73,7 @@ public class CharacterMove : MonoBehaviour {
 
 	// Checks to make sure player has pressed the jump key, and also is not already jumping
 	private void JumpInput() {
-		if(Input.GetButtonDown(jumpInputName) && !isJumping) {
+		if(Input.GetButtonDown(jumpInputName) && !isJumping && !isCrouch) {
 			isJumping = true;
 			StartCoroutine(JumpEvent());
 		}
@@ -113,10 +113,10 @@ public class CharacterMove : MonoBehaviour {
 
 	// Called when the player presses the run key, and increases the players movement while the key is held down
 	private void Run() {
-		if(Input.GetButtonDown(runInputName) && !isCrouch && !IsUnderwater()) {
+		if(Input.GetButtonDown(runInputName) && !isCrouch && !inWater) {
 			movementSpeed = runSpeed;
 			isRun = true;
-		} else if(Input.GetButtonUp(runInputName) && !isCrouch && !IsUnderwater()) {
+		} else if(Input.GetButtonUp(runInputName) && !isCrouch && !inWater) {
 			movementSpeed = walkSpeed;
 			isRun = false;
 		}
@@ -124,12 +124,12 @@ public class CharacterMove : MonoBehaviour {
 
 	// Called when the player presses the crouch key, and lowers the camera while the key is held down
 	private void Crouch() {
-		if(Input.GetButtonDown(crouchInputName) && !isRun && !IsUnderwater() && CrouchWaterDistance()) {
+		if(Input.GetButtonDown(crouchInputName) && !isRun && !inWater && CrouchWaterDistance() && !isJumping) {
 			camera.transform.Translate(Vector3.down * crouchCameraMove);
 			movementSpeed = crouchSpeed;
 			isCrouch = true;
 
-		} else if(Input.GetButtonUp(crouchInputName) && !isRun && !IsUnderwater() && isCrouch) {
+		} else if(Input.GetButtonUp(crouchInputName) && !isRun && !inWater && isCrouch) {
 			camera.transform.Translate(Vector3.up * crouchCameraMove);
 			movementSpeed = walkSpeed;
 			isCrouch = false;
@@ -146,8 +146,6 @@ public class CharacterMove : MonoBehaviour {
 			inWater = true;
 			charGravity = waterGravity;
 			Debug.Log("Underwater");
-
-			
 		} else if(!IsUnderwater() && inWater) {
 			movementSpeed = walkSpeed;
 			inWater = false;

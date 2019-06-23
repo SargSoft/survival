@@ -11,6 +11,7 @@ public class CharacterLook : MonoBehaviour {
 	[SerializeField] private Transform playerBody;
 
 	private float xAxisClamp;
+	private static bool inWater;
 
 	// Initial function that runs when the scene is played, lockks the cursor and rests xAxisClamp
 	private void Awake() {
@@ -20,6 +21,8 @@ public class CharacterLook : MonoBehaviour {
 
 	// Called every frame, and runs the CameraRotation function
 	private void Update() {
+		inWater = CharacterMove.inWater;
+		Debug.Log("Static Variable: " + inWater);
 		CameraRotation();
 	}
 
@@ -44,6 +47,11 @@ public class CharacterLook : MonoBehaviour {
 			mouseY = 0.0f;
 			ClampXAxisRotationToValue(90.0f);
 		}
+		// if(!inWater) {
+
+		// 	} else if(inWater) {
+				
+		// 	}
 		transform.Rotate(Vector3.left * mouseY);
 		playerBody.Rotate(Vector3.up * mouseX);
 	}

@@ -10,9 +10,7 @@ public class PlantNode : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void spawnPlant() {
+    	Debug.Log("spawn Plant");
     }
 }

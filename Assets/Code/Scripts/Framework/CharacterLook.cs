@@ -23,7 +23,7 @@ public class CharacterLook : MonoBehaviour {
 	private void Update() {
 		inWater = CharacterMove.inWater;
 		Debug.Log("Static Variable: " + inWater);
-		CameraRotation();
+		// CameraRotation();
 	}
 
 	// Function that locks the cursor

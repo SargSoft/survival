@@ -1212,10 +1212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4359e04d5b3bcf4bacf03a8e7ab7bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseXInputName: Mouse X
-  mouseYInputName: Mouse Y
-  mouseSensitivity: 100
-  playerBody: {fileID: 1316574329}
+  mouseXInputName: 
+  mouseYInputName: 
+  mouseSensitivity: 0
+  playerBody: {fileID: 0}
 --- !u!1 &991396420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,8 +1455,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1316574329}
-  - component: {fileID: 1316574331}
   - component: {fileID: 1316574330}
+  - component: {fileID: 1316574331}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1491,49 +1491,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9fca56f4e57c94d9024f39aa018e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalInputName: Horizontal
-  verticalInputName: Vertical
-  runInputName: Run
-  crouchInputName: Crouch
-  jumpInputName: Jump
-  walkSpeed: 6
-  runSpeed: 10
-  swimSpeed: 5
-  crouchSpeed: 4
-  crouchCameraMove: 0.2
+  horizontalInputName: 
+  verticalInputName: 
+  runInputName: 
+  crouchInputName: 
+  jumpInputName: 
+  walkSpeed: 0
+  runSpeed: 0
+  swimSpeed: 0
+  crouchSpeed: 0
+  crouchCameraMove: 0
   jumpFallOff:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7006064
-      value: 0.000001007691
-      inSlope: 0.11042259
-      outSlope: 0.11042259
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.071516156
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpMultiplier: 16
-  camera: {fileID: 878293630}
-  water: {fileID: 281359403}
-  slopeForce: 5
-  slopeForceRayLength: 5
-  defaultGravity: {x: 0, y: -9.81, z: 0}
-  waterGravity: {x: 0, y: -1, z: 0}
---- !u!143 &1316574331
-CharacterController:
+  jumpMultiplier: 0
+  camera: {fileID: 0}
+  water: {fileID: 0}
+  slopeForce: 0
+  slopeForceRayLength: 0
+  defaultGravity: {x: 0, y: 0, z: 0}
+  waterGravity: {x: 0, y: 0, z: 0}
+--- !u!136 &1316574331
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1542,13 +1524,9 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1319055052
 GameObject:

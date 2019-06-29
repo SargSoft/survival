@@ -26,7 +26,7 @@ public class CharacterMove : MonoBehaviour {
 	[Header("GameObject")]
 	[SerializeField] private GameObject camera;
 	[SerializeField] private GameObject water;
-	private CharacterController charController;
+	private CapsuleCollider charCollider;
 
 	[Header("Physics")] // Two varialbes, ray length is the length of the ray shooting down to detect floor, slopForce is the downwards force applied to remove jitters
 	[SerializeField] private float slopeForce;
@@ -38,7 +38,7 @@ public class CharacterMove : MonoBehaviour {
 
 	// Called once after objects are initialized, used to initialize variables and get the Character Controller Component
 	private void Awake() {
-		charController = GetComponent<CharacterController>();
+		charCollider = GetComponent<CapsuleCollider>();
 		movementSpeed = walkSpeed;
 		inWater = false;
 		charGravity = defaultGravity;
@@ -57,18 +57,18 @@ public class CharacterMove : MonoBehaviour {
 		Vector3 forwardMovement = transform.forward * vertInput;
 		Vector3 rightMovement = transform.right * horizInput;
 
-		charController.Move(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed * Time.deltaTime);
-		charController.Move(charGravity * Time.deltaTime);
+		// charCollider.transform.(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed * Time.deltaTime);
+		// charCollider.Move(charGravity * Time.deltaTime);
 
 		if((vertInput != 0 || horizInput != 0) && OnSlope()) {
-			charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
+			// charCollider.Move(Vector3.down * charCollider.height / 2 * slopeForce * Time.deltaTime);
 		}
 
-		Swim();
-		Run();
-		Crouch();
-		JumpInput();
-		Debug.Log(movementSpeed);
+		// Swim();
+		// Run();
+		// Crouch();
+		// JumpInput();
+		// Debug.Log(movementSpeed);
 	}
 
 	// Checks to make sure player has pressed the jump key, and also is not already jumping
@@ -81,17 +81,18 @@ public class CharacterMove : MonoBehaviour {
 
 	// Called when player has jumped and isnt already jumping, and executes the jump
 	private IEnumerator JumpEvent() {
-		charController.slopeLimit = 90.0f;
+		// charCollider.slopeLimit = 90.0f;
 		float timeInAir = 0.0f;
+		return null;
 
-		do {
-			float jumpForce = jumpFallOff.Evaluate(timeInAir);
-			charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
-			timeInAir += Time.deltaTime;
-			yield return null;
-		} while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
+		// do {
+		// 	float jumpForce = jumpFallOff.Evaluate(timeInAir);
+		// 	// charCollider.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+		// 	timeInAir += Time.deltaTime;
+		// 	yield return null;
+		// } while (!charCollider.isGrounded && charCollider.collisionFlags != CollisionFlags.Above);
 
-		charController.slopeLimit = 45.0f;
+		// charCollider.slopeLimit = 45.0f;
 		isJumping = false;
 	}
 
@@ -102,7 +103,7 @@ public class CharacterMove : MonoBehaviour {
 		}
 		RaycastHit hit;
 
-		if(Physics.Raycast(transform.position, Vector3.down, out hit, charController.height / 2 * slopeForceRayLength)) {
+		if(Physics.Raycast(transform.position, Vector3.down, out hit, charCollider.height / 2 * slopeForceRayLength)) {
 			if(hit.normal != Vector3.up) {
 				return true;
 			}

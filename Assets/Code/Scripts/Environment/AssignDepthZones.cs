@@ -9,6 +9,7 @@ public class AssignDepthZones : MonoBehaviour
 	[SerializeField] private GameObject deepPlant;
 	[SerializeField] private GameObject waterSpace;
 	[SerializeField] private GameObject sector;
+	[SerializeField] private GameObject plantNode;
 	
 	[Header("Controls")]
  	[Range(1,20)]
@@ -50,7 +51,8 @@ public class AssignDepthZones : MonoBehaviour
     void createSector(Vector3 createAt, string name) {
     	GameObject newSector = Instantiate(sector, createAt, this.transform.rotation);
     	newSector.name = name;
-    	gridSector scriptAccess = newSector.GetComponent<gridSector>();
-    	scriptAccess.fillSector();
+    	GridSector scriptReference = newSector.GetComponent<GridSector>();
+    	scriptReference.depthDetection(deepPlant, shallowPlant);
+    	scriptReference.fillSector(plantNode, plantDensity);
     }
 }

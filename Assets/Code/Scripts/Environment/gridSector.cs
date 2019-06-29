@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gridSector : MonoBehaviour
+public class GridSector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+	private GameObject plantType;
 
+	// Assigns plantType the correct object
+    public void depthDetection(GameObject deepPlant, GameObject shallowPlant) {
+		//Cast ray to work out depth
     }
-   public void fillSector() {
-    	//spawn plant nodes
-   		depthDetection();
-    	Debug.Log("fill Zone with plant clusters of correct type");
-    	Destroy(this.gameObject);
-    }
-    private void depthDetection() {
-    	//Cast ray to work out depth
-    	Debug.Log("what depth is this?");
-    }
+
+    //spawn plant nodes
+	public void fillSector(GameObject node, int density) {
+		Destroy(this.gameObject);
+	}
 }

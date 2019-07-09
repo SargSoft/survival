@@ -501,6 +501,8 @@ Below is a breakdown of all of the aspects relating to the story, including all 
 - Due to age or just difference, a different radiation spectrum on the planet (from the stars) resulting in different pigments in plants for photosynthesis?
 - Planet closer to the stars than earth, so a slightly hotter planet, but not much, allowing fauna and plants to be larger (kind of tropical vibe)
 
+![SolarSystemDiagram](Assets/Docs/Readme/SolarSystemDiagram.png)
+
 #### 5.4.2 Ending
 - Ending info
 

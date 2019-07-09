@@ -500,6 +500,16 @@ Below is a breakdown of all of the aspects relating to the story, including all 
 - Perhaps younger starts than the Sun (less evolved fauna and plants?, larger fauna and plants,)
 - Due to age or just difference, a different radiation spectrum on the planet (from the stars) resulting in different pigments in plants for photosynthesis?
 - Planet closer to the stars than earth, so a slightly hotter planet, but not much, allowing fauna and plants to be larger (kind of tropical vibe)
+- Planet name Ideas: 'Novae Terrae' (Latin for 'New Earth'), or 'Initium Novum' (Latin for 'New Start/Beginning')
+- 90% to 95% of the planets surface water (On Earth it is 71%)
+- Height map of Iona or similar Scottish isle for map?
+- 3 or 4 moons
+- Due to hotter planet, larger cold blooder fauna flourishes
+- More Oxygen than in Earths atmosphere (allows thing to grow bigger, etc)
+- Unnamed, unexplored Solar System
+- Tall plants in ocean, like trees, and dense like an underwater forest
+- Coral
+- Mining on land / island for mining?
 
 ![SolarSystemDiagram](Assets/Docs/Readme/SolarSystemDiagram.png)
 

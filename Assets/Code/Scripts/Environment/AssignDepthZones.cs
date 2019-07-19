@@ -7,7 +7,7 @@ public class AssignDepthZones : MonoBehaviour
 	[Header("Prefab References")]
 	[SerializeField] private GameObject shallowPlant;
 	[SerializeField] private GameObject deepPlant;
-	[SerializeField] private GameObject waterSpace;
+	[SerializeField] private GameObject waterLevel;
 	[SerializeField] private GameObject sector;
 	[SerializeField] private GameObject plantNode;
 	

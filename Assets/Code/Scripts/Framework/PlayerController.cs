@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CapsuleController : MonoBehaviour{
+public class PlayerController : MonoBehaviour{
 
 
 	[Header("Player Options")]

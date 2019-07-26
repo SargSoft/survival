@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 35496122}
   - component: {fileID: 35496123}
   m_Layer: 9
-  m_Name: PlayerTest
+  m_Name: PlayerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,10 +199,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35496117}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -127.88907, y: 1.5, z: 28.284857}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1892781489}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2641,7 +2642,7 @@ GameObject:
   - component: {fileID: 1892781487}
   - component: {fileID: 1892781486}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2659,12 +2660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f788df6cab90f7b49ba9c219d7c1eb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockCursor: 0
-  mouseSensitivity: 10
-  target: {fileID: 35496121}
-  distFromTarget: 8.5
-  pitchMinMax: {x: -40, y: 85}
-  rotationSmoothTime: 0.12
+  mouseXInputName: Mouse X
+  mouseYInputName: Mouse Y
+  mouseYSensitivity: 5
+  mouseXSensitivity: 5
+  playerBody: {fileID: 35496121}
 --- !u!81 &1892781487
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2722,12 +2722,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892781485}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.88907, y: 3.2, z: 25.46}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 35496121}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2143313454
 GameObject:

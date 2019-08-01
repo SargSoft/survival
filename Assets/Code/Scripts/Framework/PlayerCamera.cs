@@ -8,14 +8,10 @@ public class PlayerCamera : MonoBehaviour {
 	[SerializeField] private string mouseYInputName;
 	[SerializeField] private float mouseYSensitivity;
 	[SerializeField] private float mouseXSensitivity;
-	private float mouseYAxisMin = -90f;
-	private float mouseYAxisMax = 90f;
 
 	[Header("Game Object")]
 	[SerializeField] private Transform playerBody;
-
-	private float mouseX;
-	private float mouseY;
+	
 
 	// Initial function that runs when the scene is played, lockks the cursor and rests xAxisClamp
 	private void Awake() {
@@ -33,17 +29,26 @@ public class PlayerCamera : MonoBehaviour {
 		Cursor.visible = false;
 	}
 
-	private void CameraRotation() {
-		mouseX += Input.GetAxis (mouseXInputName) * mouseXSensitivity;
-		mouseY += Input.GetAxis (mouseYInputName) * mouseYSensitivity;
-		mouseY = Mathf.Clamp (mouseY, mouseYAxisMin, mouseYAxisMax);
+	// private float ClampXRotation(float current, float rotation) {
+	// 	if(current + rotation <)
+	// }
 
-		transform.eulerAngles = (Vector3.left * mouseY);
-		playerBody.eulerAngles = Vector3.up * mouseX;
+
+	private void CameraRotation() {
+		float mouseX =+ Input.GetAxis(mouseXInputName) * mouseXSensitivity;
+		float mouseY =+ Input.GetAxis(mouseYInputName) * mouseYSensitivity;
+
+		// mouseY = ClampXRotation(transform.eulerAngles.x, mouseY);
+		Debug.Log(transform.eulerAngles.x);
+
+		Quaternion yRot = playerBody.localRotation * Quaternion.Euler(0f, mouseX, 0f);
+		Quaternion xRot = transform.localRotation * Quaternion.Euler(-mouseY, 0f, 0f);
+
+		transform.localRotation = xRot;
+		playerBody.localRotation = yRot;
 
 		// For Swimming:
 		// transform.eulerAngles = (Vector3.left * mouseY) + (Vector3.up * mouseX);
-
 	}
 
 }

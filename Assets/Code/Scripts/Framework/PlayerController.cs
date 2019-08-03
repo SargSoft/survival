@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private string jumpInput;
 	[SerializeField] private string runInput;
 	[SerializeField] private string crouchInput;
+	[SerializeField] private string interactInput;
 
 	[Header("Player Options")]
 	[SerializeField] private float playerHeight;
 
 	[Header("Movement Options")]
 	[SerializeField] private float walkMoveSpeed;
+	[SerializeField] private float swimMoveSpeed;
 	[SerializeField] private float runMoveSpeed;
 	[SerializeField] private float crouchMoveSpeed;
 	[SerializeField] private float crouchCameraMove;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour{
 	private float moveSpeed;
 	private bool isRun;
 	private bool isCrouch;
+	private bool inWater;
 
 	[Header("Jump Options")]
 	[SerializeField] private float jumpForce;
@@ -31,7 +34,9 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private float jumpDecrease;
 
 	[Header("Gravity")]
-	[SerializeField] private float gravity = 2.5f;
+	[SerializeField] private float defaultGravity = 2.5f;
+	[SerializeField] private float waterGravity = 0.5f;
+	private float charGravity;
 
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludePlayer;
@@ -50,6 +55,10 @@ public class PlayerController : MonoBehaviour{
 	private RaycastHit groundHit;
 	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
+	// Jump Private Variables
+	private float jumpHeight = 0;
+	private bool inputJump = false;
+
 	//Player Camera Options
 	[Header("Mouse Settings")]
 	[SerializeField] private float mouseYSensitivity;
@@ -57,18 +66,22 @@ public class PlayerController : MonoBehaviour{
 
 	[Header("Game Object")]
 	[SerializeField] private Transform cameraObject;
+	[SerializeField] private GameObject water;
 
 	private void Awake() {
 		LockCursor();
 		moveSpeed = walkMoveSpeed;
+		charGravity = defaultGravity;
 	}
 
 	private void Update() {
 		Gravity();
 		SimpleMove();
+		Swim();
 		Jump();
 		Run();
 		Crouch();
+		Interact();
 		FinalMove();
 		GroundChecking();
 		CollisionCheck();
@@ -139,7 +152,7 @@ public class PlayerController : MonoBehaviour{
 
 	private void Gravity() {
 		if (grounded == false) {
-			velocity.y -= gravity;
+			velocity.y -= charGravity;
 		}
 	}
 
@@ -216,9 +229,6 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	private float jumpHeight = 0;
-	private bool inputJump = false;
-
 	private void Jump() {
 		bool canJump = false;
 
@@ -245,25 +255,58 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Run() {
-		if(Input.GetButtonDown(runInput) && !isCrouch) {
+		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater) {
 			moveSpeed = runMoveSpeed;
 			isRun = true;
-		} else if(Input.GetButtonUp(runInput) && !isCrouch) {
+		} else if(Input.GetButtonUp(runInput) && !isCrouch && !inWater) {
 			moveSpeed = walkMoveSpeed;
 			isRun = false;
 		}
 	}
 
 	private void Crouch() {
-		if(Input.GetButtonDown(crouchInput) && !isRun){
+		if(Input.GetButtonDown(crouchInput) && !isRun && !inWater && CrouchWaterDistance()){
 			cameraObject.transform.Translate(Vector3.down * crouchCameraMove);
 			moveSpeed = crouchMoveSpeed;
 			isCrouch = true;
 
-		} else if(Input.GetButtonUp(crouchInput) && !isRun) {
+		} else if(Input.GetButtonUp(crouchInput) && !isRun && !inWater && isCrouch) {
 			cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
 			moveSpeed = walkMoveSpeed;
 			isCrouch = false;
+		}
+	}
+
+	private void Swim() {
+		if(IsUnderwater() && !inWater) {
+			if(isCrouch) cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
+			moveSpeed = swimMoveSpeed;
+			isRun = false;
+			isCrouch = false;
+			inWater = true;
+			charGravity = waterGravity;
+			Debug.Log("Underwater");
+		} else if(!IsUnderwater() && inWater) {
+			moveSpeed = walkMoveSpeed;
+			inWater = false;
+			charGravity = defaultGravity;
+			Debug.Log("Above Water");
+		}
+	}
+
+	// Checks if the player camera is below the y position of the water surface plane
+	private bool IsUnderwater() {
+		return cameraObject.transform.position.y < water.transform.position.y;
+	}
+
+	// Checks if the difference between the camera position and water position is greater than the crouch movement, and thus prevents crouching below the water surface
+	private bool CrouchWaterDistance() {
+		return cameraObject.transform.position.y - water.transform.position.y - 0.5 > crouchCameraMove;
+	}
+
+	private void Interact() {
+		if(Input.GetButtonDown(interactInput)) {
+			Debug.Log("Interact button pressed");
 		}
 	}
 }

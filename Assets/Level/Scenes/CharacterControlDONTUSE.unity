@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35496117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -127.88907, y: 1.5, z: 28.284857}
+  m_LocalPosition: {x: 155.94, y: 30.95, z: 117.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1892781489}
@@ -224,8 +224,10 @@ MonoBehaviour:
   jumpInput: Jump
   runInput: Run
   crouchInput: Crouch
+  interactInput: Interact
   playerHeight: 2
   walkMoveSpeed: 5
+  swimMoveSpeed: 4
   runMoveSpeed: 8
   crouchMoveSpeed: 3
   crouchCameraMove: 0.3
@@ -234,14 +236,16 @@ MonoBehaviour:
   jumpForce: 4
   jumpSpeed: 0
   jumpDecrease: 2
-  gravity: 2.5
+  defaultGravity: 2.5
+  waterGravity: 0.5
   discludePlayer:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 295
   sphereCol: {fileID: 35496123}
   mouseYSensitivity: 5
   mouseXSensitivity: 5
   cameraObject: {fileID: 1892781489}
+  water: {fileID: 281359403}
 --- !u!135 &35496123
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -961,7 +965,7 @@ GameObject:
   - component: {fileID: 281359406}
   - component: {fileID: 281359405}
   - component: {fileID: 281359404}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

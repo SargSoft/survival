@@ -225,7 +225,6 @@ MonoBehaviour:
   runInput: Run
   crouchInput: Crouch
   interactInput: Interact
-  playerHeight: 2
   walkMoveSpeed: 5
   swimMoveSpeed: 4
   runMoveSpeed: 8

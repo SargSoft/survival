@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private string crouchInput;
 	[SerializeField] private string interactInput;
 
-	[Header("Player Options")]
-	[SerializeField] private float playerHeight;
+	private float playerHeight = 2f;
 
 	[Header("Movement Options")]
 	[SerializeField] private float walkMoveSpeed;
@@ -21,8 +20,6 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private float runMoveSpeed;
 	[SerializeField] private float crouchMoveSpeed;
 	[SerializeField] private float crouchCameraMove;
-	[SerializeField] private bool smooth;
-	[SerializeField] private float smoothSpeed;
 	private float moveSpeed;
 	private bool isRun;
 	private bool isCrouch;
@@ -182,11 +179,7 @@ public class PlayerController : MonoBehaviour{
 				grounded = true;
 
 				if(inputJump == false) {
-					if(!smooth) {
-						transform.position = new Vector3(transform.position.x, (groundHit.point.y + playerHeight/2), transform.position.z);
-					} else {
-						transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, (groundHit.point.y + playerHeight/2), transform.position.z), smoothSpeed * Time.deltaTime);
-					}
+					transform.position = new Vector3(transform.position.x, (groundHit.point.y + playerHeight/2), transform.position.z);
 				}
 
 				break;

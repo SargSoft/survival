@@ -42,6 +42,20 @@ public class PlayerController : MonoBehaviour{
 	private RaycastHit groundHit;
 	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
+	//Player Camera Options
+	[Header("Mouse Settings")]
+	[SerializeField] private string mouseXInputName;
+	[SerializeField] private string mouseYInputName;
+	[SerializeField] private float mouseYSensitivity;
+	[SerializeField] private float mouseXSensitivity;
+
+	[Header("Game Object")]
+	[SerializeField] private Transform cameraObject;
+
+	private void Awake() {
+		LockCursor();
+	}
+
 	private void Update() {
 		Gravity();
 		SimpleMove();
@@ -49,6 +63,54 @@ public class PlayerController : MonoBehaviour{
 		FinalMove();
 		GroundChecking();
 		CollisionCheck();
+	}
+
+	private void LateUpdate() {
+		CameraRotation();
+	}
+
+	// Function that locks the cursor
+	private void LockCursor() {
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	private float ClampXRotation(float current, float rotation) {
+		if(current - rotation > 80f && current - rotation < 280f) {
+			if(rotation < 0f) {
+				return FloatFloor(current, 4) - 80f + 0.001f;
+			} else if(rotation > 0f) {
+				return FloatFloor(current, 4) - 280f - 0.001f;
+			} else {
+				Debug.Log("Error: Outside bounds without mouse movement");
+				return 0f;
+			}
+		} else {
+			return rotation;
+		}
+	}
+
+	private float FloatFloor(float number, float decimalPlaces) {
+		float output = number * Mathf.Pow(10f, decimalPlaces);
+		output = Mathf.Floor(output);
+		output = output / Mathf.Pow(10f, decimalPlaces);
+		return output;
+	}
+
+	private void CameraRotation() {
+		float mouseX = Input.GetAxis(mouseXInputName) * mouseXSensitivity;
+		float mouseY = Input.GetAxis(mouseYInputName) * mouseYSensitivity;
+
+		mouseY = ClampXRotation(cameraObject.eulerAngles.x, mouseY);
+
+		Quaternion yRot = transform.localRotation * Quaternion.Euler(0f, mouseX, 0f);
+		Quaternion xRot = cameraObject.localRotation * Quaternion.Euler(-mouseY, 0f, 0f);
+
+		cameraObject.localRotation = xRot;
+		transform.localRotation = yRot;
+
+		// For Swimming:
+		// transform.eulerAngles = (Vector3.left * mouseY) + (Vector3.up * mouseX);
 	}
 
 	private void SimpleMove() {

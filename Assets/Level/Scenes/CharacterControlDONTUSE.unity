@@ -214,7 +214,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35496117}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33a5e9e2c254f7f4599e2638ba3035cd, type: 3}
   m_Name: 
@@ -231,6 +231,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 311
   sphereCol: {fileID: 35496123}
+  mouseXInputName: Mouse X
+  mouseYInputName: Mouse Y
+  mouseYSensitivity: 5
+  mouseXSensitivity: 5
+  cameraObject: {fileID: 1892781489}
 --- !u!135 &35496123
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1652,10 +1657,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4359e04d5b3bcf4bacf03a8e7ab7bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   mouseXInputName: 
   mouseYInputName: 
   mouseSensitivity: 0
   playerBody: {fileID: 0}
+  xAxisClamp: 0
 --- !u!1 &963152246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,6 +2123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9fca56f4e57c94d9024f39aa018e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   horizontalInputName: 
   verticalInputName: 
   runInputName: 
@@ -2124,18 +2138,23 @@ MonoBehaviour:
   crouchSpeed: 0
   crouchCameraMove: 0
   jumpFallOff:
-    serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpMultiplier: 0
+  movementSpeed: 0
+  isJumping: 0
+  isCrouch: 0
+  isRun: 0
   camera: {fileID: 0}
   water: {fileID: 0}
+  charCollider: {fileID: 0}
   slopeForce: 0
   slopeForceRayLength: 0
   defaultGravity: {x: 0, y: 0, z: 0}
   waterGravity: {x: 0, y: 0, z: 0}
+  charGravity: {x: 0, y: 0, z: 0}
 --- !u!136 &1316574331
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2640,7 +2659,6 @@ GameObject:
   - component: {fileID: 1892781489}
   - component: {fileID: 1892781488}
   - component: {fileID: 1892781487}
-  - component: {fileID: 1892781486}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -2648,23 +2666,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1892781486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892781485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f788df6cab90f7b49ba9c219d7c1eb88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseXInputName: Mouse X
-  mouseYInputName: Mouse Y
-  mouseYSensitivity: 2
-  mouseXSensitivity: 10
-  playerBody: {fileID: 35496121}
 --- !u!81 &1892781487
 AudioListener:
   m_ObjectHideFlags: 0

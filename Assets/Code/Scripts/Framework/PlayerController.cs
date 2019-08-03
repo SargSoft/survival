@@ -4,48 +4,54 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
 
+	[Header("Input Manager")]
+	[SerializeField] private string mouseXInput;
+	[SerializeField] private string mouseYInput;
+	[SerializeField] private string jumpInput;
+	[SerializeField] private string runInput;
+	[SerializeField] private string crouchInput;
 
 	[Header("Player Options")]
-	public float playerHeight;
+	[SerializeField] private float playerHeight;
 
 	[Header("Movement Options")]
-	public float movementSpeed;
-	public bool smooth;
-	public float smoothSpeed;
+	[SerializeField] private float walkMoveSpeed;
+	[SerializeField] private float runMoveSpeed;
+	[SerializeField] private float crouchMoveSpeed;
+	[SerializeField] private float crouchCameraMove;
+	[SerializeField] private bool smooth;
+	[SerializeField] private float smoothSpeed;
+	private float moveSpeed;
+	private bool isRun;
+	private bool isCrouch;
 
 	[Header("Jump Options")]
-	public float jumpForce;
-	public float jumpSpeed;
-	public float jumpDecrease;
+	[SerializeField] private float jumpForce;
+	[SerializeField] private float jumpSpeed;
+	[SerializeField] private float jumpDecrease;
 
 	[Header("Gravity")]
-	public float gravity = 2.5f;
+	[SerializeField] private float gravity = 2.5f;
 
  	[Header("Physics")]
- 	public LayerMask discludePlayer;
+ 	[SerializeField] private LayerMask discludePlayer;
 
  	[Header("References")]
- 	public SphereCollider sphereCol;
+ 	[SerializeField] private SphereCollider sphereCol;
 
 	// Private Variables
 	private Vector3 velocity;
 	private Vector3 move;
 	private Vector3 vel;
 
-	// Gravity Private Variables
-	private bool grounded;
-	private float currentGravity = 0;
-
-
 	// Grounded Private Variables
+	private bool grounded;
 	private Vector3 liftPoint = new Vector3 (0, 1.2f, 0);
 	private RaycastHit groundHit;
 	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
 	//Player Camera Options
 	[Header("Mouse Settings")]
-	[SerializeField] private string mouseXInputName;
-	[SerializeField] private string mouseYInputName;
 	[SerializeField] private float mouseYSensitivity;
 	[SerializeField] private float mouseXSensitivity;
 
@@ -54,12 +60,15 @@ public class PlayerController : MonoBehaviour{
 
 	private void Awake() {
 		LockCursor();
+		moveSpeed = walkMoveSpeed;
 	}
 
 	private void Update() {
 		Gravity();
 		SimpleMove();
 		Jump();
+		Run();
+		Crouch();
 		FinalMove();
 		GroundChecking();
 		CollisionCheck();
@@ -98,8 +107,8 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void CameraRotation() {
-		float mouseX = Input.GetAxis(mouseXInputName) * mouseXSensitivity;
-		float mouseY = Input.GetAxis(mouseYInputName) * mouseYSensitivity;
+		float mouseX = Input.GetAxis(mouseXInput) * mouseXSensitivity;
+		float mouseY = Input.GetAxis(mouseYInput) * mouseYSensitivity;
 
 		mouseY = ClampXRotation(cameraObject.eulerAngles.x, mouseY);
 
@@ -121,9 +130,7 @@ public class PlayerController : MonoBehaviour{
 
 	private void FinalMove() {
 
-		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * movementSpeed;
-		// velocity = (new Vector3 (move.x, -currentGravity + jumpHeight, move.z) + vel) * movementSpeed;
-		// velocity = transform.TransformDirection(velocity);
+		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.deltaTime;
 
@@ -133,10 +140,7 @@ public class PlayerController : MonoBehaviour{
 	private void Gravity() {
 		if (grounded == false) {
 			velocity.y -= gravity;
-		} else {
-			currentGravity = 0;
 		}
-
 	}
 
 	private void GroundChecking() {
@@ -226,9 +230,9 @@ public class PlayerController : MonoBehaviour{
 		}
 
 		if (grounded && canJump) {
-			if (Input.GetKeyDown(KeyCode.Space)) {
+			if (Input.GetButtonDown(jumpInput)) {
 				inputJump = true;
-				transform.position += Vector3.up * 0.6f * 2;
+				transform.position += Vector3.up * 0.2f * 2;
 				jumpHeight += jumpForce;
 			}
 		} else {
@@ -238,5 +242,28 @@ public class PlayerController : MonoBehaviour{
 		}
 
 		velocity.y += jumpHeight;
+	}
+
+	private void Run() {
+		if(Input.GetButtonDown(runInput) && !isCrouch) {
+			moveSpeed = runMoveSpeed;
+			isRun = true;
+		} else if(Input.GetButtonUp(runInput) && !isCrouch) {
+			moveSpeed = walkMoveSpeed;
+			isRun = false;
+		}
+	}
+
+	private void Crouch() {
+		if(Input.GetButtonDown(crouchInput) && !isRun){
+			cameraObject.transform.Translate(Vector3.down * crouchCameraMove);
+			moveSpeed = crouchMoveSpeed;
+			isCrouch = true;
+
+		} else if(Input.GetButtonUp(crouchInput) && !isRun) {
+			cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
+			moveSpeed = walkMoveSpeed;
+			isCrouch = false;
+		}
 	}
 }

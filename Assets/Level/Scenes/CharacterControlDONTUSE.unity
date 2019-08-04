@@ -230,8 +230,6 @@ MonoBehaviour:
   runMoveSpeed: 8
   crouchMoveSpeed: 3
   crouchCameraMove: 0.3
-  smooth: 0
-  smoothSpeed: 0
   jumpForce: 4
   jumpSpeed: 0
   jumpDecrease: 2
@@ -964,7 +962,7 @@ GameObject:
   - component: {fileID: 281359406}
   - component: {fileID: 281359405}
   - component: {fileID: 281359404}
-  m_Layer: 10
+  m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

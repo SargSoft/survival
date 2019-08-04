@@ -136,7 +136,6 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void FinalMove() {
-
 		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.deltaTime;
@@ -162,7 +161,6 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void GroundConfirm(RaycastHit tempHit) {
-
 		Collider[] col = new Collider[3];
 		int num = Physics.OverlapSphereNonAlloc(transform.TransformPoint(groundCheckPoint), 0.57f, col, discludePlayer);
 

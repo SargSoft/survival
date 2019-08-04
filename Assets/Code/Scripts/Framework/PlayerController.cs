@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Update() {
+		CameraRotation();
 		Gravity();
 		SimpleMove();
 		Swim();
@@ -82,10 +83,6 @@ public class PlayerController : MonoBehaviour{
 		FinalMove();
 		GroundChecking();
 		CollisionCheck();
-	}
-
-	private void LateUpdate() {
-		CameraRotation();
 	}
 
 	// Function that locks the cursor

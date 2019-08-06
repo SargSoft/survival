@@ -65,24 +65,31 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private Transform cameraObject;
 	[SerializeField] private GameObject water;
 
+	private Collider coll;
+
 	private void Awake() {
 		LockCursor();
 		moveSpeed = walkMoveSpeed;
 		charGravity = defaultGravity;
+		coll = GetComponent<Collider> ();
 	}
 
 	private void Update() {
 		CameraRotation();
-		Gravity();
+		// Gravity();
 		SimpleMove();
 		Swim();
 		Jump();
 		Run();
 		Crouch();
 		Interact();
-		FinalMove();
-		GroundChecking();
+		grounded = Grounded();
+		Gravity();
+		StickToGround();
 		CollisionCheck();
+		FinalMove();
+		// GroundChecking();
+		// CollisionCheck();
 	}
 
 	// Function that locks the cursor
@@ -147,6 +154,20 @@ public class PlayerController : MonoBehaviour{
 		if (grounded == false) {
 			velocity.y -= charGravity;
 		}
+	}
+
+	private bool Grounded() {
+		return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
+	}
+
+	private void StickToGround() {
+		RaycastHit hit;
+		Ray downRay = new Ray(transform.position, Vector3.down);
+
+		if(Physics.Raycast(downRay, out hit)) {
+			transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
+		}
+
 	}
 
 	private void GroundChecking() {

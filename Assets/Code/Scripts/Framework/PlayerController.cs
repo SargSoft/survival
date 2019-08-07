@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour{
 	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
 	// Jump Private Variables
-	private float jumpHeight = 0;
+	// private float jumpHeight = 0;
 	private bool inputJump = false;
 
 	//Player Camera Options
@@ -65,7 +65,13 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private Transform cameraObject;
 	[SerializeField] private GameObject water;
 
+	// New Variables
 	private Collider coll;
+	private bool isJump = false;
+
+	private float jumpHeight;
+	private float jumpTime;
+	private float jumpCount;
 
 	private void Awake() {
 		LockCursor();
@@ -76,20 +82,17 @@ public class PlayerController : MonoBehaviour{
 
 	private void Update() {
 		CameraRotation();
-		// Gravity();
 		SimpleMove();
+		grounded = Grounded();
+		Gravity();
 		Swim();
 		Jump();
 		Run();
 		Crouch();
 		Interact();
-		grounded = Grounded();
-		Gravity();
+		FinalMove();
 		StickToGround();
 		CollisionCheck();
-		FinalMove();
-		// GroundChecking();
-		// CollisionCheck();
 	}
 
 	// Function that locks the cursor
@@ -170,55 +173,6 @@ public class PlayerController : MonoBehaviour{
 
 	}
 
-	private void GroundChecking() {
-		Ray ray = new Ray(transform.TransformPoint(liftPoint), Vector3.down);
-		RaycastHit tempHit = new RaycastHit();
-
-		if(Physics.SphereCast(ray, 0.17f, out tempHit, 20, discludePlayer)) {
-				GroundConfirm(tempHit);
-			} else {
-				grounded = false;
-			}
-	}
-
-	private void GroundConfirm(RaycastHit tempHit) {
-		Collider[] col = new Collider[3];
-		int num = Physics.OverlapSphereNonAlloc(transform.TransformPoint(groundCheckPoint), 0.57f, col, discludePlayer);
-
-		grounded = false;
-
-		for (int i = 0; i < num; i++) {
-
-			
-			if(col[i].transform == tempHit.transform) {
-				groundHit = tempHit;
-				grounded = true;
-
-				if(inputJump == false) {
-					transform.position = new Vector3(transform.position.x, (groundHit.point.y + playerHeight/2), transform.position.z);
-				}
-
-				break;
-
-			}	
-		}
-
-		if(num <= 1 && tempHit.distance <= 3.1f && inputJump == false) {
-
-			if(col [0] != null) {
-				Ray ray = new Ray(transform.TransformPoint(liftPoint), Vector3.down);
-				RaycastHit hit;
-
-				if(Physics.Raycast (ray, out hit, 3.1f, discludePlayer)) {
-					if (hit.transform != col [0].transform) {
-						grounded = false;
-						return;
-					}
-				}
-			}
-		}
-	}
-
 	private void CollisionCheck() {
 		Collider[] overlaps = new Collider[4];
 		int num = Physics.OverlapSphereNonAlloc(transform.TransformPoint(sphereCol.center), sphereCol.radius, overlaps, discludePlayer, QueryTriggerInteraction.UseGlobal);
@@ -239,28 +193,22 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Jump() {
-		bool canJump = false;
-
-		canJump = !Physics.Raycast(new Ray(transform.position, Vector3.up), playerHeight, discludePlayer);
-
-		if(grounded && jumpHeight > 0.2f || jumpHeight <= 0.2f && grounded) {
-			jumpHeight = 0;
-			inputJump = false;
+		if(Input.GetButtonDown(jumpInput) && grounded && !isJump){
+			isJump = true;
+			jumpCount = jumpTime;
+			JumpEvent(jumpCount, jumpHeight, jumpTime);
+		} else if(isJump) {
+			JumpEvent(jumpCount, jumpHeight, jumpTime);
 		}
+	}
 
-		if (grounded && canJump) {
-			if (Input.GetButtonDown(jumpInput)) {
-				inputJump = true;
-				transform.position += Vector3.up * 0.2f * 2;
-				jumpHeight += jumpForce;
-			}
-		} else {
-			if(!grounded) {
-				jumpHeight -= (jumpHeight * jumpDecrease * Time.deltaTime);
-			}
+	private void JumpEvent(float count, float jumpHeight, float jumpTime) {
+		if(count > 0) {
+			count -= 1.0f;
+			velocity.y += jumpHeight / jumpTime;
+		} else if(count == 0) {
+			isJump = false;
 		}
-
-		velocity.y += jumpHeight;
 	}
 
 	private void Run() {

@@ -230,9 +230,8 @@ MonoBehaviour:
   runMoveSpeed: 8
   crouchMoveSpeed: 3
   crouchCameraMove: 0.3
-  jumpForce: 4
-  jumpSpeed: 0
-  jumpDecrease: 2
+  jumpHeight: 14
+  jumpTime: 10
   defaultGravity: 2.5
   waterGravity: 0.5
   discludePlayer:

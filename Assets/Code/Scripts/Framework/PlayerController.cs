@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private string crouchInput;
 	[SerializeField] private string interactInput;
 
-	private float playerHeight = 2f;
-
 	[Header("Movement Options")]
 	[SerializeField] private float walkMoveSpeed;
 	[SerializeField] private float swimMoveSpeed;
@@ -26,9 +24,10 @@ public class PlayerController : MonoBehaviour{
 	private bool inWater;
 
 	[Header("Jump Options")]
-	[SerializeField] private float jumpForce;
-	[SerializeField] private float jumpSpeed;
-	[SerializeField] private float jumpDecrease;
+	[SerializeField] private float jumpHeight;
+	[SerializeField] private float jumpTime;
+	private float jumpCount;
+	private bool isJump;
 
 	[Header("Gravity")]
 	[SerializeField] private float defaultGravity = 2.5f;
@@ -52,10 +51,6 @@ public class PlayerController : MonoBehaviour{
 	private RaycastHit groundHit;
 	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
-	// Jump Private Variables
-	// private float jumpHeight = 0;
-	private bool inputJump = false;
-
 	//Player Camera Options
 	[Header("Mouse Settings")]
 	[SerializeField] private float mouseYSensitivity;
@@ -67,17 +62,13 @@ public class PlayerController : MonoBehaviour{
 
 	// New Variables
 	private Collider coll;
-	private bool isJump = false;
-
-	private float jumpHeight;
-	private float jumpTime;
-	private float jumpCount;
 
 	private void Awake() {
 		LockCursor();
 		moveSpeed = walkMoveSpeed;
 		charGravity = defaultGravity;
 		coll = GetComponent<Collider> ();
+		isJump = false;
 	}
 
 	private void Update() {
@@ -154,7 +145,7 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Gravity() {
-		if (grounded == false) {
+		if (grounded == false && !isJump) {
 			velocity.y -= charGravity;
 		}
 	}
@@ -168,7 +159,9 @@ public class PlayerController : MonoBehaviour{
 		Ray downRay = new Ray(transform.position, Vector3.down);
 
 		if(Physics.Raycast(downRay, out hit)) {
-			transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
+			if(hit.distance > 0.8f && hit.distance < 1.2f && !isJump) {
+				transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
+			}
 		}
 
 	}
@@ -194,19 +187,21 @@ public class PlayerController : MonoBehaviour{
 
 	private void Jump() {
 		if(Input.GetButtonDown(jumpInput) && grounded && !isJump){
+			Debug.Log("Initial Jump Input");
 			isJump = true;
-			jumpCount = jumpTime;
-			JumpEvent(jumpCount, jumpHeight, jumpTime);
+			jumpCount = jumpTime + 1f;
+			JumpEvent(jumpHeight, jumpTime);
 		} else if(isJump) {
-			JumpEvent(jumpCount, jumpHeight, jumpTime);
+			Debug.Log("Jumping Upwards");
+			JumpEvent(jumpHeight, jumpTime);
 		}
 	}
 
-	private void JumpEvent(float count, float jumpHeight, float jumpTime) {
-		if(count > 0) {
-			count -= 1.0f;
+	private void JumpEvent(float jumpHeight, float jumpTime) {
+		if(jumpCount > 0) {
+			jumpCount -= 1.0f;
 			velocity.y += jumpHeight / jumpTime;
-		} else if(count == 0) {
+		} else if(jumpCount == 0) {
 			isJump = false;
 		}
 	}

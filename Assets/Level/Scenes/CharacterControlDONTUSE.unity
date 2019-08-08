@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35496117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 155.94, y: 30.95, z: 117.63}
+  m_LocalPosition: {x: 155.94, y: 109, z: 117.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1892781489}
@@ -230,10 +230,11 @@ MonoBehaviour:
   runMoveSpeed: 8
   crouchMoveSpeed: 3
   crouchCameraMove: 0.3
-  jumpHeight: 14
+  jumpHeight: 20
   jumpTime: 10
-  defaultGravity: 2.5
-  waterGravity: 0.5
+  gravity: 9.8
+  terminalVelocity: 50
+  gravityMultiplier: 20
   discludePlayer:
     serializedVersion: 2
     m_Bits: 295

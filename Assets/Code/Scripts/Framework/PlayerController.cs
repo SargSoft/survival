@@ -27,12 +27,14 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private float jumpHeight;
 	[SerializeField] private float jumpTime;
 	private float jumpCount;
+	private float remainingJumpHeight;
 	private bool isJump;
 
 	[Header("Gravity")]
-	[SerializeField] private float defaultGravity = 2.5f;
-	[SerializeField] private float waterGravity = 0.5f;
-	private float charGravity;
+	[SerializeField] private float gravity;
+	[SerializeField] private float terminalVelocity;
+	[SerializeField] private float gravityMultiplier;
+	private float currentGravity;
 
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludePlayer;
@@ -66,7 +68,6 @@ public class PlayerController : MonoBehaviour{
 	private void Awake() {
 		LockCursor();
 		moveSpeed = walkMoveSpeed;
-		charGravity = defaultGravity;
 		coll = GetComponent<Collider> ();
 		isJump = false;
 	}
@@ -145,8 +146,18 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Gravity() {
-		if (grounded == false && !isJump) {
-			velocity.y -= charGravity;
+		if (!grounded && !isJump) {
+			currentGravity += gravity * Time.deltaTime;
+
+			if(currentGravity < terminalVelocity) {
+				velocity.y -= currentGravity * Time.deltaTime * gravityMultiplier;
+			} else if(currentGravity > terminalVelocity) {
+				currentGravity = terminalVelocity;
+				velocity.y -= currentGravity * Time.deltaTime * gravityMultiplier;
+			}
+
+		} else if(grounded) {
+			currentGravity = 0;
 		}
 	}
 
@@ -159,7 +170,7 @@ public class PlayerController : MonoBehaviour{
 		Ray downRay = new Ray(transform.position, Vector3.down);
 
 		if(Physics.Raycast(downRay, out hit)) {
-			if(hit.distance > 0.8f && hit.distance < 1.2f && !isJump) {
+			if(hit.distance > 0.9f && hit.distance < 1.1f && !isJump) {
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
 			}
 		}
@@ -185,24 +196,26 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	private void Jump() {
-		if(Input.GetButtonDown(jumpInput) && grounded && !isJump){
-			Debug.Log("Initial Jump Input");
+	private void Jump() { // Currently does not stop gravity so needs a rework
+		if(Input.GetButtonDown(jumpInput) && grounded && !isJump && !isCrouch){
 			isJump = true;
 			jumpCount = jumpTime + 1f;
-			JumpEvent(jumpHeight, jumpTime);
+			remainingJumpHeight = jumpHeight;
+			JumpEvent();
 		} else if(isJump) {
-			Debug.Log("Jumping Upwards");
-			JumpEvent(jumpHeight, jumpTime);
+			JumpEvent();
 		}
 	}
 
-	private void JumpEvent(float jumpHeight, float jumpTime) {
+	private void JumpEvent() {
 		if(jumpCount > 0) {
 			jumpCount -= 1.0f;
-			velocity.y += jumpHeight / jumpTime;
+			velocity.y += remainingJumpHeight / jumpTime;
+			remainingJumpHeight -= remainingJumpHeight / jumpTime;
+			Debug.Log(remainingJumpHeight);
 		} else if(jumpCount == 0) {
 			isJump = false;
+			Debug.Log("Jump Finished");
 		}
 	}
 
@@ -236,12 +249,12 @@ public class PlayerController : MonoBehaviour{
 			isRun = false;
 			isCrouch = false;
 			inWater = true;
-			charGravity = waterGravity;
+			// charGravity = waterGravity; <- No Gravity underwater?
 			Debug.Log("Underwater");
 		} else if(!IsUnderwater() && inWater) {
 			moveSpeed = walkMoveSpeed;
 			inWater = false;
-			charGravity = defaultGravity;
+			// charGravity = defaultGravity; <- No Gravity underwater?
 			Debug.Log("Above Water");
 		}
 	}

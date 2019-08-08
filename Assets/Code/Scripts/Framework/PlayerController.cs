@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour{
 		isJump = false;
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		CameraRotation();
 		SimpleMove();
 		grounded = Grounded();
@@ -140,20 +140,20 @@ public class PlayerController : MonoBehaviour{
 	private void FinalMove() {
 		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
 		vel = transform.TransformDirection(vel);
-		transform.position += vel * Time.deltaTime;
+		transform.position += vel * Time.fixedDeltaTime;
 
 		velocity = Vector3.zero;
 	}
 
 	private void Gravity() {
 		if (!grounded && !isJump) {
-			currentGravity += gravity * Time.deltaTime;
+			currentGravity += gravity * Time.fixedDeltaTime;
 
 			if(currentGravity < terminalVelocity) {
-				velocity.y -= currentGravity * Time.deltaTime * gravityMultiplier;
+				velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
 			} else if(currentGravity > terminalVelocity) {
 				currentGravity = terminalVelocity;
-				velocity.y -= currentGravity * Time.deltaTime * gravityMultiplier;
+				velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
 			}
 
 		} else if(grounded) {
@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour{
 		Ray downRay = new Ray(transform.position, Vector3.down);
 
 		if(Physics.Raycast(downRay, out hit)) {
+			Debug.Log("Normal: " + hit.normal);
 			if(hit.distance > 0.9f && hit.distance < 1.1f && !isJump) {
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
 			}
@@ -212,10 +213,8 @@ public class PlayerController : MonoBehaviour{
 			jumpCount -= 1.0f;
 			velocity.y += remainingJumpHeight / jumpTime;
 			remainingJumpHeight -= remainingJumpHeight / jumpTime;
-			Debug.Log(remainingJumpHeight);
 		} else if(jumpCount == 0) {
 			isJump = false;
-			Debug.Log("Jump Finished");
 		}
 	}
 

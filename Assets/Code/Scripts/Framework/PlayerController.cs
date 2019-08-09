@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour{
 
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludePlayer;
+ 	[SerializeField] private float maxSlopeAngle;
 
  	[Header("References")]
  	[SerializeField] private SphereCollider sphereCol;
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour{
 		Run();
 		Crouch();
 		Interact();
-		// Debug.Log("Downwards velocity:" + velocity.y * Time.fixedDeltaTime);
 		FinalMove();
 		StickToGround();
 		CollisionCheck();
@@ -174,14 +174,16 @@ public class PlayerController : MonoBehaviour{
 		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
 
 		if(Physics.Raycast(downRay, out hit)) {
-			// Debug.Log("Normal: " + hit.normal);
-			Debug.Log("hit distance: " + hit.distance);
+			LimitSlopeAngle(hit.normal, maxSlopeAngle);
 			if(hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
-				Debug.Log("Within snap bounds | hit distance: " + hit.distance + " | therefore move: " + (2f - hit.distance));
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
 			}
 		}
 
+	}
+
+	private void LimitSlopeAngle(Vector3 currentAngle, float maxAngle){
+		Debug.Log("Normal: " + currentAngle);
 	}
 
 	private void CollisionCheck() {

@@ -82,9 +82,11 @@ public class PlayerController : MonoBehaviour{
 		Run();
 		Crouch();
 		Interact();
+		// Debug.Log("Downwards velocity:" + velocity.y * Time.fixedDeltaTime);
 		FinalMove();
 		StickToGround();
 		CollisionCheck();
+		VelocityReset();
 	}
 
 	// Function that locks the cursor
@@ -141,7 +143,9 @@ public class PlayerController : MonoBehaviour{
 		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
+	}
 
+	private void VelocityReset() {
 		velocity = Vector3.zero;
 	}
 
@@ -167,12 +171,14 @@ public class PlayerController : MonoBehaviour{
 
 	private void StickToGround() {
 		RaycastHit hit;
-		Ray downRay = new Ray(transform.position, Vector3.down);
+		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
 
 		if(Physics.Raycast(downRay, out hit)) {
-			Debug.Log("Normal: " + hit.normal);
-			if(hit.distance > 0.9f && hit.distance < 1.1f && !isJump) {
-				transform.position = new Vector3 (transform.position.x, transform.position.y + (1 - hit.distance), transform.position.z);
+			// Debug.Log("Normal: " + hit.normal);
+			Debug.Log("hit distance: " + hit.distance);
+			if(hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
+				Debug.Log("Within snap bounds | hit distance: " + hit.distance + " | therefore move: " + (2f - hit.distance));
+				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
 			}
 		}
 

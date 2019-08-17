@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour{
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludePlayer;
  	[SerializeField] private float maxSlopeAngle;
+ 	[SerializeField] private float slideMultiplier;
 
  	[Header("References")]
  	[SerializeField] private SphereCollider sphereCol;
@@ -50,9 +51,6 @@ public class PlayerController : MonoBehaviour{
 
 	// Grounded Private Variables
 	private bool grounded;
-	private Vector3 liftPoint = new Vector3 (0, 1.2f, 0);
-	private RaycastHit groundHit;
-	private Vector3 groundCheckPoint = new Vector3 (0, -0.87f, 0);
 
 	//Player Camera Options
 	[Header("Mouse Settings")]
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour{
 		isJump = false;
 	}
 
-	private void FixedUpdate() {
+	private void Update() {
 		CameraRotation();
 		SimpleMove();
 		grounded = Grounded();
@@ -84,7 +82,7 @@ public class PlayerController : MonoBehaviour{
 		Crouch();
 		Interact();
 		FinalMove();
-		StickToGround();
+		StickToGround(SlopeAngleToNormal(maxSlopeAngle));
 		CollisionCheck();
 		VelocityReset();
 	}
@@ -169,21 +167,38 @@ public class PlayerController : MonoBehaviour{
 		return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
 	}
 
-	private void StickToGround() {
+	private void StickToGround(float maxAngle) {
 		RaycastHit hit;
 		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
+		Vector3 slide = new Vector3(0, 0, 0);
 
 		if(Physics.Raycast(downRay, out hit)) {
-			LimitSlopeAngle(hit.normal, maxSlopeAngle);
 			if(hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
 			}
-		}
 
+			if(hit.normal.x > maxAngle || hit.normal.x < -maxAngle) {
+				slide += new Vector3(hit.normal.x, 0, 0);
+			}
+
+			if(hit.normal.z > maxAngle || hit.normal.z < -maxAngle) {
+				slide += new Vector3(0, 0, hit.normal.z);
+			}
+
+			transform.position += slide * slideMultiplier;
+
+			Debug.Log("Normal: " + hit.normal + " | Postion: " + transform.position + " | hit.normal.x: " + hit.normal.x + " | hit.normal.z" + hit.normal.z);
+		}
 	}
 
-	private void LimitSlopeAngle(Vector3 currentAngle, float maxAngle){
-		Debug.Log("Normal: " + currentAngle);
+	// Takes the MaxSlopeAngle from input and translates it into number between 0 and 1 for using the LimitSlopeAngle function
+	private float SlopeAngleToNormal(float angle) {
+		if(angle < 0f || angle > 90f) {
+			Debug.LogError("Invalid MaxSLopeAngle input. Float must be between 0 and 90 degrees.");
+			return 0f;
+		} else {
+			return angle / 90f;
+		}
 	}
 
 	private void CollisionCheck() {

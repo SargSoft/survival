@@ -81,8 +81,9 @@ public class PlayerController : MonoBehaviour{
 		Run();
 		Crouch();
 		Interact();
+		SteepCheck(maxSlopeAngle);
 		FinalMove();
-		StickToGround(SlopeAngleToNormal(maxSlopeAngle));
+		StickToGround(maxSlopeAngle);
 		CollisionCheck();
 		VelocityReset();
 	}
@@ -177,27 +178,26 @@ public class PlayerController : MonoBehaviour{
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
 			}
 
-			if(hit.normal.x > maxAngle || hit.normal.x < -maxAngle) {
-				slide += new Vector3(hit.normal.x, 0, 0);
-			}
-
-			if(hit.normal.z > maxAngle || hit.normal.z < -maxAngle) {
-				slide += new Vector3(0, 0, hit.normal.z);
+			if(FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
+				Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
+				slide += -Vector3.Cross(slideTemp, hit.normal);
 			}
 
 			transform.position += slide * slideMultiplier;
 
-			Debug.Log("Normal: " + hit.normal + " | Postion: " + transform.position + " | hit.normal.x: " + hit.normal.x + " | hit.normal.z" + hit.normal.z);
+			Debug.Log("Normal: " + hit.normal + " | Postion: " + transform.position + " | hit.normal.x: " + hit.normal.x + " | hit.normal.z" + hit.normal.z + " | maxAngle: " + maxAngle + " | AngleCalc: " + FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f));
 		}
 	}
 
-	// Takes the MaxSlopeAngle from input and translates it into number between 0 and 1 for using the LimitSlopeAngle function
-	private float SlopeAngleToNormal(float angle) {
-		if(angle < 0f || angle > 90f) {
-			Debug.LogError("Invalid MaxSLopeAngle input. Float must be between 0 and 90 degrees.");
-			return 0f;
-		} else {
-			return angle / 90f;
+	private void SteepCheck(float maxAngle) {
+		RaycastHit hit;
+		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
+
+		if(Physics.Raycast(downRay, out hit)) {
+			
+			if(FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
+				VelocityReset();
+			}
 		}
 	}
 

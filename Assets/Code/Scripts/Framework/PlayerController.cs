@@ -13,12 +13,11 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private string interactInput;
 
 	[Header("Movement Options")]
-	[SerializeField] private float walkMoveSpeed;
-	[SerializeField] private float swimMoveSpeed;
-	[SerializeField] private float runMoveSpeed;
-	[SerializeField] private float crouchMoveSpeed;
+	[SerializeField] private float baseMoveSpeed;
+	[SerializeField] private float runMultiplier;
+	[SerializeField] private float swimMultiplier;
+	[SerializeField] private float crouchMultiplier;
 	[SerializeField] private float crouchCameraMove;
-	private float moveSpeed;
 	private bool isRun;
 	private bool isCrouch;
 	private bool inWater;
@@ -67,7 +66,6 @@ public class PlayerController : MonoBehaviour{
 
 	private void Awake() {
 		LockCursor();
-		moveSpeed = walkMoveSpeed;
 		coll = GetComponent<Collider> ();
 		isJump = false;
 	}
@@ -143,7 +141,10 @@ public class PlayerController : MonoBehaviour{
 
 	// Calculates the velocity (player movement this game tick) and transforms the player appropriately
 	private void FinalMove() {
-		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
+		float runSpeed = RunSpeed();
+		float speedMult = SpeedMult();
+
+		Vector3 vel = new Vector3(velocity.x * speedMult, velocity.y, velocity.z * runSpeed * speedMult) * baseMoveSpeed;
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
 	}
@@ -260,10 +261,8 @@ public class PlayerController : MonoBehaviour{
 	// When the run input is pressed down or released, the moveSpeed variables is assigned the value of runMoveSpeeed or walkMoveSpeed, respectively
 	private void Run() {
 		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater) {
-			moveSpeed = runMoveSpeed;
 			isRun = true;
 		} else if(Input.GetButtonUp(runInput) && !isCrouch && !inWater) {
-			moveSpeed = walkMoveSpeed;
 			isRun = false;
 		}
 	}
@@ -272,27 +271,41 @@ public class PlayerController : MonoBehaviour{
 	private void Crouch() {
 		if(Input.GetButtonDown(crouchInput) && !isRun && !inWater && CrouchWaterDistance()){
 			cameraObject.transform.Translate(Vector3.down * crouchCameraMove);
-			moveSpeed = crouchMoveSpeed;
 			isCrouch = true;
 
 		} else if(Input.GetButtonUp(crouchInput) && !isRun && !inWater && isCrouch) {
 			cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
-			moveSpeed = walkMoveSpeed;
 			isCrouch = false;
+		}
+	}
+
+	private float RunSpeed() {
+		if(isRun && velocity.z > 0) {
+			return runMultiplier;
+		} else {
+			return 1.0f;
+		}
+	}
+
+	private float SpeedMult() {
+		if(isCrouch) {
+			return crouchMultiplier;
+		} else if(inWater) {
+			return swimMultiplier;
+		} else {
+			return 1.0f;
 		}
 	}
 
 	private void Swim() {
 		if(IsUnderwater() && !inWater) {
 			if(isCrouch) cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
-			moveSpeed = swimMoveSpeed;
 			isRun = false;
 			isCrouch = false;
 			inWater = true;
 			// charGravity = waterGravity; <- No Gravity underwater?
 			Debug.Log("Underwater");
 		} else if(!IsUnderwater() && inWater) {
-			moveSpeed = walkMoveSpeed;
 			inWater = false;
 			// charGravity = defaultGravity; <- No Gravity underwater?
 			Debug.Log("Above Water");

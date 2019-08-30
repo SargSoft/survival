@@ -225,10 +225,10 @@ MonoBehaviour:
   runInput: Run
   crouchInput: Crouch
   interactInput: Interact
-  walkMoveSpeed: 5
-  swimMoveSpeed: 4
-  runMoveSpeed: 8
-  crouchMoveSpeed: 3
+  baseMoveSpeed: 5
+  runMultiplier: 1.5
+  swimMultiplier: 0.7
+  crouchMultiplier: 0.5
   crouchCameraMove: 0.3
   jumpHeight: 20
   jumpTime: 10

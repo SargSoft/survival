@@ -37,12 +37,13 @@ public class PlayerController : MonoBehaviour{
 	private float currentGravity;
 
  	[Header("Physics")]
- 	[SerializeField] private LayerMask discludePlayer;
+ 	[SerializeField] private LayerMask discludeGround;
+ 	[SerializeField] private LayerMask discludeObjects;
  	[SerializeField] private float maxSlopeAngle;
  	[SerializeField] private float slideMultiplier;
 
  	[Header("References")]
- 	[SerializeField] private SphereCollider sphereCol;
+ 	[SerializeField] private CapsuleCollider capsuleCol;
 
 	// Private Variables
 	private Vector3 velocity;
@@ -76,15 +77,15 @@ public class PlayerController : MonoBehaviour{
 		SimpleMove();
 		grounded = Grounded();
 		Gravity();
+		SteepCheck(maxSlopeAngle);
 		Swim();
 		Jump();
 		Run();
 		Crouch();
 		Interact();
-		SteepCheck(maxSlopeAngle);
 		FinalMove();
 		StickToGround(maxSlopeAngle);
-		CollisionCheck();
+		CollisionCheck(discludeGround);
 		VelocityReset();
 	}
 
@@ -116,6 +117,7 @@ public class PlayerController : MonoBehaviour{
 		return output;
 	}
 
+	// Takes the mouseX and mouseY, clamps the X rotation, adds the mouseX and mouseY to the quaternions yRot and xRot, and then rotates the camera and object appropriately
 	private void CameraRotation() {
 		float mouseX = Input.GetAxis(mouseXInput) * mouseXSensitivity;
 		float mouseY = Input.GetAxis(mouseYInput) * mouseYSensitivity;
@@ -132,22 +134,26 @@ public class PlayerController : MonoBehaviour{
 		// transform.eulerAngles = (Vector3.left * mouseY) + (Vector3.up * mouseX);
 	}
 
+	// Takes the horizontal and vertical inputs of the player for movement and adds them to velocity
 	private void SimpleMove() {
 		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
 		velocity += move;
 
 	}
 
+	// Calculates the velocity (player movement this game tick) and transforms the player appropriately
 	private void FinalMove() {
 		Vector3 vel = new Vector3(velocity.x, velocity.y, velocity.z) * moveSpeed;
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
 	}
 
+	// Resets the velocity variable (used for controlling movement) to zero
 	private void VelocityReset() {
 		velocity = Vector3.zero;
 	}
 
+	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity
 	private void Gravity() {
 		if (!grounded && !isJump) {
 			currentGravity += gravity * Time.fixedDeltaTime;
@@ -164,31 +170,36 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Uses a Raycast to check if the player is in contact with the ground and returns a boolean value
 	private bool Grounded() {
 		return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
 	}
 
+	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	private void StickToGround(float maxAngle) {
 		RaycastHit hit;
 		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
 		Vector3 slide = new Vector3(0, 0, 0);
 
 		if(Physics.Raycast(downRay, out hit)) {
+			// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
+			if(FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
+				// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
+				// slide += -Vector3.Cross(slideTemp, hit.normal);
+
+				CollisionCheck(discludeObjects);
+			}
+
+			// transform.position += slide * slideMultiplier;
+
+			// Checks if the player is within 2.1f of the top of the player, and if so transforms the players position so they on the ground surface
 			if(hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
 				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
 			}
-
-			if(FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-				Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
-				slide += -Vector3.Cross(slideTemp, hit.normal);
-			}
-
-			transform.position += slide * slideMultiplier;
-
-			Debug.Log("Normal: " + hit.normal + " | Postion: " + transform.position + " | hit.normal.x: " + hit.normal.x + " | hit.normal.z" + hit.normal.z + " | maxAngle: " + maxAngle + " | AngleCalc: " + FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f));
 		}
 	}
 
+	// Checks the angle of the ground below the players feet, and then treats it like a collision if it is greater than the maxAngle
 	private void SteepCheck(float maxAngle) {
 		RaycastHit hit;
 		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
@@ -201,9 +212,14 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	private void CollisionCheck() {
+	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
+	private void CollisionCheck(LayerMask disclude) {
 		Collider[] overlaps = new Collider[4];
-		int num = Physics.OverlapSphereNonAlloc(transform.TransformPoint(sphereCol.center), sphereCol.radius, overlaps, discludePlayer, QueryTriggerInteraction.UseGlobal);
+		// Calculating top and bottom of capsule
+		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
+		Vector3 top = capsuleCenter + Vector3.up;
+		Vector3 bottom = capsuleCenter - Vector3.up;
+		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
 
 		for (int i = 0; i < num; i++) {
 
@@ -211,16 +227,15 @@ public class PlayerController : MonoBehaviour{
 			Vector3 dir;
 			float dist;
 
-			if(Physics.ComputePenetration(sphereCol,transform.position, transform.rotation, overlaps[i], t.position, t.rotation, out dir, out dist)) {
+			if(Physics.ComputePenetration(capsuleCol, transform.position, transform.rotation, overlaps[i], t.position, t.rotation, out dir, out dist)) {
 				Vector3 penetrationVector = dir * dist;
-				Vector3 velocityProjected = Vector3.Project(velocity, -dir);
 				transform.position = transform.position + penetrationVector;
-				vel -= velocityProjected;
 			}
 		}
 	}
 
-	private void Jump() { // Currently does not stop gravity so needs a rework
+	// Checks if the 
+	private void Jump() {
 		if(Input.GetButtonDown(jumpInput) && grounded && !isJump && !isCrouch){
 			isJump = true;
 			jumpCount = jumpTime + 1f;
@@ -231,6 +246,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Checks the jump count, and if its still greater than 0 it addes y velocity accordingly, decreasing as the jumpCount does until ultimaltey isJump is assigned false
 	private void JumpEvent() {
 		if(jumpCount > 0) {
 			jumpCount -= 1.0f;
@@ -241,6 +257,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// When the run input is pressed down or released, the moveSpeed variables is assigned the value of runMoveSpeeed or walkMoveSpeed, respectively
 	private void Run() {
 		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater) {
 			moveSpeed = runMoveSpeed;
@@ -251,6 +268,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// When the crouch input is pressed down or released the camera is transformed appropriately, and isCrouch is assigned a boolean value
 	private void Crouch() {
 		if(Input.GetButtonDown(crouchInput) && !isRun && !inWater && CrouchWaterDistance()){
 			cameraObject.transform.Translate(Vector3.down * crouchCameraMove);

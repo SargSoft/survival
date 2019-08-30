@@ -65,7 +65,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 - Nye Goodall
 
 ## 2. Getting Started
-- Unity Version 2018.3.9 (found in 2018.x section found [here](https://unity3d.com/get-unity/download/archive))
+- Unity Version 2018.4.7f1 (Found [here](https://unity3d.com/unity/qa/lts-releases))
 - 3ds Max Version
 - Install Unity Smart Merge Tool (Guide below)
 

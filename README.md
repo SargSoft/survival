@@ -496,6 +496,10 @@ Below is a breakdown of all of the aspects relating to the main menu, including 
 Below is a breakdown of all of the aspects relating to the story, including all of the major events, backstory, story chronology, and in game triggers for story advancement.
 
 #### 5.4.1 Backstory
+
+**IDEAS:**
+- Players only dialog with a personal computer (something like Siri, 'Hey ___ , could you check this for me, etc')? And perhaps at some point after the explosion your PDA esc device runs out of power and needs recharging before you can speak to the computer?
+- A female protagonist?
 - Binary Star system
 - Perhaps younger starts than the Sun (less evolved fauna and plants?, larger fauna and plants,)
 - Due to age or just difference, a different radiation spectrum on the planet (from the stars) resulting in different pigments in plants for photosynthesis?

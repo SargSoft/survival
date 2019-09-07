@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour{
 	[Header("Jump Options")]
 	[SerializeField] private float jumpHeight;
 	[SerializeField] private float jumpTime;
+	[Range(0,1)][SerializeField] private float airControlPercentForward;
+	[Range(0,1)][SerializeField] private float airControlPercentSideways;
 	private float jumpCount;
 	private float remainingJumpHeight;
 	private bool isJump;
@@ -71,9 +73,9 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Update() {
+		grounded = Grounded();
 		CameraRotation();
 		SimpleMove();
-		grounded = Grounded();
 		Gravity();
 		SteepCheck(maxSlopeAngle);
 		Swim();
@@ -84,7 +86,6 @@ public class PlayerController : MonoBehaviour{
 		FinalMove();
 		StickToGround(maxSlopeAngle);
 		CollisionCheck(discludeGround);
-		VelocityReset();
 	}
 
 	// Function that locks the cursor
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour{
 		Cursor.visible = false;
 	}
 
+	// Prevents the rotation exceeding the bounds, in this case 80 degrees up and down
 	private float ClampXRotation(float current, float rotation) {
 		if(current - rotation > 80f && current - rotation < 280f) {
 			if(rotation < 0f) {
@@ -108,6 +110,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Takes a float and floors it to a specified number of decimal places
 	private float FloatFloor(float number, float decimalPlaces) {
 		float output = number * Mathf.Pow(10f, decimalPlaces);
 		output = Mathf.Floor(output);
@@ -134,9 +137,16 @@ public class PlayerController : MonoBehaviour{
 
 	// Takes the horizontal and vertical inputs of the player for movement and adds them to velocity
 	private void SimpleMove() {
-		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
-		velocity += move;
-
+		if(grounded) {
+			VelocityReset();
+			velocity += basicMoveVector();
+		} else {
+			velocity.y = 0f;
+			Vector3 tempVelocity = basicMoveVector();
+			tempVelocity = velocity - tempVelocity;
+			velocity.z += tempVelocity.z * airControlPercentForward;
+			velocity.x += tempVelocity.x * airControlPercentSideways;
+		}
 	}
 
 	// Calculates the velocity (player movement this game tick) and transforms the player appropriately
@@ -144,7 +154,10 @@ public class PlayerController : MonoBehaviour{
 		float runSpeed = RunSpeed();
 		float speedMult = SpeedMult();
 
+		// Debug.Log("Velocity: " + velocity);
 		Vector3 vel = new Vector3(velocity.x * speedMult, velocity.y, velocity.z * runSpeed * speedMult) * baseMoveSpeed;
+		Debug.Log("Vel: " + vel);
+
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
 	}
@@ -152,6 +165,12 @@ public class PlayerController : MonoBehaviour{
 	// Resets the velocity variable (used for controlling movement) to zero
 	private void VelocityReset() {
 		velocity = Vector3.zero;
+	}
+
+	// Returns a normalized vector3 of the horizontal and vertical movement inputs
+	private Vector3 basicMoveVector() {
+		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
+		return Vector3.Normalize(move);
 	}
 
 	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity
@@ -200,7 +219,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	// Checks the angle of the ground below the players feet, and then treats it like a collision if it is greater than the maxAngle
+	// Checks the angle of the ground below the players feet, and if its greater than the max angle prevents the player from moving
 	private void SteepCheck(float maxAngle) {
 		RaycastHit hit;
 		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
@@ -258,6 +277,16 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Reduces the players movement while in the air
+	private float AirControl(float vel, float multiplier) {
+		Debug.Log("Grounded: " + grounded);
+		if(grounded) {
+			return vel;
+		} else {
+			return vel * multiplier;
+		}
+	}
+
 	// When the run input is pressed down or released, the moveSpeed variables is assigned the value of runMoveSpeeed or walkMoveSpeed, respectively
 	private void Run() {
 		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater) {
@@ -279,6 +308,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Checks if the player is running or not, and then either returns the runMultiplier, or just 1.0f
 	private float RunSpeed() {
 		if(isRun && velocity.z > 0) {
 			return runMultiplier;
@@ -287,6 +317,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Checks if the player is crouching, or underwater, and then returns the appropriate movement speed multiplier
 	private float SpeedMult() {
 		if(isCrouch) {
 			return crouchMultiplier;
@@ -297,6 +328,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
+	// Checks if the player is underwater, and was previously not in the water, and then puts the player in swimming mode
 	private void Swim() {
 		if(IsUnderwater() && !inWater) {
 			if(isCrouch) cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
@@ -322,6 +354,7 @@ public class PlayerController : MonoBehaviour{
 		return cameraObject.transform.position.y - water.transform.position.y - 0.5 > crouchCameraMove;
 	}
 
+	// Checks if the player presses the interact button
 	private void Interact() {
 		if(Input.GetButtonDown(interactInput)) {
 			Debug.Log("Interact button pressed");

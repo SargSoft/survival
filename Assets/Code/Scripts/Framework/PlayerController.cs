@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour{
 
 		if(grounded) {
 			VelocityReset();
-			velocity += BasicMoveVector(move);
+			velocity += NormalizeVector(move);
 		} else {
 			velocity.y = 0f;
 			velocity.z += AirMoveVector(velocity.z, move.z, airControlPercentForward);
@@ -154,9 +154,7 @@ public class PlayerController : MonoBehaviour{
 		float runSpeed = RunSpeed();
 		float speedMult = SpeedMult();
 
-		Debug.Log("Velocity: " + velocity);
 		Vector3 vel = new Vector3(velocity.x * speedMult, velocity.y, velocity.z * runSpeed * speedMult) * baseMoveSpeed;
-		// Debug.Log("Vel: " + vel);
 
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
@@ -168,13 +166,14 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	// Returns a normalized vector3 of the horizontal and vertical movement inputs
-	private Vector3 BasicMoveVector(Vector3 input) {
+	private Vector3 NormalizeVector(Vector3 input) {
 		return Vector3.Normalize(input);
 	}
 
 	//
 	private float AirMoveVector(float current, float proposed, float AirControl) {
-		return (proposed - current) * AirControl;
+		float output = (proposed - current) * AirControl;
+		return output;
 	}
 
 	// Takes a float as the input, checks if it is above or below the upper or lower bounds, respectively, and then returns either the input or appropriate bound
@@ -294,7 +293,7 @@ public class PlayerController : MonoBehaviour{
 
 	// When the run input is pressed down or released, the moveSpeed variables is assigned the value of runMoveSpeeed or walkMoveSpeed, respectively
 	private void Run() {
-		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater) {
+		if(Input.GetButtonDown(runInput) && !isCrouch && !inWater && grounded) {
 			isRun = true;
 		} else if(Input.GetButtonUp(runInput) && !isCrouch && !inWater) {
 			isRun = false;

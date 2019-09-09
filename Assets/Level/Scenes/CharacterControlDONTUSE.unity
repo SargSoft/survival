@@ -232,8 +232,8 @@ MonoBehaviour:
   crouchCameraMove: 0.3
   jumpHeight: 20
   jumpTime: 10
-  airControlPercentForward: 1
-  airControlPercentSideways: 0
+  airControlPercentForward: 0.1
+  airControlPercentSideways: 0.1
   gravity: 9.8
   terminalVelocity: 50
   gravityMultiplier: 20

@@ -137,15 +137,15 @@ public class PlayerController : MonoBehaviour{
 
 	// Takes the horizontal and vertical inputs of the player for movement and adds them to velocity
 	private void SimpleMove() {
+		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
+
 		if(grounded) {
 			VelocityReset();
-			velocity += basicMoveVector();
+			velocity += BasicMoveVector(move);
 		} else {
 			velocity.y = 0f;
-			Vector3 tempVelocity = basicMoveVector();
-			tempVelocity = velocity - tempVelocity;
-			velocity.z += tempVelocity.z * airControlPercentForward;
-			velocity.x += tempVelocity.x * airControlPercentSideways;
+			velocity.z += AirMoveVector(velocity.z, move.z, airControlPercentForward);
+			velocity.x += AirMoveVector(velocity.x, move.x, airControlPercentSideways);
 		}
 	}
 
@@ -154,9 +154,9 @@ public class PlayerController : MonoBehaviour{
 		float runSpeed = RunSpeed();
 		float speedMult = SpeedMult();
 
-		// Debug.Log("Velocity: " + velocity);
+		Debug.Log("Velocity: " + velocity);
 		Vector3 vel = new Vector3(velocity.x * speedMult, velocity.y, velocity.z * runSpeed * speedMult) * baseMoveSpeed;
-		Debug.Log("Vel: " + vel);
+		// Debug.Log("Vel: " + vel);
 
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
@@ -168,9 +168,24 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	// Returns a normalized vector3 of the horizontal and vertical movement inputs
-	private Vector3 basicMoveVector() {
-		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
-		return Vector3.Normalize(move);
+	private Vector3 BasicMoveVector(Vector3 input) {
+		return Vector3.Normalize(input);
+	}
+
+	//
+	private float AirMoveVector(float current, float proposed, float AirControl) {
+		return (proposed - current) * AirControl;
+	}
+
+	// Takes a float as the input, checks if it is above or below the upper or lower bounds, respectively, and then returns either the input or appropriate bound
+	private float NumberLimits(float input, float upper, float lower) {
+		if(input > upper) {
+			return upper;
+		} else if(input < lower) {
+			return lower;
+		} else {
+			return input;
+		}
 	}
 
 	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity
@@ -274,16 +289,6 @@ public class PlayerController : MonoBehaviour{
 			remainingJumpHeight -= remainingJumpHeight / jumpTime;
 		} else if(jumpCount == 0) {
 			isJump = false;
-		}
-	}
-
-	// Reduces the players movement while in the air
-	private float AirControl(float vel, float multiplier) {
-		Debug.Log("Grounded: " + grounded);
-		if(grounded) {
-			return vel;
-		} else {
-			return vel * multiplier;
 		}
 	}
 

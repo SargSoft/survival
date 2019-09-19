@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour{
 	[SerializeField] private string crouchInput;
 	[SerializeField] private string interactInput;
 
+	[Header("Mouse Settings")]
+	[SerializeField] private float mouseYSensitivity;
+	[SerializeField] private float mouseXSensitivity;
+
 	[Header("Movement Options")]
 	[SerializeField] private float baseMoveSpeed;
 	[SerializeField] private float runMultiplier;
@@ -46,25 +50,17 @@ public class PlayerController : MonoBehaviour{
  	[Header("References")]
  	[SerializeField] private CapsuleCollider capsuleCol;
 
+ 	[Header("Game Object")]
+	[SerializeField] private Transform cameraObject;
+	[SerializeField] private GameObject water;
+	
 	// Private Variables
 	private Vector3 velocity;
 	private Vector3 move;
 	private Vector3 vel;
-
-	// Grounded Private Variables
 	private bool grounded;
-
-	//Player Camera Options
-	[Header("Mouse Settings")]
-	[SerializeField] private float mouseYSensitivity;
-	[SerializeField] private float mouseXSensitivity;
-
-	[Header("Game Object")]
-	[SerializeField] private Transform cameraObject;
-	[SerializeField] private GameObject water;
-
-	// New Variables
 	private Collider coll;
+
 
 	private void Awake() {
 		LockCursor();
@@ -88,7 +84,7 @@ public class PlayerController : MonoBehaviour{
 		CollisionCheck(discludeGround);
 	}
 
-	// Function that locks the cursor
+	// Locks the cursor
 	private void LockCursor() {
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -170,7 +166,7 @@ public class PlayerController : MonoBehaviour{
 		return Vector3.Normalize(input);
 	}
 
-	//
+	// Returns a float that is the difference between the first two inputs multiplied by the third, which is a fraction. Used to reduce movement while not grounded.
 	private float AirMoveVector(float current, float proposed, float AirControl) {
 		float output = (proposed - current) * AirControl;
 		return output;
@@ -187,7 +183,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity
+	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity, by taking the gravity off of the players velocity every tick
 	private void Gravity() {
 		if (!grounded && !isJump) {
 			currentGravity += gravity * Time.fixedDeltaTime;
@@ -268,7 +264,7 @@ public class PlayerController : MonoBehaviour{
 		}
 	}
 
-	// Checks if the 
+	// Checks if the jumpInput key has been pressed and then starts the jump count and the first JumpEvent()
 	private void Jump() {
 		if(Input.GetButtonDown(jumpInput) && grounded && !isJump && !isCrouch){
 			isJump = true;
@@ -361,7 +357,17 @@ public class PlayerController : MonoBehaviour{
 	// Checks if the player presses the interact button
 	private void Interact() {
 		if(Input.GetButtonDown(interactInput)) {
-			Debug.Log("Interact button pressed");
+			// Debug.Log("Interact button pressed");
+
+			RaycastHit hit;
+			Ray forwardRay = new Ray(cameraObject.position, cameraObject.forward);
+
+			if(Physics.Raycast(forwardRay, out hit, 100)) {
+				Interactable interactable = hit.collider.GetComponent<Interactable>();
+				if (interactable != null) {
+					Debug.Log("Interactable");
+				}
+			}
 		}
 	}
 }

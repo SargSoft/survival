@@ -316,6 +316,7 @@ Assets
 |	+---Materials
 |	+---Models
 |	+---Textures
+|	+---UI
 +---Audio
 |	+---Music
 |	+---Sound

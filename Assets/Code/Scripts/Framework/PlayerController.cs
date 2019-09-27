@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour{
+public class PlayerController : PhysicsObject {
 
 	[Header("Input Manager")]
 	[SerializeField] private string mouseXInput;
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour{
 	}
 
 	private void Update() {
+		Test();
 		grounded = Grounded();
 		CameraRotation();
 		SimpleMove();

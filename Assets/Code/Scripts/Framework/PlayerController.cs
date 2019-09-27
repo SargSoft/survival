@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour{
  	[Header("Game Object")]
 	[SerializeField] private Transform cameraObject;
 	[SerializeField] private GameObject water;
+
+	[Header("Interact Options")]
+	[SerializeField] private float interactRange;
 	
 	// Private Variables
 	private Vector3 velocity;
@@ -362,10 +365,10 @@ public class PlayerController : MonoBehaviour{
 			RaycastHit hit;
 			Ray forwardRay = new Ray(cameraObject.position, cameraObject.forward);
 
-			if(Physics.Raycast(forwardRay, out hit, 100)) {
+			if(Physics.Raycast(forwardRay, out hit, interactRange)) {
 				Interactable interactable = hit.collider.GetComponent<Interactable>();
 				if (interactable != null) {
-					Debug.Log("Interactable");
+					// Debug.Log("Interactable");
 				}
 			}
 		}

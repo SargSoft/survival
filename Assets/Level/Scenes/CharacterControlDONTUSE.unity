@@ -250,6 +250,7 @@ MonoBehaviour:
   capsuleCol: {fileID: 35496118}
   cameraObject: {fileID: 1892781489}
   water: {fileID: 281359403}
+  interactRange: 4
 --- !u!135 &35496123
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -874,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276075289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -175.77122, y: 31.71, z: 80.6}
+  m_LocalPosition: {x: -175.77122, y: 32.479, z: 80.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

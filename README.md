@@ -515,6 +515,8 @@ Below is a breakdown of all of the aspects relating to the story, including all 
 - Tall plants in ocean, like trees, and dense like an underwater forest
 - Coral
 - Mining on land / island for mining?
+- Solar radiation limiting the time you can stay outside of a base on land, in the day time? - Reason that there is 'no life', but then at night things start to come out. Also explains why creatures are hidden away in the rainforest cave places (to avoid the solar radiation)
+- Above point is perhaps the reason you are forced into the water? Some sort of dialogue between you and your PA (personal assistant) e.g. 'Warning Solar Radiation levels are becomming increasingly dangerous, get out of direct sunlight immediately' - and some sort of counter? Naturally forces you to dive into the water
 
 ![SolarSystemDiagram](Assets/Docs/Readme/SolarSystemDiagram.png)
 

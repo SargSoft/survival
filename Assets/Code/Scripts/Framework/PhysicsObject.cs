@@ -44,4 +44,12 @@ public class PhysicsObject : MonoBehaviour {
 		float output = -Mathf.Pow(currentVelocity / (terminalVelocity * scaleCompensationConstant), 2f) + 1;
 		return output;
 	}
+
+	// Takes a float and floors it to a specified number of decimal places
+	public float FloatFloor(float number, float decimalPlaces) {
+		float output = number * Mathf.Pow(10f, decimalPlaces);
+		output = Mathf.Floor(output);
+		output = output / Mathf.Pow(10f, decimalPlaces);
+		return output;
+	}
 }

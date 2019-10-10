@@ -108,14 +108,6 @@ public class PlayerController : PhysicsObject {
 		}
 	}
 
-	// Takes a float and floors it to a specified number of decimal places
-	private float FloatFloor(float number, float decimalPlaces) {
-		float output = number * Mathf.Pow(10f, decimalPlaces);
-		output = Mathf.Floor(output);
-		output = output / Mathf.Pow(10f, decimalPlaces);
-		return output;
-	}
-
 	// Takes the mouseX and mouseY, clamps the X rotation, adds the mouseX and mouseY to the quaternions yRot and xRot, and then rotates the camera and object appropriately
 	private void CameraRotation() {
 		float mouseX = Input.GetAxis(mouseXInput) * mouseXSensitivity;
@@ -139,7 +131,7 @@ public class PlayerController : PhysicsObject {
 
 		if(grounded) {
 			velocity = ResetVelocity(velocity);
-			velocity += NormalizeVector(move);
+			velocity += Vector3.Normalize(move);
 		} else {
 			velocity.z += AirMoveVector(velocity.z, move.z, airControlPercentForward);
 			velocity.x += AirMoveVector(velocity.x, move.x, airControlPercentSideways);
@@ -157,44 +149,11 @@ public class PlayerController : PhysicsObject {
 		transform.position += vel * Time.fixedDeltaTime;
 	}
 
-	// Returns a normalized vector3 of the horizontal and vertical movement inputs
-	private Vector3 NormalizeVector(Vector3 input) {
-		return Vector3.Normalize(input);
-	}
-
 	// Returns a float that is the difference between the first two inputs multiplied by the third, which is a fraction. Used to reduce movement while not grounded.
 	private float AirMoveVector(float current, float proposed, float AirControl) {
 		float output = (proposed - current) * AirControl;
 		return output;
 	}
-
-	// Takes a float as the input, checks if it is above or below the upper or lower bounds, respectively, and then returns either the input or appropriate bound
-	private float NumberLimits(float input, float upper, float lower) {
-		if(input > upper) {
-			return upper;
-		} else if(input < lower) {
-			return lower;
-		} else {
-			return input;
-		}
-	}
-
-	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity, by taking the gravity off of the players velocity every tick
-	// private void Gravity() {
-	// 	if (!grounded && !isJump) {
-	// 		currentGravity += gravity * Time.fixedDeltaTime;
-
-	// 		if(currentGravity < terminalVelocity) {
-	// 			velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
-	// 		} else if(currentGravity > terminalVelocity) {
-	// 			currentGravity = terminalVelocity;
-	// 			velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
-	// 		}
-
-	// 	} else if(grounded) {
-	// 		currentGravity = 0;
-	// 	}
-	// }
 
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	private void StickToGround(float maxAngle) {

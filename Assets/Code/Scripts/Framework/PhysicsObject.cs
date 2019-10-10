@@ -52,4 +52,9 @@ public class PhysicsObject : MonoBehaviour {
 		output = output / Mathf.Pow(10f, decimalPlaces);
 		return output;
 	}
+
+	// Checks if the player camera is below the y position of the water surface plane
+	public bool IsUnderwater(Transform objectPosition , GameObject water) {
+		return objectPosition.transform.position.y < water.transform.position.y;
+	}
 }

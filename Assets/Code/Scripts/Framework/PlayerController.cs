@@ -280,23 +280,18 @@ public class PlayerController : PhysicsObject {
 
 	// Checks if the player is underwater, and was previously not in the water, and then puts the player in swimming mode
 	private void Swim() {
-		if(IsUnderwater() && !inWater) {
+		if(IsUnderwater(cameraObject, water) && !inWater) {
 			if(isCrouch) cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
 			isRun = false;
 			isCrouch = false;
 			inWater = true;
 			// charGravity = waterGravity; <- No Gravity underwater?
 			Debug.Log("Underwater");
-		} else if(!IsUnderwater() && inWater) {
+		} else if(!IsUnderwater(cameraObject, water) && inWater) {
 			inWater = false;
 			// charGravity = defaultGravity; <- No Gravity underwater?
 			Debug.Log("Above Water");
 		}
-	}
-
-	// Checks if the player camera is below the y position of the water surface plane
-	private bool IsUnderwater() {
-		return cameraObject.transform.position.y < water.transform.position.y;
 	}
 
 	// Checks if the difference between the camera position and water position is greater than the crouch movement, and thus prevents crouching below the water surface

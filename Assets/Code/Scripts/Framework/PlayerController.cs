@@ -35,12 +35,6 @@ public class PlayerController : PhysicsObject {
 	private float remainingJumpHeight;
 	private bool isJump;
 
-	[Header("Gravity")]
-	[SerializeField] private float gravity;
-	[SerializeField] private float terminalVelocity;
-	[SerializeField] private float gravityMultiplier;
-	private float currentGravity;
-
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludeGround;
  	[SerializeField] private LayerMask discludeObjects;
@@ -72,11 +66,10 @@ public class PlayerController : PhysicsObject {
 	}
 
 	private void Update() {
-		Test();
-		grounded = Grounded();
+		grounded = Grounded(transform.position, coll);
 		CameraRotation();
 		SimpleMove();
-		Gravity();
+		velocity.y = Gravity(velocity, grounded, isJump);
 		SteepCheck(maxSlopeAngle);
 		Swim();
 		Jump();
@@ -86,6 +79,11 @@ public class PlayerController : PhysicsObject {
 		FinalMove();
 		StickToGround(maxSlopeAngle);
 		CollisionCheck(discludeGround);
+	}
+
+	// Calls all over the methods related to the players physics in the correct order
+	private void PlayerPhysics() {
+		// Note to self: put all methods called from PhysicsObject class? e.g. Gravity, collision, grounded?
 	}
 
 	// Locks the cursor
@@ -140,10 +138,9 @@ public class PlayerController : PhysicsObject {
 		move = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
 
 		if(grounded) {
-			VelocityReset();
+			velocity = ResetVelocity(velocity);
 			velocity += NormalizeVector(move);
 		} else {
-			velocity.y = 0f;
 			velocity.z += AirMoveVector(velocity.z, move.z, airControlPercentForward);
 			velocity.x += AirMoveVector(velocity.x, move.x, airControlPercentSideways);
 		}
@@ -158,11 +155,6 @@ public class PlayerController : PhysicsObject {
 
 		vel = transform.TransformDirection(vel);
 		transform.position += vel * Time.fixedDeltaTime;
-	}
-
-	// Resets the velocity variable (used for controlling movement) to zero
-	private void VelocityReset() {
-		velocity = Vector3.zero;
 	}
 
 	// Returns a normalized vector3 of the horizontal and vertical movement inputs
@@ -188,26 +180,21 @@ public class PlayerController : PhysicsObject {
 	}
 
 	// Applies a downwards accelleration if they player is in the air until they reach the terminal velocity, by taking the gravity off of the players velocity every tick
-	private void Gravity() {
-		if (!grounded && !isJump) {
-			currentGravity += gravity * Time.fixedDeltaTime;
+	// private void Gravity() {
+	// 	if (!grounded && !isJump) {
+	// 		currentGravity += gravity * Time.fixedDeltaTime;
 
-			if(currentGravity < terminalVelocity) {
-				velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
-			} else if(currentGravity > terminalVelocity) {
-				currentGravity = terminalVelocity;
-				velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
-			}
+	// 		if(currentGravity < terminalVelocity) {
+	// 			velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
+	// 		} else if(currentGravity > terminalVelocity) {
+	// 			currentGravity = terminalVelocity;
+	// 			velocity.y -= currentGravity * Time.fixedDeltaTime * gravityMultiplier;
+	// 		}
 
-		} else if(grounded) {
-			currentGravity = 0;
-		}
-	}
-
-	// Uses a Raycast to check if the player is in contact with the ground and returns a boolean value
-	private bool Grounded() {
-		return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
-	}
+	// 	} else if(grounded) {
+	// 		currentGravity = 0;
+	// 	}
+	// }
 
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	private void StickToGround(float maxAngle) {
@@ -241,7 +228,7 @@ public class PlayerController : PhysicsObject {
 		if(Physics.Raycast(downRay, out hit)) {
 			
 			if(FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-				VelocityReset();
+				velocity = ResetVelocity(velocity);
 			}
 		}
 	}
@@ -284,7 +271,7 @@ public class PlayerController : PhysicsObject {
 	private void JumpEvent() {
 		if(jumpCount > 0) {
 			jumpCount -= 1.0f;
-			velocity.y += remainingJumpHeight / jumpTime;
+			velocity.y = remainingJumpHeight / jumpTime;
 			remainingJumpHeight -= remainingJumpHeight / jumpTime;
 		} else if(jumpCount == 0) {
 			isJump = false;

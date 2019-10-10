@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35496117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -160.47, y: 53.26, z: 46.5}
+  m_LocalPosition: {x: -160.47, y: 500, z: 46.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1892781489}
@@ -236,9 +236,6 @@ MonoBehaviour:
   jumpTime: 10
   airControlPercentForward: 0.05
   airControlPercentSideways: 0.05
-  gravity: 9.8
-  terminalVelocity: 50
-  gravityMultiplier: 20
   discludeGround:
     serializedVersion: 2
     m_Bits: 2359
@@ -875,7 +872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276075289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -175.77122, y: 32.479, z: 80.6}
+  m_LocalPosition: {x: -175.77122, y: 32.26, z: 80.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

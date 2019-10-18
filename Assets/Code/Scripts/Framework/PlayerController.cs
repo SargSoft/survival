@@ -36,8 +36,7 @@ public class PlayerController : PhysicsObject {
 	private bool isJump;
 
  	[Header("Physics")]
- 	[SerializeField] private LayerMask discludeGround;
- 	[SerializeField] private LayerMask discludeObjects;
+ 	[SerializeField] private LayerMask discludePlayer;
  	[SerializeField] private float maxSlopeAngle;
  	[SerializeField] private float slideMultiplier;
 
@@ -77,8 +76,11 @@ public class PlayerController : PhysicsObject {
 		Crouch();
 		Interact();
 		FinalMove();
+		Vector3 test;
+		// test = Collision(transform, IsUnderwater(cameraObject, water), isJump);
+		// transform.position = test;
 		StickToGround(maxSlopeAngle);
-		CollisionCheck(discludeGround);
+		CollisionCheckRename(discludePlayer);
 	}
 
 	// Calls all over the methods related to the players physics in the correct order
@@ -155,6 +157,15 @@ public class PlayerController : PhysicsObject {
 		return output;
 	}
 
+	// Checks if collision would effect the position of the object, and the transforms it if it would
+	private void CollisionCheck() {
+		// Vector3 propsedCollisionTransform = Collision();
+
+		// if(proposedCollisionTransform != transform.position) {
+		// 	transform.position = proposedCollisionTransform;
+		// }
+	}
+
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	private void StickToGround(float maxAngle) {
 		RaycastHit hit;
@@ -167,7 +178,7 @@ public class PlayerController : PhysicsObject {
 				// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
 				// slide += -Vector3.Cross(slideTemp, hit.normal);
 
-				CollisionCheck(discludeObjects);
+				CollisionCheckRename(discludePlayer);
 			}
 
 			// transform.position += slide * slideMultiplier;
@@ -193,7 +204,7 @@ public class PlayerController : PhysicsObject {
 	}
 
 	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
-	private void CollisionCheck(LayerMask disclude) {
+	private void CollisionCheckRename(LayerMask disclude) {
 		Collider[] overlaps = new Collider[4];
 		// Calculating top and bottom of capsule
 		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);

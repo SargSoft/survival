@@ -57,4 +57,23 @@ public class PhysicsObject : MonoBehaviour {
 	public bool IsUnderwater(Transform objectPosition , GameObject water) {
 		return objectPosition.transform.position.y < water.transform.position.y;
 	}
+
+	// Collision
+	public Vector3 Collision(Transform thisObject, bool inWater, bool isJump) {
+		Vector3 collisionTransformOutput = thisObject.transform.position;
+
+		if (!inWater) {
+			RaycastHit hit;
+			Ray downRay = new Ray((thisObject.transform.position + Vector3.up), Vector3.down);
+
+			if(Physics.Raycast(downRay, out hit)) {
+
+				if(hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
+					collisionTransformOutput = new Vector3 (thisObject.transform.position.x, transform.position.y + (2.0f - hit.distance), thisObject.transform.position.z);
+				}
+			}
+		}
+
+		return collisionTransformOutput;
+	}
 }

@@ -15,10 +15,10 @@ TagManager:
   - UI
   - 
   - 
-  - Character
   - Player
   - Ground
   - Object
+  - InteractableObject
   - 
   - 
   - 

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/MainMenu.unity
     guid: 8c073bc37d71aa8458a0277fe8139259
   - enabled: 1
-    path: Assets/Level/Scenes/CharacterControlDONTUSE.unity
+    path: Assets/Level/Scenes/CharacterControllerTestArea.unity
     guid: ab11751817952374c8cee9c6da2a0ffe
   - enabled: 1
     path: Assets/Level/Scenes/Main.unity

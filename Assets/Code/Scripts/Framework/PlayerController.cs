@@ -61,47 +61,40 @@ public class PlayerController : PlayerInputController {
 	private void Update() {
 		playerInputs = ReturnPlayerInputs();
 		grounded = Grounded(transform.position, coll);
+
 		CameraRotation();
 		SimpleMove();
-		velocity.y = Gravity(velocity, grounded, isJump);
-		SteepCheck(maxSlopeAngle);
-		Swim();
-		Jump();
-		Run();
-		Crouch();
-		Interact();
+		PlayerPhysics();
 		FinalMove();
-		// test = Collision(transform, IsUnderwater(cameraObject, water), isJump);
-		// transform.position = test;
-		StickToGround(maxSlopeAngle);
-		CollisionCheckRename(discludePlayer);
+		PlayerCollision();
+		Actions();
 	}
 
 	// Calls all over the methods related to the players physics in the correct order
 	private void PlayerPhysics() {
-		// Note to self: put all methods called from PhysicsObject class? e.g. Gravity, collision, grounded?
+		// Gravity, jump, run, crouch
+		velocity.y = SetSingleVelocity(velocity.y, Gravity(velocity, grounded, isJump));
+		// Swim();
+		// Jump();
+		// Run();
+		// Crouch();
+	}
+
+	private void PlayerCollision() {
+		// StickToGround, Collision
+		StickToGround(maxSlopeAngle);
+		CollisionCheckRename(discludePlayer);
+	}
+
+	private void Actions() {
+		// Interact and other actions (non physics related)
+		Interact();
 	}
 
 	// Locks the cursor
 	private void LockCursor() {
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
-	}
-
-	// Prevents the rotation exceeding the bounds, in this case 80 degrees up and down
-	private float ClampXRotation(float current, float rotation) {
-		if (current - rotation > 80f && current - rotation < 280f) {
-			if (rotation < 0f) {
-				return FloatFloor(current, 4) - 80f + 0.001f;
-			} else if (rotation > 0f) {
-				return FloatFloor(current, 4) - 280f - 0.001f;
-			} else {
-				Debug.Log("Error: Outside bounds without mouse movement");
-				return 0f;
-			}
-		} else {
-			return rotation;
-		}
 	}
 
 	// Takes the mouseX and mouseY, clamps the X rotation, adds the mouseX and mouseY to the quaternions yRot and xRot, and then rotates the camera and object appropriately
@@ -127,10 +120,10 @@ public class PlayerController : PlayerInputController {
 
 		if (grounded) {
 			velocity = ResetVelocity(velocity);
-			velocity += Vector3.Normalize(move);
+			velocity = AddVelocity(velocity, Vector3.Normalize(move));
 		} else {
-			velocity.z += AirMoveVector(velocity.z, move.z, airControlPercentForward);
-			velocity.x += AirMoveVector(velocity.x, move.x, airControlPercentSideways);
+			velocity.z = AddSingleVelocity(velocity.z, AirMoveVector(velocity.z, move.z, airControlPercentForward));
+			velocity.x = AddSingleVelocity(velocity.x, AirMoveVector(velocity.x, move.x, airControlPercentSideways));
 		}
 	}
 
@@ -151,74 +144,6 @@ public class PlayerController : PlayerInputController {
 		return output;
 	}
 
-	// Checks if collision would effect the position of the object, and the transforms it if it would
-	private void CollisionCheck() {
-		// Vector3 propsedCollisionTransform = Collision();
-
-		// if(proposedCollisionTransform != transform.position) {
-		// 	transform.position = proposedCollisionTransform;
-		// }
-	}
-
-	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
-	private void StickToGround(float maxAngle) {
-		RaycastHit hit;
-		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
-		Vector3 slide = new Vector3(0, 0, 0);
-
-		if (Physics.Raycast(downRay, out hit)) {
-			// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
-			if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-				// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
-				// slide += -Vector3.Cross(slideTemp, hit.normal);
-
-				CollisionCheckRename(discludePlayer);
-			}
-
-			// transform.position += slide * slideMultiplier;
-
-			// Checks if the player is within 2.1f of the top of the player, and if so transforms the players position so they on the ground surface
-			if (hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
-				transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
-			}
-		}
-	}
-
-	// Checks the angle of the ground below the players feet, and if its greater than the max angle prevents the player from moving
-	private void SteepCheck(float maxAngle) {
-		RaycastHit hit;
-		Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
-
-		if (Physics.Raycast(downRay, out hit)) {
-			
-			if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-				velocity = ResetVelocity(velocity);
-			}
-		}
-	}
-
-	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
-	private void CollisionCheckRename(LayerMask disclude) {
-		Collider[] overlaps = new Collider[4];
-		// Calculating top and bottom of capsule
-		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
-		Vector3 top = capsuleCenter + Vector3.up;
-		Vector3 bottom = capsuleCenter - Vector3.up;
-		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
-
-		for (int i = 0; i < num; i++) {
-
-			Transform t = overlaps [i].transform;
-			Vector3 dir;
-			float dist;
-
-			if (Physics.ComputePenetration(capsuleCol, transform.position, transform.rotation, overlaps[i], t.position, t.rotation, out dir, out dist)) {
-				Vector3 penetrationVector = dir * dist;
-				transform.position = transform.position + penetrationVector;
-			}
-		}
-	}
-
 	// Checks if the jumpInput key has been pressed and then starts the jump count and the first JumpEvent()
 	private void Jump() {
 		if (playerInputs.jump == keyState.Down && grounded && !isJump && !isCrouch){
@@ -235,7 +160,7 @@ public class PlayerController : PlayerInputController {
 	private void JumpEvent() {
 		if (jumpCount > 0) {
 			jumpCount -= 1.0f;
-			velocity.y = remainingJumpHeight / jumpTime;
+			velocity.y = SetSingleVelocity(velocity.y, remainingJumpHeight / jumpTime);
 			remainingJumpHeight -= remainingJumpHeight / jumpTime;
 		} else if (jumpCount == 0) {
 			isJump = false;

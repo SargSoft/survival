@@ -40,9 +40,6 @@ public class PlayerController : PlayerInputController {
  	[Header("Game Object")]
 	[SerializeField] private Transform cameraObject;
 	[SerializeField] private GameObject water;
-
-	[Header("Interact Options")]
-	[SerializeField] private float interactRange;
 	
 	// Private Variables
 	private Vector3 velocity;
@@ -67,7 +64,6 @@ public class PlayerController : PlayerInputController {
 		PlayerPhysics();
 		FinalMove();
 		PlayerCollision();
-		Actions();
 	}
 
 	// Calls all over the methods related to the players physics in the correct order
@@ -75,9 +71,9 @@ public class PlayerController : PlayerInputController {
 		// Gravity, jump, run, crouch
 		velocity.y = SetSingleVelocity(velocity.y, Gravity(velocity, grounded, isJump));
 		// Swim();
-		// Jump();
-		// Run();
-		// Crouch();
+		Jump();
+		Run();
+		Crouch();
 	}
 
 	private void PlayerCollision() {
@@ -87,11 +83,6 @@ public class PlayerController : PlayerInputController {
 			transform.position = yPosition;
 		}
 		// CollisionCheckRename(discludePlayer);
-	}
-
-	private void Actions() {
-		// Interact and other actions (non physics related)
-		Interact();
 	}
 
 	// Locks the cursor
@@ -230,22 +221,5 @@ public class PlayerController : PlayerInputController {
 	// Checks if the difference between the camera position and water position is greater than the crouch movement, and thus prevents crouching below the water surface
 	private bool CrouchWaterDistance() {
 		return cameraObject.transform.position.y - water.transform.position.y - 0.5 > crouchCameraMove;
-	}
-
-	// Checks if the player presses the interact button
-	private void Interact() {
-		if (playerInputs.interact == keyState.Down) {
-			// Debug.Log("Interact button pressed");
-
-			RaycastHit hit;
-			Ray forwardRay = new Ray(cameraObject.position, cameraObject.forward);
-
-			if (Physics.Raycast(forwardRay, out hit, interactRange)) {
-				Interactable interactable = hit.collider.GetComponent<Interactable>();
-				if (interactable != null) {
-					// Debug.Log("Interactable");
-				}
-			}
-		}
 	}
 }

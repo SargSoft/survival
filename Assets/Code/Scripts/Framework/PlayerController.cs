@@ -82,8 +82,11 @@ public class PlayerController : PlayerInputController {
 
 	private void PlayerCollision() {
 		// StickToGround, Collision
-		StickToGround(maxSlopeAngle);
-		CollisionCheckRename(discludePlayer);
+		Vector3 yPosition = StickToGround(transform.position, isJump, velocity.y);
+		if (yPosition != transform.position) {
+			transform.position = yPosition;
+		}
+		// CollisionCheckRename(discludePlayer);
 	}
 
 	private void Actions() {

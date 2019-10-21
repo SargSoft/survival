@@ -98,28 +98,39 @@ public class PhysicsObject : MonoBehaviour {
 	}
 
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
-	protected void StickToGround(float maxAngle) {
-		// RaycastHit hit;
-		// Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
-		// Vector3 slide = new Vector3(0, 0, 0);
+	protected Vector3 StickToGround(Vector3 origin, bool isJump, float downVel) {
+		RaycastHit hit;
+		Ray downRay = new Ray((origin + Vector3.up), Vector3.down);
+		Vector3 output = origin;
+		float downwardsVelocityCompensation = 1.7f + (downVel * 3.4f * Time.fixedDeltaTime);
 
-		// if (Physics.Raycast(downRay, out hit)) {
-		// 	// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
-		// 	if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-		// 		// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
-		// 		// slide += -Vector3.Cross(slideTemp, hit.normal);
+		if (Physics.Raycast(downRay, out hit)) {
+			// Checks if the player is within 2.1f of the top of the player, and if so transforms the players position so they on the ground surface
+			if (hit.distance >= downwardsVelocityCompensation && hit.distance <= 2.1f && !isJump) {
+				output = new Vector3(origin.x, origin.y + (2.0f - hit.distance), origin.z);
+			}
+		}
 
-		// 		CollisionCheckRename(discludePlayer);
-		// 	}
-
-		// 	// transform.position += slide * slideMultiplier;
-
-		// 	// Checks if the player is within 2.1f of the top of the player, and if so transforms the players position so they on the ground surface
-		// 	if (hit.distance >= 0f && hit.distance <= 2.1f && !isJump) {
-		// 		transform.position = new Vector3 (transform.position.x, transform.position.y + (2.0f - hit.distance), transform.position.z);
-		// 	}
-		// }
+		return output;
 	}
+
+	// protected void SlideOnSlope(Vector3 origin, float maxAngle) {
+	// 	RaycastHit hit;
+	// 	Ray downRay = new Ray((origin + Vector3.up), Vector3.down);
+	// 	Vector3 slide = new Vector3(0, 0, 0);
+
+	// 	if (Physics.Raycast(downRay, out hit)) {
+	// 		// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
+	// 		if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
+	// 			// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
+	// 			// slide += -Vector3.Cross(slideTemp, hit.normal);
+
+	// 			CollisionCheckRename(discludePlayer);
+	// 		}
+
+	// 		// transform.position += slide * slideMultiplier;
+	// 	}
+	// }
 
 	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
 	protected void CollisionCheckRename(LayerMask disclude) {

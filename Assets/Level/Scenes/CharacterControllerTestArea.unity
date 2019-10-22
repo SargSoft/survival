@@ -234,7 +234,7 @@ MonoBehaviour:
   discludePlayer:
     serializedVersion: 2
     m_Bits: 3639
-  maxSlopeAngle: 30
+  maxSlopeAngle: 45
   slideMultiplier: 0.5
   capsuleCol: {fileID: 35496118}
   bodyObject: {fileID: 35496121}

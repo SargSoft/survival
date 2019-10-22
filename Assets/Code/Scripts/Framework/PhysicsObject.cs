@@ -39,16 +39,17 @@ public class PhysicsObject : MonoBehaviour {
 	}
 
 	// Checks the angle of the ground below the players feet, and if its greater than the max angle prevents the player from moving
-	private void SteepCheck(float maxAngle) {
-		// RaycastHit hit;
-		// Ray downRay = new Ray((transform.position + Vector3.up), Vector3.down);
+	protected float SteepCheck(Transform objectPosition) {
+		float output = 0f;
+		RaycastHit hit;
+		Ray downRay = new Ray((objectPosition.transform.position + Vector3.up), Vector3.down);
 
-		// if (Physics.Raycast(downRay, out hit)) {
+		if (Physics.Raycast(downRay, out hit)) {
 			
-		// 	if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-		// 		velocity = ResetVelocity(velocity);
-		// 	}
-		// }
+			output = Vector3.Angle(hit.normal, Vector3.up);
+		}
+
+		return output;
 	}
 
 	// Returns a float that is the velocity.y of the object
@@ -133,13 +134,14 @@ public class PhysicsObject : MonoBehaviour {
 	// }
 
 	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
-	protected Vector3 Collision(LayerMask disclude, CapsuleCollider capsuleCol, Transform objectPosition) {
+	protected Vector3 Collision(LayerMask disclude, CapsuleCollider capsuleCol, Transform objectPosition, float steepness) {
 		Collider[] overlaps = new Collider[4];
 		Vector3 output = objectPosition.transform.position;
 		// Calculating top and bottom of capsule
 		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
 		Vector3 top = capsuleCenter + Vector3.up;
-		Vector3 bottom = capsuleCenter - Vector3.up;
+		Vector3 bottom = capsuleCenter - (Vector3.up * 0.5f) + (Vector3.up * steepness * (0.5f / 45f));
+		Debug.Log(Vector3.up - (Vector3.up * 0.5f) + (Vector3.up * steepness * (0.5f / 45f)));
 		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
 
 		for (int i = 0; i < num; i++) {

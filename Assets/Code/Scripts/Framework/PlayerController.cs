@@ -79,12 +79,14 @@ public class PlayerController : PlayerInputController {
 
 	private void PlayerCollision() {
 		// StickToGround, Collision
+
+		float steepness = SteepCheck(bodyObject);
 		Vector3 yPosition = StickToGround(transform.position, isJump, velocity.y);
 		if (yPosition != transform.position) {
 			transform.position = yPosition;
 		}
-		
-		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject);
+
+		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject, steepness);
 		if (collPosition != transform.position) {
 			transform.position = collPosition;
 		}

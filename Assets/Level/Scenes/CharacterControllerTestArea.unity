@@ -237,6 +237,7 @@ MonoBehaviour:
   maxSlopeAngle: 30
   slideMultiplier: 0.5
   capsuleCol: {fileID: 35496118}
+  bodyObject: {fileID: 35496121}
   cameraObject: {fileID: 1892781489}
   water: {fileID: 281359403}
 --- !u!135 &35496123

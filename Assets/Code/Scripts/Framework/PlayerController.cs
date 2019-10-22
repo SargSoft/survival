@@ -38,6 +38,7 @@ public class PlayerController : PlayerInputController {
  	[SerializeField] private CapsuleCollider capsuleCol;
 
  	[Header("Game Object")]
+ 	[SerializeField] private Transform bodyObject;
 	[SerializeField] private Transform cameraObject;
 	[SerializeField] private GameObject water;
 	
@@ -82,7 +83,11 @@ public class PlayerController : PlayerInputController {
 		if (yPosition != transform.position) {
 			transform.position = yPosition;
 		}
-		// CollisionCheckRename(discludePlayer);
+		
+		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject);
+		if (collPosition != transform.position) {
+			transform.position = collPosition;
+		}
 	}
 
 	// Locks the cursor

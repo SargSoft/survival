@@ -133,24 +133,28 @@ public class PhysicsObject : MonoBehaviour {
 	// }
 
 	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
-	protected void CollisionCheckRename(LayerMask disclude) {
-		// Collider[] overlaps = new Collider[4];
-		// // Calculating top and bottom of capsule
-		// Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
-		// Vector3 top = capsuleCenter + Vector3.up;
-		// Vector3 bottom = capsuleCenter - Vector3.up;
-		// int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
+	protected Vector3 Collision(LayerMask disclude, CapsuleCollider capsuleCol, Transform objectPosition) {
+		Collider[] overlaps = new Collider[4];
+		Vector3 output = objectPosition.transform.position;
+		// Calculating top and bottom of capsule
+		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
+		Vector3 top = capsuleCenter + Vector3.up;
+		Vector3 bottom = capsuleCenter - Vector3.up;
+		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
 
-		// for (int i = 0; i < num; i++) {
+		for (int i = 0; i < num; i++) {
 
-		// 	Transform t = overlaps [i].transform;
-		// 	Vector3 dir;
-		// 	float dist;
+			Transform t = overlaps [i].transform;
+			Vector3 dir;
+			float dist;
 
-		// 	if (Physics.ComputePenetration(capsuleCol, transform.position, transform.rotation, overlaps[i], t.position, t.rotation, out dir, out dist)) {
-		// 		Vector3 penetrationVector = dir * dist;
-		// 		transform.position = transform.position + penetrationVector;
-		// 	}
-		// }
+			if (Physics.ComputePenetration(capsuleCol, objectPosition.transform.position, objectPosition.transform.rotation, overlaps[i], t.position, t.rotation, out dir, out dist)) {
+				Vector3 penetrationVector = dir * dist;
+				output += penetrationVector;
+			}
+		}
+
+		return output;
+
 	}
 }

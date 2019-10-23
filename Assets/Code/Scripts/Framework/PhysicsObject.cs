@@ -35,7 +35,7 @@ public class PhysicsObject : MonoBehaviour {
 
 	// Uses a Raycast to check if the object is in contact with the ground and returns a boolean value
 	protected bool Grounded(Vector3 origin, Collider objectCollider) {
-		return Physics.Raycast(origin, Vector3.down, objectCollider.bounds.extents.y + 0.1f);
+		return Physics.Raycast(origin, Vector3.down, objectCollider.bounds.extents.y + 0.25f);
 	}
 
 	// Checks the angle of the ground below the players feet, and if its greater than the max angle prevents the player from moving
@@ -139,9 +139,9 @@ public class PhysicsObject : MonoBehaviour {
 		Vector3 output = objectPosition.transform.position;
 		// Calculating top and bottom of capsule
 		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
-		Vector3 top = capsuleCenter + Vector3.up;
-		Vector3 bottom = capsuleCenter - (Vector3.up * 0.5f) + (Vector3.up * steepness * (0.5f / 45f));
-		Debug.Log(Vector3.up - (Vector3.up * 0.5f) + (Vector3.up * steepness * (0.5f / 45f)));
+		Vector3 top = capsuleCenter + (Vector3.up * 0.925f);
+		Vector3 bottom = capsuleCenter - (Vector3.up * 0.925f);
+		// Debug.Log(Vector3.up - (Vector3.up * 0.4f));
 		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
 
 		for (int i = 0; i < num; i++) {

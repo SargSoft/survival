@@ -47,18 +47,16 @@ public class PlayerController : PlayerInputController {
 	private Vector3 move;
 	private Vector3 vel;
 	private bool grounded;
-	private Collider coll;
 
 
 	private void Awake() {
 		LockCursor();
-		coll = GetComponent<Collider> ();
 		isJump = false;
 	}
 
 	private void Update() {
 		playerInputs = ReturnPlayerInputs();
-		grounded = Grounded(transform.position, coll);
+		grounded = Grounded(transform.position, capsuleCol);
 
 		CameraRotation();
 		SimpleMove();
@@ -85,6 +83,8 @@ public class PlayerController : PlayerInputController {
 		if (yPosition != transform.position) {
 			transform.position = yPosition;
 		}
+
+		// Debug.Log(SteepCheck(bodyObject));
 
 		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject, steepness);
 		if (collPosition != transform.position) {

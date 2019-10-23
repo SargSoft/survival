@@ -53,6 +53,15 @@ public class PhysicsObject : MonoBehaviour {
 		return output;
 	}
 
+	// Returns boolean value depending whether SteepCheck returns a value greater than maxSlope
+	protected bool IsSteep(float steepness, float maxSlope) {
+		if (steepness > maxSlope) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	// Returns a float that is the velocity.y of the object
 	protected float Gravity(Vector3 velocity, bool grounded, bool isJump) {
 		if (!grounded && !isJump) {

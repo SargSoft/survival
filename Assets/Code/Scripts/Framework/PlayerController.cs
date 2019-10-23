@@ -34,6 +34,7 @@ public class PlayerController : PlayerInputController {
  	[SerializeField] private float maxSlopeAngle;
  	[SerializeField] private bool slideOnSlope;
  	[SerializeField] private float slideMultiplier;
+ 	private bool isSteep;
 
  	[Header("References")]
  	[SerializeField] private CapsuleCollider capsuleCol;
@@ -60,6 +61,7 @@ public class PlayerController : PlayerInputController {
 		playerInputs = ReturnPlayerInputs();
 		grounded = Grounded(transform.position, capsuleCol);
 		initialPosition = transform.position;
+		isSteep = IsSteep(SteepCheck(bodyObject), maxSlopeAngle);
 
 		CameraRotation();
 		SimpleMove();
@@ -148,6 +150,10 @@ public class PlayerController : PlayerInputController {
 		float runSpeed = RunSpeed();
 		float speedMult = SpeedMult();
 
+		if (isSteep) {
+			velocity = SetVelocity(velocity, new Vector3 (0, velocity.y, 0));
+		}
+
 		Vector3 vel = new Vector3(velocity.x * speedMult, velocity.y, velocity.z * runSpeed * speedMult) * baseMoveSpeed;
 
 		vel = transform.TransformDirection(vel);
@@ -162,7 +168,7 @@ public class PlayerController : PlayerInputController {
 
 	// Checks if the jumpInput key has been pressed and then starts the jump count and the first JumpEvent()
 	private void Jump() {
-		if (playerInputs.jump == keyState.Down && grounded && !isJump && !isCrouch){
+		if (playerInputs.jump == keyState.Down && grounded && !isJump && !isCrouch && !isSteep){
 			isJump = true;
 			jumpCount = jumpTime + 1f;
 			remainingJumpHeight = jumpHeight;
@@ -185,7 +191,7 @@ public class PlayerController : PlayerInputController {
 
 	// When the run input is pressed down or released, the moveSpeed variables is assigned the value of runMoveSpeeed or walkMoveSpeed, respectively
 	private void Run() {
-		if (playerInputs.run == keyState.Down && !isCrouch && !inWater && grounded) {
+		if (playerInputs.run == keyState.Down && !isCrouch && !inWater && grounded && !isSteep) {
 			isRun = true;
 		} else if (playerInputs.run == keyState.Up && !isCrouch && !inWater) {
 			isRun = false;
@@ -194,7 +200,7 @@ public class PlayerController : PlayerInputController {
 
 	// When the crouch input is pressed down or released the camera is transformed appropriately, and isCrouch is assigned a boolean value
 	private void Crouch() {
-		if (playerInputs.crouch == keyState.Down && !isRun && !inWater && CrouchWaterDistance()){
+		if (playerInputs.crouch == keyState.Down && !isRun && !inWater && CrouchWaterDistance() && !isSteep){
 			cameraObject.transform.Translate(Vector3.down * crouchCameraMove, Space.World);
 			isCrouch = true;
 

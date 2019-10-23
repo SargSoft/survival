@@ -101,7 +101,7 @@ public class PhysicsObject : MonoBehaviour {
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	protected Vector3 StickToGround(Vector3 origin, bool isJump, float downVel) {
 		RaycastHit hit;
-		Ray downRay = new Ray((origin + Vector3.up), Vector3.down);
+		Ray downRay = new Ray((origin + (Vector3.up * 0.925f)), Vector3.down);
 		Vector3 output = origin;
 		float downwardsVelocityCompensation = 1.7f + (downVel * 3.4f * Time.fixedDeltaTime);
 

@@ -157,4 +157,44 @@ public class PhysicsObject : MonoBehaviour {
 
 		return output;
 	}
+
+	//
+	protected Vector3 SlopeLimit(Vector3 initialPosition, Transform objectPosition, CapsuleCollider capsuleCol) {
+		RaycastHit hit;
+		Ray downRay = new Ray((objectPosition.transform.position + (Vector3.up * capsuleSizeCompensation)), Vector3.down);
+		Vector3 output = objectPosition.transform.position;
+		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
+		Vector3 top = capsuleCenter + (Vector3.up * capsuleSizeCompensation);
+		Vector3 bottom = capsuleCenter - (Vector3.up * capsuleSizeCompensation);
+
+		if (Physics.Raycast(downRay, out hit)) {
+			
+			Vector3 n = hit.normal;
+			float a = Vector3.Angle(n, Vector3.up);
+
+			Vector3 absoluteMoveDirection = Math3d.ProjectVectorOnPlane(n, objectPosition.transform.position - initialPosition);
+
+			// Retrieve a vector pointing down the slope
+			Vector3 r = Vector3.Cross(n, Vector3.down);
+			Vector3 v = Vector3.Cross(r, n);
+
+			float angle = Vector3.Angle(absoluteMoveDirection, v);
+
+			// Calculate where to place the controller on the slope, or at the bottom, based on the desired movement distance
+			Vector3 resolvedPosition = Math3d.ProjectPointOnLine(initialPosition, r, objectPosition.transform.position);
+			Vector3 direction = Math3d.ProjectVectorOnPlane(n, resolvedPosition - objectPosition.transform.position);
+
+			RaycastHit hit2;
+
+			// Check if our path to our resolved position is blocked by any colliders
+			if (Physics.CapsuleCast(top, bottom, capsuleCol.radius, direction.normalized, out hit2, direction.magnitude)) {
+				output += v.normalized * hit2.distance;
+			} else {
+				output += direction;
+			}
+		}
+
+		return output;
+
+	}
 }

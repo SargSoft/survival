@@ -48,6 +48,7 @@ public class PlayerController : PlayerInputController {
 	private Vector3 move;
 	private Vector3 vel;
 	private bool grounded;
+	private Vector3 initialPosition;
 
 
 	private void Awake() {
@@ -58,6 +59,7 @@ public class PlayerController : PlayerInputController {
 	private void Update() {
 		playerInputs = ReturnPlayerInputs();
 		grounded = Grounded(transform.position, capsuleCol);
+		initialPosition = transform.position;
 
 		CameraRotation();
 		SimpleMove();
@@ -77,16 +79,16 @@ public class PlayerController : PlayerInputController {
 	}
 
 	private void PlayerCollision() {
-		// StickToGround, Collision
-
+		
 		float steepness = SteepCheck(bodyObject);
+
+		// StickToGround
 		Vector3 yPosition = StickToGround(transform.position, isJump, velocity.y);
 		if (yPosition != transform.position) {
 			transform.position = yPosition;
 		}
 
-		// Debug.Log(SteepCheck(bodyObject));
-
+		// Collision
 		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject, steepness);
 		if (collPosition != transform.position) {
 			transform.position = collPosition;
@@ -97,6 +99,11 @@ public class PlayerController : PlayerInputController {
 			if (slidePosition != transform.position) {
 				transform.position = slidePosition;
 			}
+		}
+
+		// SlopeLimit
+		if (steepness > maxSlopeAngle) {
+			SlopeLimit(initialPosition, bodyObject, capsuleCol);
 		}
 	}
 

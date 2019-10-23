@@ -7,6 +7,7 @@ public class PhysicsObject : MonoBehaviour {
 	private float gravity = -9.81f;
 	private float terminalVelocity = -50f;
 	private float scaleCompensationConstant = 0.5f; // Compensating for scale to make it feel accurate
+	private float capsuleSizeCompensation = 0.925f; // Compensates for the face the collider is smaller to fix sliding on slopes issues
 	
 	// Adds the new force to the Velocity and returns a Vector3
 	protected Vector3 AddVelocity(Vector3 velocity, Vector3 force) {
@@ -101,7 +102,7 @@ public class PhysicsObject : MonoBehaviour {
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle
 	protected Vector3 StickToGround(Vector3 origin, bool isJump, float downVel) {
 		RaycastHit hit;
-		Ray downRay = new Ray((origin + (Vector3.up * 0.925f)), Vector3.down);
+		Ray downRay = new Ray((origin + (Vector3.up * capsuleSizeCompensation)), Vector3.down);
 		Vector3 output = origin;
 		float downwardsVelocityCompensation = 1.7f + (downVel * 3.4f * Time.fixedDeltaTime);
 
@@ -115,23 +116,22 @@ public class PhysicsObject : MonoBehaviour {
 		return output;
 	}
 
-	// protected void SlideOnSlope(Vector3 origin, float maxAngle) {
-	// 	RaycastHit hit;
-	// 	Ray downRay = new Ray((origin + Vector3.up), Vector3.down);
-	// 	Vector3 slide = new Vector3(0, 0, 0);
+	protected Vector3 SlideOnSlope(Vector3 origin, float maxAngle, bool grounded, float slideMultiplier) {
+		RaycastHit hit;
+		Ray downRay = new Ray((origin + (Vector3.up * capsuleSizeCompensation)), Vector3.down);
+		Vector3 output = origin;
 
-	// 	if (Physics.Raycast(downRay, out hit)) {
-	// 		// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
-	// 		if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
-	// 			// Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
-	// 			// slide += -Vector3.Cross(slideTemp, hit.normal);
+		if (Physics.Raycast(downRay, out hit)) {
+			// Uses RaycastHit to determine if the angle of the floor is greater than the maxAngle, and if so slides the player down the hill
+			if (FloatFloor(Vector3.Angle(hit.normal, Vector3.up), 2f) >= maxAngle && grounded) {
+				Vector3 slideTemp = Vector3.Cross(hit.normal, Vector3.up);
+				output += -Vector3.Cross(slideTemp, hit.normal) * slideMultiplier;
 
-	// 			CollisionCheckRename(discludePlayer);
-	// 		}
+			}
+		}
 
-	// 		// transform.position += slide * slideMultiplier;
-	// 	}
-	// }
+		return output;
+	}
 
 	// Checks for object collisions using a shperecast, computes the penetration, and then pushes the player back
 	protected Vector3 Collision(LayerMask disclude, CapsuleCollider capsuleCol, Transform objectPosition, float steepness) {
@@ -139,9 +139,8 @@ public class PhysicsObject : MonoBehaviour {
 		Vector3 output = objectPosition.transform.position;
 		// Calculating top and bottom of capsule
 		Vector3 capsuleCenter = transform.TransformPoint(capsuleCol.center);
-		Vector3 top = capsuleCenter + (Vector3.up * 0.925f);
-		Vector3 bottom = capsuleCenter - (Vector3.up * 0.925f);
-		// Debug.Log(Vector3.up - (Vector3.up * 0.4f));
+		Vector3 top = capsuleCenter + (Vector3.up * capsuleSizeCompensation);
+		Vector3 bottom = capsuleCenter - (Vector3.up * capsuleSizeCompensation);
 		int num = Physics.OverlapCapsuleNonAlloc(top, bottom, capsuleCol.radius, overlaps, disclude, QueryTriggerInteraction.UseGlobal);
 
 		for (int i = 0; i < num; i++) {
@@ -157,6 +156,5 @@ public class PhysicsObject : MonoBehaviour {
 		}
 
 		return output;
-
 	}
 }

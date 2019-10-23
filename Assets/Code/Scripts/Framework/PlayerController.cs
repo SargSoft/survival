@@ -32,6 +32,7 @@ public class PlayerController : PlayerInputController {
  	[Header("Physics")]
  	[SerializeField] private LayerMask discludePlayer;
  	[SerializeField] private float maxSlopeAngle;
+ 	[SerializeField] private bool slideOnSlope;
  	[SerializeField] private float slideMultiplier;
 
  	[Header("References")]
@@ -89,6 +90,13 @@ public class PlayerController : PlayerInputController {
 		Vector3 collPosition = Collision(discludePlayer, capsuleCol, bodyObject, steepness);
 		if (collPosition != transform.position) {
 			transform.position = collPosition;
+		}
+
+		if (slideOnSlope) {
+			Vector3 slidePosition = SlideOnSlope(transform.position, maxSlopeAngle, grounded, slideMultiplier);
+			if (slidePosition != transform.position) {
+				transform.position = slidePosition;
+			}
 		}
 	}
 

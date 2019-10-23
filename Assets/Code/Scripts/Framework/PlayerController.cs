@@ -188,11 +188,11 @@ public class PlayerController : PlayerInputController {
 	// When the crouch input is pressed down or released the camera is transformed appropriately, and isCrouch is assigned a boolean value
 	private void Crouch() {
 		if (playerInputs.crouch == keyState.Down && !isRun && !inWater && CrouchWaterDistance()){
-			cameraObject.transform.Translate(Vector3.down * crouchCameraMove);
+			cameraObject.transform.Translate(Vector3.down * crouchCameraMove, Space.World);
 			isCrouch = true;
 
 		} else if (playerInputs.crouch == keyState.Up && !isRun && !inWater && isCrouch) {
-			cameraObject.transform.Translate(Vector3.up * crouchCameraMove);
+			cameraObject.transform.Translate(Vector3.up * crouchCameraMove, Space.World);
 			isCrouch = false;
 		}
 	}

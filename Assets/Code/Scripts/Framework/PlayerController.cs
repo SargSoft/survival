@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : PlayerInputController {
 
 	private PlayerInputs playerInputs;
+	private movementState currentPlayerState;
+	private movementState previousPlayerState;
 
 	[Header("Mouse Settings")]
 	[SerializeField] private float mouseYSensitivity;
@@ -55,6 +57,8 @@ public class PlayerController : PlayerInputController {
 	private void Awake() {
 		LockCursor();
 		isJump = false;
+		currentPlayerState = movementState.Walk;
+		previousPlayerState = movementState.Walk;
 	}
 
 	private void Update() {
@@ -62,6 +66,12 @@ public class PlayerController : PlayerInputController {
 		grounded = Grounded(transform.position, capsuleCol);
 		initialPosition = transform.position;
 		isSteep = IsSteep(SteepCheck(bodyObject), maxSlopeAngle);
+
+		currentPlayerState = StateCheck(bodyObject, water);
+		if (previousPlayerState != currentPlayerState) {
+			Debug.Log(currentPlayerState);
+		}
+		previousPlayerState = currentPlayerState;
 
 		CameraRotation();
 		SimpleMove();

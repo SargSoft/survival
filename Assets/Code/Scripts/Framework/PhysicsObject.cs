@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour {
 
+	protected enum movementState {Walk, Wade, Swim, Dive};
+
 	private float gravity = -9.81f;
 	private float terminalVelocity = -50f;
 	private float scaleCompensationConstant = 0.5f; // Compensating for scale to make it feel accurate
@@ -106,6 +108,25 @@ public class PhysicsObject : MonoBehaviour {
 	// Checks if the player camera is below the y position of the water surface plane
 	protected bool IsUnderwater(Transform objectPosition , GameObject water) {
 		return objectPosition.transform.position.y < water.transform.position.y;
+	}
+
+	// Checks and returns the players state (Walking, Wading, Swimming, Diving)
+	protected movementState StateCheck(Transform objectPosition, GameObject water) {
+		float objectYPosition = objectPosition.transform.position.y;
+		float waterYPosition = water.transform.position.y;
+		movementState output = movementState.Walk;
+
+		if (objectYPosition - 1.0f >= waterYPosition) {
+			output = movementState.Walk;
+		} else if (objectYPosition > waterYPosition) {
+			output = movementState.Wade;
+		} else if (objectYPosition + 1.0 >= waterYPosition) {
+			output = movementState.Swim;
+		} else if (objectYPosition + 1.0f < waterYPosition) {
+			output = movementState.Dive;
+		}
+
+		return output;
 	}
 
 	// Uses a Raycast to adjust the players height to make it stick to the ground (when going up and down slopes especially), and also makes the player slide down slopes over a certain angle

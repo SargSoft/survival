@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boidPrefab: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
     type: 3}
-  moveSpeed: 0.2
+  moveSpeed: 0.1
   shoalSize: 20
   spawnRadius: 15
+  boidInteractionRadius: 10

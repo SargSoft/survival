@@ -9,10 +9,12 @@ public class Shoal : MonoBehaviour {
 	[SerializeField] float moveSpeed;
 	[SerializeField] int shoalSize;
 	[SerializeField] float spawnRadius;
+	[SerializeField] float boidInteractionRadius;
 	private float height = 28.86751f;
 	private float width = 56.48201f;
 
 	private GameObject[] boidsArray;
+
 
 	void Start() {
 		// Debug.Log("Height: " + (2.0f * 25f * Mathf.Tan(60f * 0.5f * Mathf.Deg2Rad)));
@@ -35,6 +37,13 @@ public class Shoal : MonoBehaviour {
 
 		for (int i = 0; i < shoalSize; i++) {
 			GameObject boid = boidsArray[i];
+
+			Quaternion tempRotation = SteeringBehaviours(boid.transform.position);
+
+			if (tempRotation != Quaternion.Euler(Vector3.zero)) {
+				boid.transform.rotation = tempRotation;
+			}
+
 			boid.transform.position += boid.transform.up * moveSpeed;
 
 			ScreenWrap(boid);
@@ -67,5 +76,57 @@ public class Shoal : MonoBehaviour {
 		if (boid.transform.position.x != checkX) {
 			boid.transform.position = new Vector3 (checkX, boid.transform.position.y, boid.transform.position.z);
 		}
+	}
+
+	private Quaternion SteeringBehaviours(Vector3 currentBoidPosition) {
+		List<Vector3> boidPositionsList = new List<Vector3>();
+		Quaternion output = Quaternion.Euler(Vector3.zero);
+
+		for (int i = 0; i < shoalSize; i++) {
+			GameObject tempBoid = boidsArray[i];
+			float boidDist = Vector3.Distance(currentBoidPosition, tempBoid.transform.position);
+
+			if(boidDist < boidInteractionRadius && boidDist != 0.0f) {
+				boidPositionsList.Add(tempBoid.transform.position);
+			}
+		}
+
+		if (boidPositionsList.Count != 0) {
+			output = Cohesion(currentBoidPosition, boidPositionsList);
+			output = Alignment(currentBoidPosition, boidPositionsList);
+			output = Separation(currentBoidPosition, boidPositionsList);
+		}
+
+		return output;
+	}
+
+	private Quaternion Separation(Vector3 currentBoidPosition, List<Vector3> boidPositionsList) {
+		Quaternion output = Quaternion.Euler(Vector3.zero);
+
+		return output;
+	}
+
+	private Quaternion Alignment(Vector3 currentBoidPosition, List<Vector3> boidPositionsList) {
+		Quaternion output = Quaternion.Euler(Vector3.zero);
+
+		return output;
+	}
+
+	private Quaternion Cohesion(Vector3 currentBoidPosition, List<Vector3> boidPositionsList) {
+		Quaternion output = Quaternion.Euler(Vector3.zero);
+
+		Vector3 sum = Vector3.zero;
+		float i = 0.0f;
+
+		foreach(Vector3 tempBoidPosition in boidPositionsList) {
+			i++;
+			sum += tempBoidPosition;
+		}
+
+		sum = sum / i;
+
+		Quaternion.LookRotation(sum);
+
+		return output;
 	}
 }

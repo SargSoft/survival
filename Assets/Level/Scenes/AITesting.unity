@@ -361,3 +361,4 @@ MonoBehaviour:
   shoalSize: 20
   spawnRadius: 15
   boidInteractionRadius: 10
+  boidFOV: 140

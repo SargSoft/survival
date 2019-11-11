@@ -25,12 +25,10 @@ public class Boid : MonoBehaviour {
 	public int numPerceivedFlockmates;
 
 	// Cached
-	Material material;
 	Transform cachedTransform;
 	Transform target;
 
 	void Awake () {
-		material = transform.GetComponentInChildren<MeshRenderer> ().material;
 		cachedTransform = transform;
 	}
 
@@ -43,12 +41,6 @@ public class Boid : MonoBehaviour {
 
 		float startSpeed = (settings.minSpeed + settings.maxSpeed) / 2;
 		velocity = transform.forward * startSpeed;
-	}
-
-	public void SetColour (Color col) {
-		if (material != null) {
-			material.color = col;
-		}
 	}
 
 	public void UpdateBoid () {
@@ -95,8 +87,9 @@ public class Boid : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast (position, settings.boundsRadius, forward, out hit, settings.collisionAvoidDst, settings.obstacleMask)) {
 			return true;
-		} else { }
+		} else {
 		return false;
+		}
 	}
 
 	Vector3 ObstacleRays () {

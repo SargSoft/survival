@@ -7,8 +7,8 @@ public class BoidSettings : ScriptableObject {
 	// Settings
 	public float minSpeed = 2;
 	public float maxSpeed = 5;
-	public float perceptionRadius = 2.5f;
-	public float avoidanceRadius = 2;
+	public float perceptionRadius = 7.5f;
+	public float avoidanceRadius = 5;
 	public float maxSteerForce = 3;
 
 	public float alignWeight = 1;

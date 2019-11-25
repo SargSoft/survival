@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 49.978, y: -27.730001, z: 1.7390001}
 --- !u!1 &226233087
 GameObject:
@@ -196,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &226233088
 Transform:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785519698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 500, y: 150, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -459,10 +459,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0eb08283ff8e94d9870b93441fd7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  biomeRadius: 500
+  clusterSpawnCount: 10
+  radiusAroundCluster: 50
+  clusterRadius: 10
+  radiusAroundFlora: 5
+  floraSpawnCount: 10
   prefab: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7, type: 3}
-  spawnRadius: 30
-  radiusAroundObject: 5
-  spawnCount: 20
   attemptsBeforeRejection: 30
 --- !u!1 &892684076
 GameObject:
@@ -730,7 +733,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2084856755
 GameObject:
@@ -916,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 5304354603988548528, guid: 5c60018aaf8d76648b388f9066c05550,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5304354603988548528, guid: 5c60018aaf8d76648b388f9066c05550,
         type: 3}

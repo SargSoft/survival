@@ -44,6 +44,22 @@ public class Spawner : MonoBehaviour {
 		return outputPositions;
 	}
 
+	protected void InstatiateObjects(GameObject prefab, GameObject parentObject, int count, Vector3[] positionsList) {
+		for (int i = 0; i < count; i++) {
+			Vector3 pos = positionsList[i];
+
+			if (pos != parentObject.transform.position) {
+				RaycastHit hit;
+				Ray downRay = new Ray(pos, Vector3.down);
+
+				if (Physics.Raycast(downRay, out hit)) {
+					pos += Vector3.down * hit.distance;
+				}
+
+				Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
+			}
+		}
+	}
 	protected Vector2 randomVector2insideSquare() {
 		float outX = Random.Range(-1.0f, 1.0f);
 		float outY = Random.Range(-1.0f, 1.0f);

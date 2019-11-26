@@ -461,10 +461,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   biomeRadius: 500
   clusterSpawnCount: 25
-  radiusAroundCluster: 50
+  radiusAroundCluster: 10
   clusterRadius: 80
   radiusAroundFlora: 5
-  floraSpawnCount: 20
+  floraSpawnCount: 50
   prefab: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7, type: 3}
   attemptsBeforeRejection: 30
 --- !u!1 &892684076

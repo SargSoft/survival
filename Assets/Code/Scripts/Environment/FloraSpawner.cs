@@ -30,9 +30,12 @@ public class FloraSpawner : Spawner {
         clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
 
         for (int i = 0; i < clusterSpawnCount; i++) {
-            floraPositions[i] = GeneratePositions(clusterPositions[i], clusterRadius, floraSeparationDistance, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);
 
-            InstatiateObjects(prefab, this.gameObject, clusterPositions[i], floraSpawnCount, floraPositions[i]);
+            if (clusterPositions[i] != transform.position) {
+                floraPositions[i] = GeneratePositions(clusterPositions[i], clusterRadius, floraSeparationDistance, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);
+
+                InstatiateObjects(prefab, this.gameObject, clusterPositions[i], floraSpawnCount, floraPositions[i]);
+            }
         }
 	}
 

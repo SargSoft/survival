@@ -23,8 +23,16 @@ public class FloraSpawner : Spawner {
 
             if (clusterPositions[i] != transform.position) {
                 floraPositions[i] = GeneratePositions(clusterPositions[i], biomeSettings.clusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
+                float depth = waterDepth(clusterPositions[i], 118.1f);
+                GameObject flora;
 
-                InstatiateObjects(biomeSettings.shallowFlora, this.gameObject, clusterPositions[i], biomeSettings.floraSpawnCount, floraPositions[i]);
+                if (depth < 20.0f) {
+                    flora = biomeSettings.shallowFlora;
+                } else {
+                    flora = biomeSettings.deepFlora;
+                }
+
+                InstatiateObjects(flora, this.gameObject, clusterPositions[i], biomeSettings.floraSpawnCount, floraPositions[i]);
             }
         }
 	}

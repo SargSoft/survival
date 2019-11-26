@@ -69,6 +69,19 @@ public class Spawner : MonoBehaviour {
 	protected Vector2 randomVector2insideCircle() {
 		return Random.insideUnitCircle;
 	}
+
+	protected float waterDepth(Vector3 inputPosition, float heightAboveWater) {
+		float output = 0.0f;
+
+		RaycastHit hit;
+		Ray downRay = new Ray(inputPosition, Vector3.down);
+
+		if (Physics.Raycast(downRay, out hit)) {
+			output = (hit.distance - heightAboveWater);
+			
+		}
+		return output;
+	}
 	protected void DrawGizmos(Vector3 objectPosition, float spawnRadius) {
 		Gizmos.color = new Color(1.0f, 0, 0, 0.5f);
 		Gizmos.DrawSphere(objectPosition, spawnRadius);

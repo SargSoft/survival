@@ -25,8 +25,9 @@ public class FloraSpawner : Spawner {
         floraPositions = new Vector3[clusterSpawnCount][];
         float clusterSeparationDistance = (radiusAroundCluster + (clusterRadius * 2.0f));
         float floraSeparationDistance = (radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
+        float clusterSpawningRadius = biomeRadius - clusterRadius;
 
-        clusterPositions = GeneratePositions(transform.position, biomeRadius, clusterSeparationDistance, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
+        clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
 
         for (int i = 0; i < clusterSpawnCount; i++) {
             floraPositions[i] = GeneratePositions(clusterPositions[i], clusterRadius, floraSeparationDistance, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);

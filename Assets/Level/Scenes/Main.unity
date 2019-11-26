@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeRadius: 500
-  clusterSpawnCount: 15
+  clusterSpawnCount: 25
   radiusAroundCluster: 50
   clusterRadius: 80
   radiusAroundFlora: 5

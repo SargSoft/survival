@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour {
 			
 			while (attemptsLeft > 0) {
 				bool viablePosition = true;
-				Vector2 tempPosA = randomNumberMethod() * spawnRadius;
+				Vector2 tempPosA = (randomNumberMethod() * spawnRadius);
 				
 				for (int indexB = 0; indexB < i; indexB++) {
 					Vector2 tempPosB = proposedPositions[indexB];

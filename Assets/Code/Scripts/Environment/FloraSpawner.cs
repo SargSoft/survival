@@ -16,20 +16,23 @@ public class FloraSpawner : Spawner {
     [SerializeField] private GameObject prefab;
     [SerializeField] private int attemptsBeforeRejection = 30;
 
-    private Vector3[] plantPositions;
+    private Vector3[] clusterPositions;
+    private Vector3[][] floraPositions;
     private SpawnerSettings objectSettings;
-    private float objectDiameter;
-	private float objectSeparation;
 
     void Awake() {
-		// objectSettings = prefab.GetComponent<SpawnerSettings>();
-		// objectDiameter = (objectSettings.objectRadius * objectSettings.objectScale * 2.0f);
-		// objectSeparation = objectDiameter + radiusAroundFlora;
-		// plantPositions = GeneratePositions(clusterRadius, objectSeparation, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);
+		objectSettings = prefab.GetComponent<SpawnerSettings>();
+        floraPositions = new Vector3[clusterSpawnCount][];
+        float clusterSeparationDistance = (radiusAroundCluster + (clusterRadius * 2.0f));
+        float floraSeparationDistance = (radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
 
-        plantPositions = GeneratePositions(biomeRadius, objectSeparation, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
+        clusterPositions = GeneratePositions(transform.position, biomeRadius, clusterSeparationDistance, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
 
-		InstatiateObjects(prefab, this.gameObject, floraSpawnCount, plantPositions);
+        for (int i = 0; i < clusterSpawnCount; i++) {
+            floraPositions[i] = GeneratePositions(clusterPositions[i], clusterRadius, floraSeparationDistance, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);
+
+            InstatiateObjects(prefab, this.gameObject, clusterPositions[i], floraSpawnCount, floraPositions[i]);
+        }
 	}
 
     protected void OnDrawGizmosSelected() {

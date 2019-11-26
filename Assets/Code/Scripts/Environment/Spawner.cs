@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-	protected Vector3[] GeneratePositions(float spawnRadius, float objectSeparation, int spawnCount, int attemptsBeforeRejection, System.Func<Vector2> randomNumberMethod) {
+	protected Vector3[] GeneratePositions(Vector3 inputPosition, float spawnRadius, float objectSeparation, int spawnCount, int attemptsBeforeRejection, System.Func<Vector2> randomNumberMethod) {
 		Vector3[] outputPositions = new Vector3[spawnCount];
 		Vector2[] proposedPositions = new Vector2[spawnCount];
 		float sqrObjectSeparation = objectSeparation * objectSeparation;
@@ -38,17 +38,17 @@ public class Spawner : MonoBehaviour {
 		//converts Vector2's to desired Vector3's
 		for (int i = 0; i < spawnCount; i++) {
 			Vector2 tempPos = proposedPositions[i];
-			outputPositions[i] = transform.position + (new Vector3(tempPos.x ,0 , tempPos.y));
+			outputPositions[i] = inputPosition + (new Vector3(tempPos.x ,0 , tempPos.y));
 		}
 
 		return outputPositions;
 	}
 
-	protected void InstatiateObjects(GameObject prefab, GameObject parentObject, int count, Vector3[] positionsList) {
+	protected void InstatiateObjects(GameObject prefab, GameObject parentObject, Vector3 inputPosition, int count, Vector3[] positionsList) {
 		for (int i = 0; i < count; i++) {
 			Vector3 pos = positionsList[i];
 
-			if (pos != parentObject.transform.position) {
+			if (pos != inputPosition) {
 				RaycastHit hit;
 				Ray downRay = new Ray(pos, Vector3.down);
 

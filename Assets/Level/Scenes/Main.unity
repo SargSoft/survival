@@ -426,8 +426,9 @@ GameObject:
   m_Component:
   - component: {fileID: 785519699}
   - component: {fileID: 785519700}
+  - component: {fileID: 785519701}
   m_Layer: 0
-  m_Name: Environment Manager
+  m_Name: Biome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,14 +460,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0eb08283ff8e94d9870b93441fd7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &785519701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785519698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b9eaa4795fcbd45b0407d4121b65e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   biomeRadius: 500
-  clusterSpawnCount: 25
+  clusterSpawnCount: 15
   radiusAroundCluster: 10
   clusterRadius: 80
   radiusAroundFlora: 5
-  floraSpawnCount: 50
-  prefab: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7, type: 3}
+  floraSpawnCount: 30
   attemptsBeforeRejection: 30
+  shallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
+    type: 3}
+  deepFlora: {fileID: 207292770619994653, guid: e3e806a4c289f124fa03f27092e96fc8,
+    type: 3}
 --- !u!1 &892684076
 GameObject:
   m_ObjectHideFlags: 0

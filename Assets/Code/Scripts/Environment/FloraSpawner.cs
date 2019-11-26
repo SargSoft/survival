@@ -4,37 +4,27 @@ using UnityEngine;
 
 public class FloraSpawner : Spawner {
 
-    [Header("Cluster Spawning Settings")]
-    [SerializeField] private float biomeRadius = 500.0f;
-    [SerializeField] private int clusterSpawnCount = 10;
-    [SerializeField] private float radiusAroundCluster = 50.0f;
-	[SerializeField] private float clusterRadius = 10.0f;
-    [Header("Flora Spawning Settings")]
-	[SerializeField] private float radiusAroundFlora = 5.0f;
-	[SerializeField] private int floraSpawnCount = 10;
-    [Header("Other")]
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private int attemptsBeforeRejection = 30;
-
     private Vector3[] clusterPositions;
     private Vector3[][] floraPositions;
     private SpawnerSettings objectSettings;
+    private Biome biomeSettings;
 
     void Awake() {
-		objectSettings = prefab.GetComponent<SpawnerSettings>();
-        floraPositions = new Vector3[clusterSpawnCount][];
-        float clusterSeparationDistance = (radiusAroundCluster + (clusterRadius * 2.0f));
-        float floraSeparationDistance = (radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
-        float clusterSpawningRadius = biomeRadius - clusterRadius;
+        biomeSettings = GetComponent<Biome>();
+		objectSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>();
+        floraPositions = new Vector3[biomeSettings.clusterSpawnCount][];
+        float clusterSeparationDistance = (biomeSettings.radiusAroundCluster + (biomeSettings.clusterRadius * 2.0f));
+        float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
+        float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.clusterRadius;
 
-        clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, clusterSpawnCount, attemptsBeforeRejection, randomVector2insideSquare);
+        clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.clusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
-        for (int i = 0; i < clusterSpawnCount; i++) {
+        for (int i = 0; i < biomeSettings.clusterSpawnCount; i++) {
 
             if (clusterPositions[i] != transform.position) {
-                floraPositions[i] = GeneratePositions(clusterPositions[i], clusterRadius, floraSeparationDistance, floraSpawnCount, attemptsBeforeRejection, randomVector2insideCircle);
+                floraPositions[i] = GeneratePositions(clusterPositions[i], biomeSettings.clusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
 
-                InstatiateObjects(prefab, this.gameObject, clusterPositions[i], floraSpawnCount, floraPositions[i]);
+                InstatiateObjects(biomeSettings.shallowFlora, this.gameObject, clusterPositions[i], biomeSettings.floraSpawnCount, floraPositions[i]);
             }
         }
 	}

@@ -16,6 +16,7 @@ public class FloraSpawner : Spawner {
         float clusterSeparationDistance = (biomeSettings.radiusAroundCluster + (biomeSettings.clusterRadius * 2.0f));
         float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.clusterRadius;
+        float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
 
         clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.clusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
@@ -23,10 +24,10 @@ public class FloraSpawner : Spawner {
 
             if (clusterPositions[i] != transform.position) {
                 floraPositions[i] = GeneratePositions(clusterPositions[i], biomeSettings.clusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
-                float depth = waterDepth(clusterPositions[i], 118.1f);
+                float depth = waterDepth(clusterPositions[i], heightFromWater);
                 GameObject flora;
 
-                if (depth < 20.0f) {
+                if (depth < biomeSettings.shallowDeepBoundary) {
                     flora = biomeSettings.shallowFlora;
                 } else {
                     flora = biomeSettings.deepFlora;
@@ -35,10 +36,5 @@ public class FloraSpawner : Spawner {
                 InstatiateObjects(flora, this.gameObject, clusterPositions[i], biomeSettings.floraSpawnCount, floraPositions[i]);
             }
         }
-	}
-
-    protected void OnDrawGizmosSelected() {
-		// DrawGizmos();
-        // Implement in above Awake() section so that in draws a gizmo on each cluster
 	}
 }

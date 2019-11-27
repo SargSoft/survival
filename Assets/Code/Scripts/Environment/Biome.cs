@@ -21,7 +21,7 @@ public class Biome : MonoBehaviour {
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-		Gizmos.DrawWireCube(transform.position, new Vector3(biomeRadius, biomeRadius, biomeRadius));
+		Gizmos.DrawWireCube(transform.position, new Vector3(biomeRadius * 2.0f, biomeRadius * 2.0f, biomeRadius * 2.0f));
         // Implement in above Awake() section so that in draws a gizmo on each cluster
 	}
 }

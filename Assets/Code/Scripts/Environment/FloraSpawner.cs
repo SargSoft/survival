@@ -4,36 +4,50 @@ using UnityEngine;
 
 public class FloraSpawner : Spawner {
 
-    private Vector3[] clusterPositions;
+    // Arrays
+    private Vector3[] floraClusterPositions;
     private Vector3[][] floraPositions;
+    private float[] distanceFromSeaFloor;
+    private GameObject[] flora;
+
+    // Settings
     private SpawnerSettings objectSettings;
     private Biome biomeSettings;
 
     void Awake() {
         biomeSettings = GetComponent<Biome>();
-		objectSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>();
+		objectSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
+        
+        // Instantiating Arrays
+        floraClusterPositions = new Vector3[biomeSettings.clusterSpawnCount];
         floraPositions = new Vector3[biomeSettings.clusterSpawnCount][];
+        distanceFromSeaFloor = new float[biomeSettings.floraSpawnCount];
+        flora = new GameObject[biomeSettings.floraSpawnCount];
+
         float clusterSeparationDistance = (biomeSettings.radiusAroundCluster + (biomeSettings.clusterRadius * 2.0f));
         float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.clusterRadius;
         float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
 
-        clusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.clusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
+        floraClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.clusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
         for (int i = 0; i < biomeSettings.clusterSpawnCount; i++) {
 
-            if (clusterPositions[i] != transform.position) {
-                floraPositions[i] = GeneratePositions(clusterPositions[i], biomeSettings.clusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
-                float depth = waterDepth(clusterPositions[i], heightFromWater);
-                GameObject flora;
+            if (floraClusterPositions[i] != transform.position) {
+                floraPositions[i] = GeneratePositions(floraClusterPositions[i], biomeSettings.clusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
 
-                if (depth < biomeSettings.shallowDeepBoundary) {
-                    flora = biomeSettings.shallowFlora;
-                } else {
-                    flora = biomeSettings.deepFlora;
+                for (int count = 0; count < biomeSettings.floraSpawnCount; count++ ) {
+                    float depth = waterDepth(floraPositions[i][count], heightFromWater);
+                    distanceFromSeaFloor[count] = heightFromWater + depth;
+
+                    if (depth < biomeSettings.shallowDeepBoundary) {
+                    flora[count] = biomeSettings.shallowFlora;
+                    } else {
+                    flora[count] = biomeSettings.deepFlora;
+                    }
                 }
 
-                InstatiateObjects(flora, this.gameObject, clusterPositions[i], biomeSettings.floraSpawnCount, floraPositions[i]);
+                InstantiateFlora(flora, this.gameObject, floraClusterPositions[i], distanceFromSeaFloor, biomeSettings.floraSpawnCount, floraPositions[i]);
             }
         }
 	}

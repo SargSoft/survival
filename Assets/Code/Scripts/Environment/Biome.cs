@@ -14,10 +14,19 @@ public class Biome : MonoBehaviour {
 	public int floraSpawnCount = 10;
     public float shallowDeepBoundary = 20.0f;
     public int attemptsBeforeRejection = 30;
+    [Header("Fauna Spawning Settings")]
+    public int faunaClusterSpawnCount = 3;
+    public float radiusAroundFaunaCluster = 20.0f;
+    public float faunaClusterRadius = 10.0f;
+    public float radiusAroundFauna = 20.0f;
+    public int faunaSpawnCount = 15;
+    [Range(0f, 0.5f)]
+    public float faunaVerticalSpread = 0.1f;
     [Header("GameObjects")]
     public GameObject water;
     public GameObject shallowFlora;
     public GameObject deepFlora;
+    public GameObject fauna;
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;

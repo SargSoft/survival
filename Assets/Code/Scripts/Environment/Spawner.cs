@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
+	private float minFaunaSpawnDist = 10f; // Minimum distance fauna can spawn from surface and floor
 	protected Vector3[] GeneratePositions(Vector3 inputPosition, float spawnRadius, float objectSeparation, int spawnCount, int attemptsBeforeRejection, System.Func<Vector2> randomNumberMethod) {
 		Vector3[] outputPositions = new Vector3[spawnCount];
 		Vector2[] proposedPositions = new Vector2[spawnCount];
@@ -44,20 +45,21 @@ public class Spawner : MonoBehaviour {
 		return outputPositions;
 	}
 
-	protected void InstatiateObjects(GameObject prefab, GameObject parentObject, Vector3 inputPosition, int count, Vector3[] positionsList) {
+	protected void InstantiateFlora(GameObject[] prefab, GameObject parentObject, Vector3 inputPosition, float[] distanceToFloor, int count, Vector3[] positionsList) {
 		for (int i = 0; i < count; i++) {
 			Vector3 pos = positionsList[i];
+			pos += Vector3.down * distanceToFloor[i];
 
-			if (pos != inputPosition) {
-				RaycastHit hit;
-				Ray downRay = new Ray(pos, Vector3.down);
+			Object.Instantiate(prefab[i], pos, Quaternion.identity, parentObject.transform);
+		}
+	}
+	protected void InstantiateFauna(GameObject[] prefab, GameObject parentObject, Vector3 inputPosition, float[] distanceToFloor, float heightAboveWater, int count, Vector3[] positionsList) {
+		for (int i = 0; i < count; i++) {
+			Vector3 pos = positionsList[i];
+			float rand = Random.Range(distanceToFloor[i] + minFaunaSpawnDist, pos.y - (heightAboveWater + minFaunaSpawnDist));
+			pos += Vector3.down * rand;
 
-				if (Physics.Raycast(downRay, out hit)) {
-					pos += Vector3.down * hit.distance;
-				}
-
-				Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
-			}
+			Object.Instantiate(prefab[i], pos, Quaternion.identity, parentObject.transform);
 		}
 	}
 	protected Vector2 randomVector2insideSquare() {

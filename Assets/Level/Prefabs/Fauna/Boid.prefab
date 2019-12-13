@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &4918878245626053718
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639274477966796447}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.25
+  m_Center: {x: -0.00000002980232, y: 0.44521463, z: 0.00000002980233}
 --- !u!1 &5802706282845508716
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +23,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5802706282845508719}
   - component: {fileID: 5132080043216816537}
+  - component: {fileID: 4910390718654089005}
   m_Layer: 0
   m_Name: Boid
   m_TagString: Untagged
@@ -50,6 +64,20 @@ MonoBehaviour:
   avgAvoidanceHeading: {x: 0, y: 0, z: 0}
   centreOfFlockmates: {x: 0, y: 0, z: 0}
   numPerceivedFlockmates: 0
+--- !u!114 &4910390718654089005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802706282845508716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2bdef5b31a14f4b9e1378e120b853e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectRadius: 1.25
+  objectScale: 0.5
 --- !u!1001 &2639274477966762047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +151,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4a00fb7c3107c1c499a1c2700da4fecd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09cea7df0de2f4a8e9685c65efc5715d, type: 3}
+--- !u!1 &2639274477966796447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 09cea7df0de2f4a8e9685c65efc5715d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2639274477966762047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2639274477966375615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 09cea7df0de2f4a8e9685c65efc5715d,

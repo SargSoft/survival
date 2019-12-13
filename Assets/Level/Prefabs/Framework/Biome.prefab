@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5120433559238959855}
   - component: {fileID: 5120433559238959848}
+  - component: {fileID: 217933546299964449}
   - component: {fileID: 5120433559238959849}
   m_Layer: 0
   m_Name: Biome
@@ -44,6 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0eb08283ff8e94d9870b93441fd7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &217933546299964449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120433559238959854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb57ce7d1b328c4aa431dcc5f53eec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5120433559238959849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,8 +77,15 @@ MonoBehaviour:
   floraSpawnCount: 8
   shallowDeepBoundary: 15
   attemptsBeforeRejection: 15
+  faunaClusterSpawnCount: 3
+  radiusAroundFaunaCluster: 20
+  faunaClusterRadius: 10
+  radiusAroundFauna: 20
+  faunaSpawnCount: 15
+  faunaVerticalSpread: 0.1
   water: {fileID: 0}
   shallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
     type: 3}
   deepFlora: {fileID: 207292770619994653, guid: e3e806a4c289f124fa03f27092e96fc8,
     type: 3}
+  fauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00, type: 3}

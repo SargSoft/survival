@@ -19,8 +19,8 @@ public class FaunaSpawner : Spawner {
 		objectSettings = biomeSettings.fauna.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
         
         // Instatiating Arrays
+        faunaClusterPositions = new Vector3[biomeSettings.faunaClusterSpawnCount];
         faunaPositions = new Vector3[biomeSettings.faunaClusterSpawnCount][];
-        faunaPositions = new Vector3[biomeSettings.clusterSpawnCount][];
         distanceFromSeaFloor = new float[biomeSettings.faunaSpawnCount];
         fauna = new GameObject[biomeSettings.faunaSpawnCount];
         
@@ -31,7 +31,7 @@ public class FaunaSpawner : Spawner {
 
         faunaClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.faunaClusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
-        for (int i = 0; i < biomeSettings.clusterSpawnCount; i++) {
+        for (int i = 0; i < biomeSettings.faunaClusterSpawnCount; i++) {
 
             if (faunaClusterPositions[i] != transform.position) {
                 faunaPositions[i] = GeneratePositions(faunaClusterPositions[i], biomeSettings.faunaClusterRadius, faunaSeparationDistance, biomeSettings.faunaSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);

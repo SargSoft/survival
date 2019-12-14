@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Biome : MonoBehaviour {
 	
-	[Header("Cluster Spawning Settings")]
+	[Header("Biome Settings")]
     public float biomeRadius = 500.0f;
-    public int clusterSpawnCount = 10;
-    public float radiusAroundCluster = 50.0f;
-	public float clusterRadius = 10.0f;
+    public int attemptsBeforeRejection = 30;
+    public float shallowDeepBoundary = 20.0f;
+
     [Header("Flora Spawning Settings")]
+    public int floraClusterSpawnCount = 10;
+    public float radiusAroundFloraCluster = 50.0f;
+	public float floraClusterRadius = 10.0f;
 	public float radiusAroundFlora = 5.0f;
 	public int floraSpawnCount = 10;
-    public float shallowDeepBoundary = 20.0f;
-    public int attemptsBeforeRejection = 30;
+
     [Header("Fauna Spawning Settings")]
     public int faunaClusterSpawnCount = 3;
     public float radiusAroundFaunaCluster = 20.0f;

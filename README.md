@@ -46,6 +46,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 			- [Music](https://github.com/sargasso-studios/survival#5221-music)
 			- [Sounds](https://github.com/sargasso-studios/survival#5222-sounds)
 		- [Landscape](https://github.com/sargasso-studios/survival#523-landscape)
+			-[Biomes](https://github.com/sargasso-studios/survival#5231-biomes)
 		- [Plants](https://github.com/sargasso-studios/survival#524-plants)
 	- [Main Menu](https://github.com/sargasso-studios/survival#53-main-menu)
 		- [Background](https://github.com/sargasso-studios/survival#531-background)
@@ -470,7 +471,15 @@ info
 - Sounds info
 
 #### 5.2.3 Landscape
-- Landscape info
+This section will contain all information relating to landscapes.
+
+#### 5.2.3.1 Biomes
+- **Intertital Zone**: Where the ocean meets the land (very shallow water)
+- **Pelagic Zone**: Open ocean (not too deep)
+- **Benthic Zone**: The area below the Pelagic Zone, but does not include the deepest parts of the ocean (darker and cold)
+- **Abyssal Zone**: The area below the Benthic Zone, very cold and very dark
+- **Reefs**: Dominant organisms are coral/flora. Full of life, and often harder to navigate by larger preditors. (Perhaps have both deep reefs / more typical coral reefs)
+- **Tropical?**: Areas where the temperature is much higher (could be due to volcano / hot springs / under the island / etc.)
 
 #### 5.2.4 Plants
 **Requisites:**

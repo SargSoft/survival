@@ -45,9 +45,11 @@ public class FloraSpawner : Spawner {
                     } else {
                     flora[count] = biomeSettings.deepFlora;
                     }
-                }
 
-                InstantiateFlora(flora, this.gameObject, floraClusterPositions[i], distanceFromSeaFloor, biomeSettings.floraSpawnCount, floraPositions[i]);
+                    if (floraPositions[i][count] != floraClusterPositions[i]) {
+                        InstantiateFlora(flora[count], this.gameObject, floraClusterPositions[i], distanceFromSeaFloor[count], biomeSettings.floraSpawnCount, floraPositions[i][count]);
+                    }
+                }
             }
         }
 	}

@@ -45,9 +45,11 @@ public class FaunaSpawner : Spawner {
                     } else {
                     fauna[count] = biomeSettings.fauna;
                     }
-                }
 
-                InstantiateFauna(fauna, this.gameObject, faunaClusterPositions[i], distanceFromSeaFloor, heightFromWater, biomeSettings.faunaSpawnCount, faunaPositions[i]);
+                    if (faunaPositions[i][count] != faunaClusterPositions[i]) {
+                        InstantiateFauna(fauna[count], this.gameObject, faunaClusterPositions[i], distanceFromSeaFloor[count], heightFromWater, biomeSettings.faunaSpawnCount, faunaPositions[i][count]);
+                    }
+                }
             }
         }
 	}

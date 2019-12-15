@@ -580,6 +580,46 @@ PrefabInstance:
       propertyPath: water
       value: 
       objectReference: {fileID: 1469078025}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: floraClusterSpawnCount
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: radiusAroundFloraCluster
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: floraClusterRadius
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: floraSpawnCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: faunaClusterSpawnCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: faunaClusterRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: radiusAroundFauna
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120433559238959849, guid: 00006d928926a8d4b803e852fc22c25d,
+        type: 3}
+      propertyPath: faunaSpawnCount
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00006d928926a8d4b803e852fc22c25d, type: 3}
 --- !u!4 &1091520393 stripped

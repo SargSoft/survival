@@ -386,6 +386,84 @@ Transform:
   m_Father: {fileID: 226233088}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 16.429, z: 0}
+--- !u!1 &683890020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 683890021}
+  - component: {fileID: 683890022}
+  m_Layer: 0
+  m_Name: TheBrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &683890021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683890020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &683890022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683890020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae2c5c91f590eb4facc2ecf8f1ad936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  water: {fileID: 1469078025}
+  intertidalZone:
+    biome: 0
+    shallowFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+      type: 3}
+    deepFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+      type: 3}
+    shallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
+      type: 3}
+    deepFlora: {fileID: 207292770619994653, guid: e3e806a4c289f124fa03f27092e96fc8,
+      type: 3}
+  pelagicZone:
+    biome: 0
+    shallowFauna: {fileID: 0}
+    deepFauna: {fileID: 0}
+    shallowFlora: {fileID: 0}
+    deepFlora: {fileID: 0}
+  benthicZone:
+    biome: 0
+    shallowFauna: {fileID: 0}
+    deepFauna: {fileID: 0}
+    shallowFlora: {fileID: 0}
+    deepFlora: {fileID: 0}
+  abyssalZone:
+    biome: 0
+    shallowFauna: {fileID: 0}
+    deepFauna: {fileID: 0}
+    shallowFlora: {fileID: 0}
+    deepFlora: {fileID: 0}
+  reef:
+    biome: 0
+    shallowFauna: {fileID: 0}
+    deepFauna: {fileID: 0}
+    shallowFlora: {fileID: 0}
+    deepFlora: {fileID: 0}
 --- !u!1 &839465921
 GameObject:
   m_ObjectHideFlags: 0

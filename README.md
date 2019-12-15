@@ -46,7 +46,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 			- [Music](https://github.com/sargasso-studios/survival#5221-music)
 			- [Sounds](https://github.com/sargasso-studios/survival#5222-sounds)
 		- [Landscape](https://github.com/sargasso-studios/survival#523-landscape)
-			-[Biomes](https://github.com/sargasso-studios/survival#5231-biomes)
+			- [Biomes](https://github.com/sargasso-studios/survival#5231-biomes)
 		- [Plants](https://github.com/sargasso-studios/survival#524-plants)
 	- [Main Menu](https://github.com/sargasso-studios/survival#53-main-menu)
 		- [Background](https://github.com/sargasso-studios/survival#531-background)

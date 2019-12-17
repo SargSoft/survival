@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db71748de24ecc43b3047696d42c104, type: 3}
+  m_Name: BiomeSettings
+  m_EditorClassIdentifier: 
+  biome1ShallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
+    type: 3}
+  biome1DeepFlora: {fileID: 207292770619994653, guid: e3e806a4c289f124fa03f27092e96fc8,
+    type: 3}
+  biome1ShallowFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+    type: 3}
+  biome1DeepFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+    type: 3}
+  biome2ShallowFlora: {fileID: 0}
+  biome2DeepFlora: {fileID: 0}
+  biome2ShallowFauna: {fileID: 0}
+  biome2DeepFauna: {fileID: 0}
+  biome3ShallowFlora: {fileID: 0}
+  biome3DeepFlora: {fileID: 0}
+  biome3ShallowFauna: {fileID: 0}
+  biome3DeepFauna: {fileID: 0}
+  biome4ShallowFlora: {fileID: 0}
+  biome4DeepFlora: {fileID: 0}
+  biome4ShallowFauna: {fileID: 0}
+  biome4DeepFauna: {fileID: 0}
+  biome5ShallowFlora: {fileID: 0}
+  biome5DeepFlora: {fileID: 0}
+  biome5ShallowFauna: {fileID: 0}
+  biome5DeepFauna: {fileID: 0}
+  biome6ShallowFlora: {fileID: 0}
+  biome6DeepFlora: {fileID: 0}
+  biome6ShallowFauna: {fileID: 0}
+  biome6DeepFauna: {fileID: 0}

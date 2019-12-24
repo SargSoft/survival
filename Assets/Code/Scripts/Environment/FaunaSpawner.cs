@@ -38,21 +38,18 @@ public class FaunaSpawner : Spawner {
         for (int i = 0; i < biomeSettings.faunaClusterSpawnCount; i++) {
 
             if (faunaClusterPositions[i] != transform.position) {
-                faunaPositions[i] = GeneratePositions(faunaClusterPositions[i], biomeSettings.faunaClusterRadius, faunaSeparationDistance, biomeSettings.faunaSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
+                float clusterDepth = waterDepth(faunaClusterPositions[i], heightFromWater);
+                
+                if(clusterDepth < biomeSettings.shallowDeepBoundary) {
+                    faunaPositions[i] = GeneratePositions(faunaClusterPositions[i], biomeSettings.faunaClusterRadius, faunaSeparationDistance, biomeSettings.faunaSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
 
-                for (int count = 0; count < biomeSettings.faunaSpawnCount; count++) {
-                    float depth = waterDepth(faunaPositions[i][count], heightFromWater);
-                    distanceFromSeaFloor[count] = depth + heightFromWater;
+                    InstantiateFauna(biomeSettings.shallowFauna, this.gameObject, faunaClusterPositions[i], heightFromWater, biomeSettings.faunaSpawnCount, faunaPositions[i]);
 
-                    if (depth < biomeSettings.shallowDeepBoundary) {
-                    fauna[count] = biomeSettings.shallowFauna;
-                    } else {
-                    fauna[count] = biomeSettings.deepFauna;
-                    }
+                } else {
+                    faunaPositions[i] = GeneratePositions(faunaClusterPositions[i], biomeSettings.faunaClusterRadius, faunaSeparationDistance, biomeSettings.faunaSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
 
-                    if (faunaPositions[i][count] != faunaClusterPositions[i]) {
-                        InstantiateFauna(fauna[count], this.gameObject, faunaClusterPositions[i], distanceFromSeaFloor[count], heightFromWater, biomeSettings.faunaSpawnCount, faunaPositions[i][count]);
-                    }
+                    InstantiateFauna(biomeSettings.deepFauna, this.gameObject, faunaClusterPositions[i], heightFromWater, biomeSettings.faunaSpawnCount, faunaPositions[i]);
+
                 }
             }
         }

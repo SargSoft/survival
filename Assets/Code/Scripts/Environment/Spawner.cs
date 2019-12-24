@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour {
 		for (int i = 0; i < count; i++ ) {
 			if (floraPositions[i] != inputPosition) {
 				float distanceToFloor = waterDepth(floraPositions[i], heightFromWater);
-				distanceToFloor = heightFromWater + distanceToFloor;
+				distanceToFloor += heightFromWater;
 				
 				Vector3 pos = floraPositions[i];
 				pos += Vector3.down * distanceToFloor;
@@ -58,12 +58,19 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 	}
-	protected void InstantiateFauna(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float distanceToFloor, float heightAboveWater, int count, Vector3 positionsList) {
-		Vector3 pos = positionsList;
-		float rand = Random.Range(distanceToFloor - minFaunaSpawnDist, heightAboveWater + minFaunaSpawnDist);
-		pos += Vector3.down * rand;
+	protected void InstantiateFauna(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float heightFromWater, int count, Vector3[] faunaPositions) {
+		for (int i = 0; i < count; i++ ) {
+			if (faunaPositions[i] != inputPosition) {
+				float distanceToFloor = waterDepth(faunaPositions[i], heightFromWater);
+				distanceToFloor += heightFromWater;
 
-		Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
+				Vector3 pos = faunaPositions[i];
+				float rand = Random.Range(distanceToFloor - minFaunaSpawnDist, heightFromWater + minFaunaSpawnDist);
+				pos += Vector3.down * rand;
+
+				Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
+			}
+		}
 	}
 	protected Vector2 randomVector2insideSquare() {
 		float outX = Random.Range(-1.0f, 1.0f);
@@ -75,14 +82,14 @@ public class Spawner : MonoBehaviour {
 		return Random.insideUnitCircle;
 	}
 
-	protected float waterDepth(Vector3 inputPosition, float heightAboveWater) {
+	protected float waterDepth(Vector3 inputPosition, float heightFromWater) {
 		float output = 0.0f;
 
 		RaycastHit hit;
 		Ray downRay = new Ray(inputPosition, Vector3.down);
 
 		if (Physics.Raycast(downRay, out hit)) {
-			output = (hit.distance - heightAboveWater);
+			output = (hit.distance - heightFromWater);
 			
 		}
 		return output;

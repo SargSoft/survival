@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Biome : BiomeData {
+public class Biome : MonoBehaviour {
 	
 	[Header("Biome Settings")]
-    public BiomeType thisBiome;
+    public BiomeData.BiomeType thisBiome;
     public float biomeRadius = 500.0f;
     public int attemptsBeforeRejection = 30;
     public float shallowDeepBoundary = 20.0f;
@@ -25,14 +25,7 @@ public class Biome : BiomeData {
     public int faunaSpawnCount = 15;
     [Range(0f, 0.5f)]
     public float faunaVerticalSpread = 0.1f;
-    [Header("GameObjects")]
-    [HideInInspector] public GameObject shallowFlora;
-    [HideInInspector] public GameObject deepFlora;
-    [HideInInspector] public GameObject fauna;
 
-    void Awake() {
-        //if statements for biome type to define gameobjects
-    }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(transform.position, new Vector3(biomeRadius * 2.0f, biomeRadius * 2.0f, biomeRadius * 2.0f));

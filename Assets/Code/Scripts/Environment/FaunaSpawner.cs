@@ -13,10 +13,16 @@ public class FaunaSpawner : Spawner {
     //Settings
     private SpawnerSettings objectSettings;
     private Biome biomeSettings;
+    private BiomeData biomeData;
+    private BiomeData.BiomeInfo biomeObjects;
 
-	void Awake() {
+	void Start() {
         biomeSettings = GetComponent<Biome>();
-		objectSettings = biomeSettings.fauna.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
+        biomeData = GetComponent<BiomeData>();
+
+        biomeObjects = biomeData.biomeInfoArray[(int)biomeSettings.thisBiome];
+
+		objectSettings = biomeObjects.shallowFauna.GetComponent<SpawnerSettings>(); // Needs reworked to work for both fauna
         
         // Instatiating Arrays
         faunaClusterPositions = new Vector3[biomeSettings.faunaClusterSpawnCount];
@@ -27,7 +33,7 @@ public class FaunaSpawner : Spawner {
         float clusterSeparationDistance = (biomeSettings.radiusAroundFaunaCluster + (biomeSettings.faunaClusterRadius * 2.0f));
         float faunaSeparationDistance = (biomeSettings.radiusAroundFauna + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.faunaClusterRadius;
-        float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
+        float heightFromWater = transform.position.y - biomeData.water.transform.position.y;
 
         faunaClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.faunaClusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
@@ -41,9 +47,9 @@ public class FaunaSpawner : Spawner {
                     distanceFromSeaFloor[count] = depth + heightFromWater;
 
                     if (depth < biomeSettings.shallowDeepBoundary) {
-                    fauna[count] = biomeSettings.fauna;
+                    fauna[count] = biomeObjects.shallowFauna;
                     } else {
-                    fauna[count] = biomeSettings.fauna;
+                    fauna[count] = biomeObjects.deepFauna;
                     }
 
                     if (faunaPositions[i][count] != faunaClusterPositions[i]) {

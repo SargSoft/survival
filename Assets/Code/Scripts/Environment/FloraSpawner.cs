@@ -13,10 +13,16 @@ public class FloraSpawner : Spawner {
     // Settings
     private SpawnerSettings objectSettings;
     private Biome biomeSettings;
+    private BiomeData biomeData;
+    private BiomeData.BiomeInfo biomeObjects;
 
-    void Awake() {
+    void Start() {
         biomeSettings = GetComponent<Biome>();
-		objectSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
+        biomeData = GetComponent<BiomeData>();
+
+        biomeObjects = biomeData.biomeInfoArray[(int)biomeSettings.thisBiome];
+
+		objectSettings = biomeObjects.shallowFlora.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
         
         // Instantiating Arrays
         floraClusterPositions = new Vector3[biomeSettings.floraClusterSpawnCount];
@@ -27,7 +33,7 @@ public class FloraSpawner : Spawner {
         float clusterSeparationDistance = (biomeSettings.radiusAroundFloraCluster + (biomeSettings.floraClusterRadius * 2.0f));
         float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.floraClusterRadius;
-        float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
+        float heightFromWater = transform.position.y - biomeData.water.transform.position.y;
 
         floraClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.floraClusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
@@ -41,9 +47,9 @@ public class FloraSpawner : Spawner {
                     distanceFromSeaFloor[count] = heightFromWater + depth;
 
                     if (depth < biomeSettings.shallowDeepBoundary) {
-                    flora[count] = biomeSettings.shallowFlora;
+                    flora[count] = biomeObjects.shallowFlora;
                     } else {
-                    flora[count] = biomeSettings.deepFlora;
+                    flora[count] = biomeObjects.deepFlora;
                     }
 
                     if (floraPositions[i][count] != floraClusterPositions[i]) {

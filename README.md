@@ -19,6 +19,7 @@ A survival game focused on exploration and building, with a strong storyline, an
 	- [Directory](https://github.com/sargasso-studios/general_testing#49-directory)
 		- [File Structure](https://github.com/sargasso-studios/general_testing#491-file-structure)
 		- [Files Types](https://github.com/sargasso-studios/general_testing#492-file-types)
+	- [Execution Order](https://github.com/sargasso-studios/general_testing#410-execution-order)
 5. [Design](https://github.com/sargasso-studios/survival#5-design)
 	- [Character](https://github.com/sargasso-studios/survival#51-character)
 		- [Controls](https://github.com/sargasso-studios/survival#511-controls)
@@ -348,6 +349,21 @@ Assets
 | Sound         | .OGG          |
 | Models        | .FBX          |
 | Textures      | .PNG          |
+
+### 4.10 Execution Order
+Below gives an outline of the Monobehaviour Execution Order, and also some guidance on the use of the most common methods.
+
+**Awake()** - Should be used to initialize variables / game states (Should not contain any cross-class interactions)
+
+**Start()** - Called once on the frame that the script is enabled, prior to Update methods (Can contain cross-class interactions)
+
+**FixedUpdate()** - Should be used for anything relating to physics (Called once every 0.02seconds by default, and is independent to framerate)
+
+**Update()** - Most common method (called once per frame)
+
+**LateUpdate()** - The same as Update(), but called afterwards so can be useful if something needs to occur after all of Update() has completed (e.g. follow cameras)
+
+![MonobehaviourExecutionOrderFlowchart](Assets/Docs/Readme/MonobehaviourExecutionOrderFlowchart.png)
 
 ## 5. Design
 This section is an overview of the design of the game followed by a highly descriptive breakdown of all the individual elements of the game. Below is a visual representation of the game design overview.

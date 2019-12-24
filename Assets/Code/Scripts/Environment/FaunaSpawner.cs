@@ -11,18 +11,16 @@ public class FaunaSpawner : Spawner {
     private GameObject[] fauna;
 
     //Settings
-    private SpawnerSettings objectSettings;
+    private SpawnerSettings shallowFaunaSettings;
+    private SpawnerSettings deepFaunaSettings;
     private Biome biomeSettings;
-    private BiomeData biomeData;
-    private BiomeData.BiomeInfo biomeObjects;
 
 	void Start() {
         biomeSettings = GetComponent<Biome>();
-        biomeData = GetComponent<BiomeData>();
 
-        biomeObjects = biomeData.biomeInfoArray[(int)biomeSettings.thisBiome];
 
-		objectSettings = biomeObjects.shallowFauna.GetComponent<SpawnerSettings>(); // Needs reworked to work for both fauna
+		shallowFaunaSettings = biomeSettings.shallowFauna.GetComponent<SpawnerSettings>();
+        deepFaunaSettings = biomeSettings.deepFauna.GetComponent<SpawnerSettings>();
         
         // Instatiating Arrays
         faunaClusterPositions = new Vector3[biomeSettings.faunaClusterSpawnCount];
@@ -31,9 +29,9 @@ public class FaunaSpawner : Spawner {
         fauna = new GameObject[biomeSettings.faunaSpawnCount];
         
         float clusterSeparationDistance = (biomeSettings.radiusAroundFaunaCluster + (biomeSettings.faunaClusterRadius * 2.0f));
-        float faunaSeparationDistance = (biomeSettings.radiusAroundFauna + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
+        float faunaSeparationDistance = (biomeSettings.radiusAroundFauna + (shallowFaunaSettings.objectRadius * shallowFaunaSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.faunaClusterRadius;
-        float heightFromWater = transform.position.y - biomeData.water.transform.position.y;
+        float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
 
         faunaClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.faunaClusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
@@ -47,9 +45,9 @@ public class FaunaSpawner : Spawner {
                     distanceFromSeaFloor[count] = depth + heightFromWater;
 
                     if (depth < biomeSettings.shallowDeepBoundary) {
-                    fauna[count] = biomeObjects.shallowFauna;
+                    fauna[count] = biomeSettings.shallowFauna;
                     } else {
-                    fauna[count] = biomeObjects.deepFauna;
+                    fauna[count] = biomeSettings.deepFauna;
                     }
 
                     if (faunaPositions[i][count] != faunaClusterPositions[i]) {

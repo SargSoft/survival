@@ -5,7 +5,6 @@ using UnityEngine;
 public class Biome : MonoBehaviour {
 	
 	[Header("Biome Settings")]
-    public BiomeData.BiomeType thisBiome;
     public float biomeRadius = 500.0f;
     public int attemptsBeforeRejection = 30;
     public float shallowDeepBoundary = 20.0f;
@@ -25,6 +24,14 @@ public class Biome : MonoBehaviour {
     public int faunaSpawnCount = 15;
     [Range(0f, 0.5f)]
     public float faunaVerticalSpread = 0.1f;
+
+    [Header("GameObjects")]
+    public GameObject water;
+    public GameObject shallowFauna;
+    public GameObject deepFauna;
+    public GameObject shallowFlora;
+    public GameObject deepFlora;
+
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;

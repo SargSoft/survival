@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 217933546299964449}
   - component: {fileID: 5120433559238959849}
   m_Layer: 0
-  m_Name: Biome
+  m_Name: IntertidalZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,22 +70,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeRadius: 250
-  clusterSpawnCount: 40
-  radiusAroundCluster: 10
-  clusterRadius: 50
-  radiusAroundFlora: 5
-  floraSpawnCount: 8
+  attemptsBeforeRejection: 30
   shallowDeepBoundary: 15
-  attemptsBeforeRejection: 15
-  faunaClusterSpawnCount: 3
+  floraClusterSpawnCount: 12
+  radiusAroundFloraCluster: 50
+  floraClusterRadius: 20
+  radiusAroundFlora: 5
+  floraSpawnCount: 20
+  faunaClusterSpawnCount: 4
   radiusAroundFaunaCluster: 20
-  faunaClusterRadius: 10
-  radiusAroundFauna: 20
+  faunaClusterRadius: 30
+  radiusAroundFauna: 5
   faunaSpawnCount: 15
   faunaVerticalSpread: 0.1
   water: {fileID: 0}
+  shallowFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+    type: 3}
+  deepFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+    type: 3}
   shallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
     type: 3}
   deepFlora: {fileID: 207292770619994653, guid: e3e806a4c289f124fa03f27092e96fc8,
     type: 3}
-  fauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00, type: 3}

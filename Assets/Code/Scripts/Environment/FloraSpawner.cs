@@ -11,18 +11,15 @@ public class FloraSpawner : Spawner {
     private GameObject[] flora;
 
     // Settings
-    private SpawnerSettings objectSettings;
+    private SpawnerSettings shallowFloraSettings;
+    private SpawnerSettings deepFloraSettings;
     private Biome biomeSettings;
-    private BiomeData biomeData;
-    private BiomeData.BiomeInfo biomeObjects;
 
     void Start() {
         biomeSettings = GetComponent<Biome>();
-        biomeData = GetComponent<BiomeData>();
 
-        biomeObjects = biomeData.biomeInfoArray[(int)biomeSettings.thisBiome];
-
-		objectSettings = biomeObjects.shallowFlora.GetComponent<SpawnerSettings>(); //Note: Need to use multiple settings for different types of fauna in future to prevent collisions
+		shallowFloraSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>();
+        deepFloraSettings = biomeSettings.deepFlora.GetComponent<SpawnerSettings>();
         
         // Instantiating Arrays
         floraClusterPositions = new Vector3[biomeSettings.floraClusterSpawnCount];
@@ -31,9 +28,9 @@ public class FloraSpawner : Spawner {
         flora = new GameObject[biomeSettings.floraSpawnCount];
 
         float clusterSeparationDistance = (biomeSettings.radiusAroundFloraCluster + (biomeSettings.floraClusterRadius * 2.0f));
-        float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (objectSettings.objectRadius * objectSettings.objectScale * 2.0f));
+        float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (shallowFloraSettings.objectRadius * shallowFloraSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.floraClusterRadius;
-        float heightFromWater = transform.position.y - biomeData.water.transform.position.y;
+        float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
 
         floraClusterPositions = GeneratePositions(transform.position, clusterSpawningRadius, clusterSeparationDistance, biomeSettings.floraClusterSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideSquare);
 
@@ -47,9 +44,9 @@ public class FloraSpawner : Spawner {
                     distanceFromSeaFloor[count] = heightFromWater + depth;
 
                     if (depth < biomeSettings.shallowDeepBoundary) {
-                    flora[count] = biomeObjects.shallowFlora;
+                    flora[count] = biomeSettings.shallowFlora;
                     } else {
-                    flora[count] = biomeObjects.deepFlora;
+                    flora[count] = biomeSettings.deepFlora;
                     }
 
                     if (floraPositions[i][count] != floraClusterPositions[i]) {

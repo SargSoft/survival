@@ -86,7 +86,7 @@ MonoBehaviour:
   water: {fileID: 0}
   shallowFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
     type: 3}
-  deepFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,
+  deepFauna: {fileID: 5802706282845508716, guid: 441f39d1ce0decb46b74a90ec4c508c2,
     type: 3}
   shallowFlora: {fileID: 3680589286431428128, guid: e96ad83aea08f5d4ab5a3be02baadff7,
     type: 3}

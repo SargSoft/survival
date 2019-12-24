@@ -72,16 +72,16 @@ MonoBehaviour:
   biomeRadius: 250
   attemptsBeforeRejection: 30
   shallowDeepBoundary: 15
-  floraClusterSpawnCount: 12
+  floraClusterSpawnCount: 10
   radiusAroundFloraCluster: 50
-  floraClusterRadius: 20
+  floraClusterRadius: 45
   radiusAroundFlora: 5
-  floraSpawnCount: 20
+  floraSpawnCount: 12
   faunaClusterSpawnCount: 4
   radiusAroundFaunaCluster: 20
-  faunaClusterRadius: 30
+  faunaClusterRadius: 20
   radiusAroundFauna: 5
-  faunaSpawnCount: 15
+  faunaSpawnCount: 12
   faunaVerticalSpread: 0.1
   water: {fileID: 0}
   shallowFauna: {fileID: 5802706282845508716, guid: ccc9a8afd4ba11d49be16ed861c69d00,

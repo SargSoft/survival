@@ -45,11 +45,18 @@ public class Spawner : MonoBehaviour {
 		return outputPositions;
 	}
 
-	protected void InstantiateFlora(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float distanceToFloor, int count, Vector3 positionsList) {
-		Vector3 pos = positionsList;
-		pos += Vector3.down * distanceToFloor;
+	protected void InstantiateFlora(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float heightFromWater, int count, Vector3[] floraPositions) {
+		for (int i = 0; i < count; i++ ) {
+			if (floraPositions[i] != inputPosition) {
+				float distanceToFloor = waterDepth(floraPositions[i], heightFromWater);
+				distanceToFloor = heightFromWater + distanceToFloor;
+				
+				Vector3 pos = floraPositions[i];
+				pos += Vector3.down * distanceToFloor;
 
-		Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
+				Object.Instantiate(prefab, pos, Quaternion.identity, parentObject.transform);
+			}
+		}
 	}
 	protected void InstantiateFauna(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float distanceToFloor, float heightAboveWater, int count, Vector3 positionsList) {
 		Vector3 pos = positionsList;

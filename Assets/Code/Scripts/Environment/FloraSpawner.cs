@@ -8,7 +8,7 @@ public class FloraSpawner : Spawner {
     private Vector3[] floraClusterPositions;
     private Vector3[][] floraPositions;
     private float[] distanceFromSeaFloor;
-    private GameObject[] flora;
+    private GameObject flora;
 
     // Settings
     private SpawnerSettings shallowFloraSettings;
@@ -25,10 +25,10 @@ public class FloraSpawner : Spawner {
         floraClusterPositions = new Vector3[biomeSettings.floraClusterSpawnCount];
         floraPositions = new Vector3[biomeSettings.floraClusterSpawnCount][];
         distanceFromSeaFloor = new float[biomeSettings.floraSpawnCount];
-        flora = new GameObject[biomeSettings.floraSpawnCount];
 
         float clusterSeparationDistance = (biomeSettings.radiusAroundFloraCluster + (biomeSettings.floraClusterRadius * 2.0f));
-        float floraSeparationDistance = (biomeSettings.radiusAroundFlora + (shallowFloraSettings.objectRadius * shallowFloraSettings.objectScale * 2.0f));
+        float shallowFloraSeparationDistance = (biomeSettings.radiusAroundFlora + (shallowFloraSettings.objectRadius * shallowFloraSettings.objectScale * 2.0f));
+        float deepFloraSeparationDistance = (biomeSettings.radiusAroundFlora + (deepFloraSettings.objectRadius * deepFloraSettings.objectScale * 2.0f));
         float clusterSpawningRadius = biomeSettings.biomeRadius - biomeSettings.floraClusterRadius;
         float heightFromWater = transform.position.y - biomeSettings.water.transform.position.y;
 
@@ -37,21 +37,18 @@ public class FloraSpawner : Spawner {
         for (int i = 0; i < biomeSettings.floraClusterSpawnCount; i++) {
 
             if (floraClusterPositions[i] != transform.position) {
-                floraPositions[i] = GeneratePositions(floraClusterPositions[i], biomeSettings.floraClusterRadius, floraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
+                float clusterDepth = waterDepth(floraClusterPositions[i], heightFromWater);
 
-                for (int count = 0; count < biomeSettings.floraSpawnCount; count++ ) {
-                    float depth = waterDepth(floraPositions[i][count], heightFromWater);
-                    distanceFromSeaFloor[count] = heightFromWater + depth;
-
-                    if (depth < biomeSettings.shallowDeepBoundary) {
-                    flora[count] = biomeSettings.shallowFlora;
-                    } else {
-                    flora[count] = biomeSettings.deepFlora;
-                    }
-
-                    if (floraPositions[i][count] != floraClusterPositions[i]) {
-                        InstantiateFlora(flora[count], this.gameObject, floraClusterPositions[i], distanceFromSeaFloor[count], biomeSettings.floraSpawnCount, floraPositions[i][count]);
-                    }
+                if(clusterDepth < biomeSettings.shallowDeepBoundary) {
+                    floraPositions[i] = GeneratePositions(floraClusterPositions[i], biomeSettings.floraClusterRadius, shallowFloraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
+                    
+                    InstantiateFlora(biomeSettings.shallowFlora, this.gameObject, floraClusterPositions[i], heightFromWater, biomeSettings.floraSpawnCount, floraPositions[i]);
+                
+                } else {
+                    floraPositions[i] = GeneratePositions(floraClusterPositions[i], biomeSettings.floraClusterRadius, deepFloraSeparationDistance, biomeSettings.floraSpawnCount, biomeSettings.attemptsBeforeRejection, randomVector2insideCircle);
+                    
+                    InstantiateFlora(biomeSettings.deepFlora, this.gameObject, floraClusterPositions[i], heightFromWater, biomeSettings.floraSpawnCount, floraPositions[i]);
+                
                 }
             }
         }

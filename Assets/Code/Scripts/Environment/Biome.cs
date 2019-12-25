@@ -27,8 +27,8 @@ public class Biome : MonoBehaviour {
 
     [Header("GameObjects")]
     public GameObject water;
-    public GameObject shallowFauna;
-    public GameObject deepFauna;
+    public Boid shallowFauna;
+    public Boid deepFauna;
     public GameObject shallowFlora;
     public GameObject deepFlora;
 

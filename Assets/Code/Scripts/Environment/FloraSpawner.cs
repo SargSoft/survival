@@ -7,15 +7,13 @@ public class FloraSpawner : Spawner {
     // Arrays
     private Vector3[] floraClusterPositions;
     private Vector3[][] floraPositions;
-    private float[] distanceFromSeaFloor;
-    private GameObject flora;
 
     // Settings
     private SpawnerSettings shallowFloraSettings;
     private SpawnerSettings deepFloraSettings;
     private Biome biomeSettings;
 
-    void Start() {
+    void Awake() {
         biomeSettings = GetComponent<Biome>();
 
 		shallowFloraSettings = biomeSettings.shallowFlora.GetComponent<SpawnerSettings>();
@@ -24,7 +22,6 @@ public class FloraSpawner : Spawner {
         // Instantiating Arrays
         floraClusterPositions = new Vector3[biomeSettings.floraClusterSpawnCount];
         floraPositions = new Vector3[biomeSettings.floraClusterSpawnCount][];
-        distanceFromSeaFloor = new float[biomeSettings.floraSpawnCount];
 
         float clusterSeparationDistance = (biomeSettings.radiusAroundFloraCluster + (biomeSettings.floraClusterRadius * 2.0f));
         float shallowFloraSeparationDistance = (biomeSettings.radiusAroundFlora + (shallowFloraSettings.objectRadius * shallowFloraSettings.objectScale * 2.0f));

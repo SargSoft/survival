@@ -58,7 +58,7 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 	}
-	protected void InstantiateFauna(GameObject prefab, GameObject parentObject, Vector3 inputPosition, float heightFromWater, int count, Vector3[] faunaPositions) {
+	protected void InstantiateFauna(Boid prefab, GameObject parentObject, Vector3 inputPosition, float heightFromWater, int count, Vector3[] faunaPositions) {
 		for (int i = 0; i < count; i++ ) {
 			if (faunaPositions[i] != inputPosition) {
 				float distanceToFloor = waterDepth(faunaPositions[i], heightFromWater);

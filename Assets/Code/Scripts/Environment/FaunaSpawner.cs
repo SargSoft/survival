@@ -7,15 +7,13 @@ public class FaunaSpawner : Spawner {
     // Arrays
 	private Vector3[] faunaClusterPositions;
     private Vector3[][] faunaPositions;
-    private float[] distanceFromSeaFloor;
-    private GameObject[] fauna;
 
     //Settings
     private SpawnerSettings shallowFaunaSettings;
     private SpawnerSettings deepFaunaSettings;
     private Biome biomeSettings;
 
-	void Start() {
+	void Awake() {
         biomeSettings = GetComponent<Biome>();
 
 
@@ -25,8 +23,6 @@ public class FaunaSpawner : Spawner {
         // Instatiating Arrays
         faunaClusterPositions = new Vector3[biomeSettings.faunaClusterSpawnCount];
         faunaPositions = new Vector3[biomeSettings.faunaClusterSpawnCount][];
-        distanceFromSeaFloor = new float[biomeSettings.faunaSpawnCount];
-        fauna = new GameObject[biomeSettings.faunaSpawnCount];
         
         float clusterSeparationDistance = (biomeSettings.radiusAroundFaunaCluster + (biomeSettings.faunaClusterRadius * 2.0f));
         float faunaSeparationDistance = (biomeSettings.radiusAroundFauna + (shallowFaunaSettings.objectRadius * shallowFaunaSettings.objectScale * 2.0f));

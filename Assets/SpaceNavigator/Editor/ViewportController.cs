@@ -28,7 +28,7 @@ namespace SpaceNavigatorDriver {
 		static ViewportController() {
 			// Set up callbacks.
 			EditorApplication.update += Update;
-			EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
+			// EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
 
 			// Initialize.
 			Settings.Read();
